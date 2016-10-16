@@ -65,7 +65,7 @@ create_piece(7, 7, Piece) :- Piece is 1001.
 % Rows 2 ,4 & 6. and Columns 2, 4 & 6 have thier pieces generated randomly
 % there is a 15 / 33 chance to be a corner piece, 12/33 to be straight and 
 % 6/33 to be a junction.
-create_piece(Row, Column, Piece):- 
+create_piece(_Row, _Column, Piece):- 
 	random_between(0,32,X),( 
 	(X < 15, create_corner(Piece));
 	(X >= 15, X < 27, create_straight(Piece));
@@ -84,7 +84,7 @@ create_straight(Piece):- random_between(0,1,P),
 % Create junction piece, simply subtrace a power of 10.
 create_junction(Piece):- random_between(0,3,P), Piece is (1111 - 10**P).
 
-% Some useful helper Predicates
+% Some helper Predicates
 % Reverse List
 % reverse_list(List,Reverse)
 
@@ -96,7 +96,7 @@ reverse_list([Head|Tail],Acc,Final):-reverse_list(Tail,[Head|Acc],Final).
 % Creation of a row of elements
 create_row(Row,RowList):- create_pieces(Row,8,1,[],Backward),reverse_list(Backward,RowList).
 
-create_pieces(Row, Total, Col, Acc, Acc):- Col = Total,!.
+create_pieces(_Row, Total, Col, Acc, Acc):- Col = Total,!.
 create_pieces(Row, Total, Col, Acc,Final):- 
 		create_piece(Row, Col,Piece),
 		C2 is Col + 1,!,
@@ -114,9 +114,75 @@ create_board(Row,Acc,Board):-
 	
 % Now that the Game Board has been created comes to hard part, we need to:
 % 1. Search the board for the best move
-% 2. Change the board by moving the pieces.
+% 2. Change the board by moving the rows / columns.
+
+% Some more helper predicates are useful here.
+
+% Write board write_board(Board)
+write_board([]).
+write_board([Head|Tail]):-
+	print(Head),nl,write_board(Tail).
+
+
+% Transpose matrix from session 3 is useful for faster lookup times 
+% when checking columns.
+
+split_matrix([[Head|Tail]|Tail2],FirstCol,Rest):-
+	split_matrix(Tail2,X,Y),
+	append([Head],X,FirstCol),
+	append([Tail],Y,Rest).
 	
+split_matrix([],[],[]).
+
+transpose([[]|_], []).
+transpose(Matrix, Output):-
+	split_matrix(Matrix,Row1,Rest),
+	transpose(Rest,X),
+	append([Row1],X,Output).
+
+% Checks for connections
 	
+pieces_connected_right(Left,Right) :- has_left_connection(Right), 										has_right_connection(Left).
+pieces_connected_left(Right,Left) :- pieces_connected_right(Left,Right).
+
+pieces_connected_up(Down,Up) :- has_up_connection(Down),has_down_connection(Up).
+pieces_connected_down(Up,Down) :- pieces_connected_up(Down,Up).
+
+
+has_left_connection(Piece) :-  X is mod(Piece,10), X = 1.
+has_right_connection(Piece) :-  Piece > 0011, X is Piece // 100, 
+								Y is mod(X,10), Y = 1.
+has_up_connection(Piece) :- Piece > 0111 .
+has_down_connection(Piece) :- 
+			Piece > 1 , X is  Piece // 10, 
+			Y is mod(X,10), Y = 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	
