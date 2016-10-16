@@ -68,7 +68,7 @@ create_piece(7, 7, Piece) :- Piece is 1001.
 create_piece(Row, Column, Piece):- 
 	random_between(0,32,X),( 
 	(X < 15, create_corner(Piece));
-	(X =< 15, X < 27, create_straight(Piece));
+	(X >= 15, X < 27, create_straight(Piece));
 	(X > 26,  create_junction(Piece))).
 	
 % Creation of 4 corner pieces, there is a more clever way to do this in one
