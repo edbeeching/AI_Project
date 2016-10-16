@@ -40,6 +40,22 @@
 % [      ,     ,      ,     ,      ,     ,      ],
 % [ 1100 ,     , 1101 ,     , 1101 ,     , 1001 ]]
 %
+% The game is played with the following predicated
+
+% setup(_) To set up the Game Board
+
+% 
+
+setup(_):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
+
+
+
+
+
+
+
+
+
 
 % Row 1 , Columns 1, 3, 5 & 7
 create_piece(1, 1, Piece) :- Piece is 0110 .
@@ -119,7 +135,7 @@ create_board(Row,Acc,Board):-
 % Some more helper predicates are useful here.
 
 % Write board write_board(Board)
-write_board([]).
+write_board([]):- nl .
 write_board([Head|Tail]):-
 	print(Head),nl,write_board(Tail).
 
@@ -140,7 +156,7 @@ transpose(Matrix, Output):-
 	transpose(Rest,X),
 	append([Row1],X,Output).
 
-% Checks for connections
+% Checks for connections between two pieces.
 	
 pieces_connected_right(Left,Right) :- has_left_connection(Right), 										has_right_connection(Left).
 pieces_connected_left(Right,Left) :- pieces_connected_right(Left,Right).
@@ -158,10 +174,46 @@ has_down_connection(Piece) :-
 			Y is mod(X,10), Y = 1.
 
 
+%get a particular piece at an index i,j			
+%get_piece()
+get_piece(Row,Col,Piece) :- board(Board), get_entry(Row,1,Board, List),get_entry(Col,1,List, Piece).
+get_piece(Row,Col,Board,Piece) :- get_entry(Row,1,Board, List),write(List),nl,get_entry(Col,1,List, Piece).
+get_entry(Row,Row,[Head|_Tail],Head):-  !.
+get_entry(Row,Index,[_Head|Tail],List):- 
+			Index < Row, I2 is Index + 1 , 
+			get_entry(Row,I2,Tail, List).
 
+			
+% Get_connections(Row,Column,ConnectionList). This predicate is a bit too
+% complicated and should be simplified.
 
-
-
+get_connections(Row,Column,ConnectionList) :- 
+		get_connections(Row,Column, [] ,ConnectionList,1).
+		
+get_connections(Row,Column, ConnectionList ,ConnectionList,5):- !.
+get_connections(Row,Column, List ,ConnectionList,1):-
+	get_piece(Row,Column,P1),R1 is Row - 1, get_piece(R1,Column,P2),
+	pieces_connected_up(P1,P2),!,get_connections(Row,Column, [P2|List] ,ConnectionList,2).
+get_connections(Row,Column, [] ,ConnectionList,1):-
+	get_connections(Row,Column, [] ,ConnectionList,2).
+	
+get_connections(Row,Column, List ,ConnectionList,2):-
+	get_piece(Row,Column,P1),R1 is Row + 1, get_piece(R1,Column,P2),
+	pieces_connected_down(P1,P2),!,get_connections(Row,Column, [P2|List] ,ConnectionList,3).
+get_connections(Row,Column, [] ,ConnectionList,2):-
+	get_connections(Row,Column, [] ,ConnectionList,3).
+	
+get_connections(Row,Column, List ,ConnectionList,3):-
+	get_piece(Row,Column,P1),C1 is Column - 1, get_piece(Row,C1,P2),
+	pieces_connected_left(P1,P2),!,get_connections(Row,Column, [P2|List] ,ConnectionList,4).
+get_connections(Row,Column, [] ,ConnectionList,3):-
+	get_connections(Row,Column, [] ,ConnectionList,4).
+	
+get_connections(Row,Column, List ,ConnectionList,4):-
+	get_piece(Row,Column,P1),C1 is Column + 1, get_piece(Row,C1,P2),
+	pieces_connected_right(P1,P2),!,get_connections(Row,Column, [P2|List] ,ConnectionList,4).
+get_connections(Row,Column, [] ,ConnectionList,4):-
+	get_connections(Row,Column, [] ,ConnectionList,5).
 
 
 
