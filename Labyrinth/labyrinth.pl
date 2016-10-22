@@ -56,7 +56,8 @@ setup(_):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
 
 
 
-
+% I understand that create_piece(1, 1, Piece) :- Piece is 0110 . is the same as
+% create_piece(1, 1, 0110). However this is somewhat clearer for the moment.
 % Row 1 , Columns 1, 3, 5 & 7
 create_piece(1, 1, Piece) :- Piece is 0110 .
 create_piece(1, 3, Piece) :- Piece is 0111 .
@@ -140,8 +141,7 @@ write_board([Head|Tail]):-
 	print(Head),nl,write_board(Tail).
 
 
-% Transpose matrix from session 3 is useful for faster lookup times 
-% when checking columns.
+% Transpose matrix from session 3 is useful when shifting columns.
 
 split_matrix([[Head|Tail]|Tail2],FirstCol,Rest):-
 	split_matrix(Tail2,X,Y),
@@ -158,7 +158,7 @@ transpose(Matrix, Output):-
 
 % Checks for connections between two pieces.
 	
-pieces_connected_right(Left,Right) :- has_left_connection(Right), 										has_right_connection(Left).
+pieces_connected_right(Left,Right) :- has_left_connection(Right),has_right_connection(Left).
 pieces_connected_left(Right,Left) :- pieces_connected_right(Left,Right).
 
 pieces_connected_up(Down,Up) :- has_up_connection(Down),has_down_connection(Up).
@@ -217,9 +217,7 @@ get_connections(Row,Column, List ,ConnectionList,4):-
 
 % Add connections to search frontier The lists are defined index i/j  eg... [1/2,4/5,3/4....]
 
-%add_connections(ConnectionList, Visited, Frontier, Newfrontier)   
-
-
+% add_connections(ConnectionList, Visited, Frontier, Newfrontier)   
 
 add_connections(ConnectionList, Visited, Frontier, FinalFrontier) :- 
 	check_connections(ConnectionList, Visited, Frontier ,[], Newfrontier),append(Frontier,Newfrontier,FinalFrontier), ! .
@@ -234,10 +232,17 @@ check_connections([Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 check_connections([_Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 	!, check_connections(ConnectionList,Visited,Frontier,Acc,Newfrontier).
 
+%The graph search Algorithm graph_search_BFS(StartI,StartJ,ListOfVisitedNodes)
 
+graph_search_BFS(StartI,StartJ,ListOfVisitedNodes):-
+	graph_search_BFS2([StartI/StartJ],[],ListOfVisitedNodes).
 
+graph_search_BFS2([],Visited,Visited):-!.
+graph_search_BFS2([I/J|Frontier],Acc,Visited):-
+	get_connections(I,J,ConnectionList),
+	add_connections(ConnectionList,Acc,Frontier,Newfrontier),
+	graph_search_BFS2(Newfrontier,[I/J|Acc],Visited).
 
-%The graph search Algorithm graph_search_BFS()
 
 
 
