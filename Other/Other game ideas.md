@@ -1,6 +1,7 @@
 ## Ploy
 
 https://en.wikipedia.org/wiki/Ploy_(board_game)
+and
 https://www.youtube.com/watch?v=324Kyn6hV-k
 
 ## Quoridor
@@ -14,4 +15,4 @@ https://github.com/mlboua/Quoridor
 http://www.boardspace.net/english/index.shtml
 
 Also, I found a document in portuguese for a similar project for students of the Oporto University. 
-The document mention some games developed in prolog for previos editions of this task.
+The document mentions some games developed in prolog for previos editions of this task.
