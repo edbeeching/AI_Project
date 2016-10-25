@@ -4,6 +4,8 @@ https://en.wikipedia.org/wiki/Ploy_(board_game)
 and
 https://www.youtube.com/watch?v=324Kyn6hV-k
 
+There is also an implementation in Ada in http://www.tensi.eu/thomas/programming/ploy/ploy_overview.html
+
 ## Quoridor
 
 https://en.boardgamearena.com/#!gamepanel?game=quoridor
