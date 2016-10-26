@@ -30,24 +30,24 @@
 %	|___|    |___|
 %
 %
-% Create Pieces, at the start some locations at predefined as follows:
+% Create Pieces, at the start some locations are predefined as follows:
 %
 %[[ 0110 ,     , 0111 ,     , 0111 ,     , 0011 ],
 % [      ,     ,      ,     ,      ,     ,      ],
-% [ 1011 ,     , 1011 ,     , 0111 ,     , 1110 ],
+% [ 1110 ,     , 1110 ,     , 0111 ,     , 1011 ],
 % [      ,     ,      ,     ,      ,     ,      ],
-% [ 1011 ,     , 1101 ,     , 1110 ,     , 1110 ],
+% [ 1110 ,     , 1101 ,     , 1011 ,     , 1011 ],
 % [      ,     ,      ,     ,      ,     ,      ],
 % [ 1100 ,     , 1101 ,     , 1101 ,     , 1001 ]]
 %
-% The game is played with the following predicated
+% The game is played with the following predicate
 
 % setup(_) To set up the Game Board
 
 % 
 
-setup(_):- retractall(board(X)),!,create_board(X),  assert(board(X)),board(Y),write_board(Y).
-setup(_):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
+setup(Y):- retractall(board(X)),!,create_board(X),  assert(board(X)),board(Y),write_board(Y).
+setup(Y):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
 
 
 
@@ -64,22 +64,22 @@ create_piece(1, 3, Piece) :- Piece is 0111 .
 create_piece(1, 5, Piece) :- Piece is 0111 .
 create_piece(1, 7, Piece) :- Piece is 0011 .
 % Row 3 , Columns 1, 3, 5 & 7
-create_piece(3, 1, Piece) :- Piece is 1011 .
-create_piece(3, 3, Piece) :- Piece is 1011 .
+create_piece(3, 1, Piece) :- Piece is 1110 .
+create_piece(3, 3, Piece) :- Piece is 1110 .
 create_piece(3, 5, Piece) :- Piece is 0111 .
-create_piece(3, 7, Piece) :- Piece is 1110 .
+create_piece(3, 7, Piece) :- Piece is 1011 .
 % Row 5 , Columns 1, 3, 5 & 7
-create_piece(5, 1, Piece) :- Piece is 1011.
+create_piece(5, 1, Piece) :- Piece is 1110.
 create_piece(5, 3, Piece) :- Piece is 1101.
-create_piece(5, 5, Piece) :- Piece is 1110.
-create_piece(5, 7, Piece) :- Piece is 1110.
+create_piece(5, 5, Piece) :- Piece is 1011.
+create_piece(5, 7, Piece) :- Piece is 1011.
 % Row 7 , Columns 1, 3, 5 & 7
 create_piece(7, 1, Piece) :- Piece is 1100.
 create_piece(7, 3, Piece) :- Piece is 1101.
 create_piece(7, 5, Piece) :- Piece is 1101.
 create_piece(7, 7, Piece) :- Piece is 1001.
 
-% Rows 2 ,4 & 6. and Columns 2, 4 & 6 have thier pieces generated randomly
+% Rows 2 ,4 & 6. and Columns 2, 4 & 6 have their pieces generated randomly
 % there is a 15 / 33 chance to be a corner piece, 12/33 to be straight and 
 % 6/33 to be a junction.
 create_piece(_Row, _Column, Piece):- 
@@ -215,7 +215,7 @@ get_connections(Row,Column, List ,ConnectionList,4):-
 get_connections(Row,Column, List ,ConnectionList,4):-
 	get_connections(Row,Column, List ,ConnectionList,5).
 
-% Add connections to search frontier The lists are defined index i/j  eg... [1/2,4/5,3/4....]
+% Add connections to search frontier The lists are defined index i/j  eg... [1/2,4/5,3/4...i/j]
 
 % add_connections(ConnectionList, Visited, Frontier, Newfrontier)   
 
@@ -232,16 +232,16 @@ check_connections([Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 check_connections([_Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 	!, check_connections(ConnectionList,Visited,Frontier,Acc,Newfrontier).
 
-%The graph search Algorithm graph_search_BFS(StartI,StartJ,ListOfVisitedNodes)
-
+% The graph search Algorithm graph_search_BFS(StartI,StartJ,ListOfVisitedNodes)
+% The ListOfVisitedNodes are all the nodes in the maze connected to index (i,j)
 graph_search_BFS(StartI,StartJ,ListOfVisitedNodes):-
-	graph_search_BFS2([StartI/StartJ],[],ListOfVisitedNodes).
+	graph_search_BFS_acc([StartI/StartJ],[],ListOfVisitedNodes).
 
-graph_search_BFS2([],Visited,Visited):-!.
-graph_search_BFS2([I/J|Frontier],Acc,Visited):-
+graph_search_BFS_acc([],Visited,Visited):-!.
+graph_search_BFS_acc([I/J|Frontier],Acc,Visited):-
 	get_connections(I,J,ConnectionList),
 	add_connections(ConnectionList,Acc,Frontier,Newfrontier),
-	graph_search_BFS2(Newfrontier,[I/J|Acc],Visited).
+	graph_search_BFS_acc(Newfrontier,[I/J|Acc],Visited).
 
 
 
