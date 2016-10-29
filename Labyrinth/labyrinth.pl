@@ -59,25 +59,25 @@ setup(Y):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
 % I understand that create_piece(1, 1, Piece) :- Piece is 0110 . is the same as
 % create_piece(1, 1, 0110). However this is somewhat clearer for the moment.
 % Row 1 , Columns 1, 3, 5 & 7
-create_piece(1, 1, Piece) :- Piece is 0110 .
-create_piece(1, 3, Piece) :- Piece is 0111 .
-create_piece(1, 5, Piece) :- Piece is 0111 .
-create_piece(1, 7, Piece) :- Piece is 0011 .
+create_piece(1, 1, Piece) :- Piece is 0110 ,!.
+create_piece(1, 3, Piece) :- Piece is 0111 ,!.
+create_piece(1, 5, Piece) :- Piece is 0111 ,!.
+create_piece(1, 7, Piece) :- Piece is 0011 ,!.
 % Row 3 , Columns 1, 3, 5 & 7
-create_piece(3, 1, Piece) :- Piece is 1110 .
-create_piece(3, 3, Piece) :- Piece is 1110 .
-create_piece(3, 5, Piece) :- Piece is 0111 .
-create_piece(3, 7, Piece) :- Piece is 1011 .
+create_piece(3, 1, Piece) :- Piece is 1110 ,!.
+create_piece(3, 3, Piece) :- Piece is 1110 ,!.
+create_piece(3, 5, Piece) :- Piece is 0111 ,!.
+create_piece(3, 7, Piece) :- Piece is 1011 ,!.
 % Row 5 , Columns 1, 3, 5 & 7
-create_piece(5, 1, Piece) :- Piece is 1110.
-create_piece(5, 3, Piece) :- Piece is 1101.
-create_piece(5, 5, Piece) :- Piece is 1011.
-create_piece(5, 7, Piece) :- Piece is 1011.
+create_piece(5, 1, Piece) :- Piece is 1110 ,!.
+create_piece(5, 3, Piece) :- Piece is 1101 ,!.
+create_piece(5, 5, Piece) :- Piece is 1011 ,!.
+create_piece(5, 7, Piece) :- Piece is 1011 ,!.
 % Row 7 , Columns 1, 3, 5 & 7
-create_piece(7, 1, Piece) :- Piece is 1100.
-create_piece(7, 3, Piece) :- Piece is 1101.
-create_piece(7, 5, Piece) :- Piece is 1101.
-create_piece(7, 7, Piece) :- Piece is 1001.
+create_piece(7, 1, Piece) :- Piece is 1100 ,!.
+create_piece(7, 3, Piece) :- Piece is 1101 ,!.
+create_piece(7, 5, Piece) :- Piece is 1101 ,!.
+create_piece(7, 7, Piece) :- Piece is 1001 ,!.
 
 % Rows 2 ,4 & 6. and Columns 2, 4 & 6 have their pieces generated randomly
 % there is a 15 / 33 chance to be a corner piece, 12/33 to be straight and 
@@ -97,17 +97,17 @@ create_corner(Piece):- random_between(1,4, C),
 			(C = 4, Piece is 1001)).
 % Subtract powers of 10 to make 1010 or 0101
 create_straight(Piece):- random_between(0,1,P),
-			P2 is P + 2, Piece is ((1111 - 10**P)-10**P2).
+			P2 is P + 2, Piece is ((1111 - 10 ** P)-10 ** P2).
 % Create junction piece, simply subtrace a power of 10.
-create_junction(Piece):- random_between(0,3,P), Piece is (1111 - 10**P).
+create_junction(Piece):- random_between(0,3,P), Piece is (1111 - 10 ** P).
 
 % Some helper Predicates
 % Reverse List
 % reverse_list(List,Reverse)
 
 reverse_list(List,Reverse):- reverse_list(List,[],Reverse).
-reverse_list([],Final,Final).
 
+reverse_list([],Final,Final).
 reverse_list([Head|Tail],Acc,Final):-reverse_list(Tail,[Head|Acc],Final).
 
 % Creation of a row of elements
@@ -230,7 +230,7 @@ check_connections([Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 	check_connections(ConnectionList,Visited,Frontier,[Head|Acc],Newfrontier).
 
 check_connections([_Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
-	!, check_connections(ConnectionList,Visited,Frontier,Acc,Newfrontier).
+	check_connections(ConnectionList,Visited,Frontier,Acc,Newfrontier).
 
 % The graph search Algorithm graph_search_BFS(StartI,StartJ,ListOfVisitedNodes)
 % The ListOfVisitedNodes are all the nodes in the maze connected to index (i,j)
@@ -243,6 +243,11 @@ graph_search_BFS_acc([I/J|Frontier],Acc,Visited):-
 	add_connections(ConnectionList,Acc,Frontier,Newfrontier),
 	graph_search_BFS_acc(Newfrontier,[I/J|Acc],Visited).
 
+% Can move to predicate, true if there is a path from startI/startJ to finishI/finishJ
+% can_move(StartI/StartJ,FinishI/FinishJ)
+
+can_move(StartI/StartJ, FinishI/FinishJ):-
+	graph_search_BFS(StartI,StartJ,List), member(FinishI/FinishJ,List),!.
 
 
 
@@ -251,10 +256,3 @@ graph_search_BFS_acc([I/J|Frontier],Acc,Visited):-
 
 
 
-
-
-
-	
-	
-	
-	
