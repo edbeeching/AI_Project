@@ -155,6 +155,16 @@ transpose(Matrix, Output):-
 	split_matrix(Matrix,Row1,Rest),
 	transpose(Rest,X),
 	append([Row1],X,Output).
+	
+%% -------------------------------------------------------------------------------------------%%
+
+%%Hmmmm, maybe instead of using transpose, could we use a predicate to move the last
+%%element of a list to the beginning of this list and vice-versa:
+%% move_last_element([], []).
+%% move_last_element(Last, [H|T]):-
+%%	append(T, [H], Last).
+
+%% -------------------------------------------------------------------------------------------%%
 
 % Checks for connections between two pieces.
 	
@@ -256,3 +266,12 @@ can_move(StartI/StartJ, FinishI/FinishJ):-
 
 
 
+<<<<<<< HEAD
+=======
+
+
+	
+	
+	
+	
+>>>>>>> origin/master
