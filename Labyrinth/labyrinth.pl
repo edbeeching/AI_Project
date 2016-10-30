@@ -346,16 +346,3 @@ can_move(StartI/StartJ, FinishI/FinishJ):-
 
 
 
-
-
-
-
-<<<<<<< HEAD
-=======
-
-
-	
-	
-	
-	
->>>>>>> origin/master
