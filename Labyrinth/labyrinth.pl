@@ -180,31 +180,73 @@ transpose(Matrix, Output):-
 %%
 %% JChong:
 %% Helper functions to rotate a row or column in the board matrix
-%% Rotate List Left
+%% Rotates List Left
 %% rotate_list_left(List, NewList): rotates a List to the left, moving the first element to the back of the list,
 %% 									and puts the result in NewList
-rotate_list_left([],[]).
+rotate_list_left([], []).
 rotate_list_left([First|Rest], NewList):- append(Rest, [First], NewList).												 
 
 %% 
-%% Rotate List Right
+%% Rotates List Right
 %% rotate_list_right(List, NewList): rotates a List to the right, moving the last element to the front of the list,
 %%									 and puts the result in NewList
 %% rotate_list_right([],[]).
 %% rotate_get_everything_but_last(List, NewList): helper predicate to implement rotate_list_right() 
 %%                                                get the original List, without the last element of the list in NewList
-rotate_get_everything_but_last([First,Second|[]], [First]).										 
-rotate_get_everything_but_last([First|Rest], [First|RestNewList]):- rotate_get_everything_but_last(Rest, RestNewList).
-rotate_list_right(List, NewList):- 	rotate_get_everything_but_last(List, ListMinusLast),
-									append(ListMinusLast, Last, List),
-									append(Last, ListMinusLast, NewList).
+%%rotate_get_everything_but_last([First,Second|[]], [First]).										 
+%%rotate_get_everything_but_last([First|Rest], [First|RestNewList]):- rotate_get_everything_but_last(Rest, RestNewList).
+%%rotate_list_right(List, NewList):- 	rotate_get_everything_but_last(List, ListMinusLast),
+%%									append(ListMinusLast, Last, List),
+%%									append(Last, ListMinusLast, NewList).
 %% rotate_list_right is not working properly with empty lists. Im trying to debug. Maybe something relate to cuts,
 %% but I still don't get the idea of the cut and how to used it. Reading about that on Prolog. So I'll finish Later
+%%
+%% I think this code for rotate_list_right is clearer, and works with empty lists. Uses the built-in predicate reverse
+rotate_list_right([], []).	
+rotate_list_right(List, NewList):- reverse(List, [Last|NewRest]),
+								   reverse(NewRest, NewRest2),
+								   append([Last], NewRest2, NewList).
+
+								   
+
 %% Missing the next predicates:
+
+%% replace_nth(Matrix, Index, Element, NewMatrix): Replace the element in position Index by Element in NewMatrix.
+%% Index starts in 1.
+replace_nth(Matrix, Index, Element, NewMatrix):- replace_nth_h(Matrix, Index, 1, Element, NewMatrix).
+replace_nth_h([],_,_,_,[]).
+replace_nth_h([First|RestMatrix], Index, Counter, Element, [First|NewMatrix]):-
+																				Index =\= Counter,
+																				NewCounter is Counter + 1,
+																				replace_nth_h(RestMatrix, Index, NewCounter, Element, NewMatrix).
+
+replace_nth_h([First|RestMatrix], Index, Counter, Element, [Element|NewMatrix]):-
+																				Index =:= Counter,
+																				NewCounter is Counter + 1,
+																				replace_nth_h(RestMatrix, Index, NewCounter, Element, NewMatrix).
+
+										
+%% Rotates the Row i to the Left
 %% rotate_row_left(Board, RowNumber, NewBoard)
+rotate_row_left(Board, RowNumber, NewBoard):- nth1(RowNumber, Board, Row),  %% Built-in predicate in SWI-Prolog
+											  rotate_list_left(Row, NewRow),
+											  replace_nth(Board, RowNumber, NewRow, NewBoard).
+%% Rotates the Row i to the Right
 %% rotate_row_right(Board, RowNumber, NewBoard)
-%% rotate_column_left(Board, ColumnNumber, NewBoard)
-%% rotate_column_right(Board, ColumnNumber, NewBoard)
+rotate_row_right(Board, RowNumber, NewBoard):- nth1(RowNumber, Board, Row),
+											   rotate_list_right(Row, NewRow),
+											   replace_nth(Board, RowNumber, NewRow, NewBoard).								
+
+%% <- Warning: I haven't tested this predicates yet. I'm taking a rest to study Complexity. Sorry!
+%% Rotates the Column j Up: Transpose Matrix, Rotate row to the left, Transpose again
+%% rotate_column_up(Board, ColumnNumber, NewBoard)
+rotate_column_up(Board, ColumnNumber, NewBoard):- transpose(Board, NewBoard2),
+												  rotate_row_left(NewBoard2, ColumnNumber, NewBoard3),
+												  transpose(NewBoard3, NewBoard).
+%% Rotate the Column j Down: Transpose Matrix, Rotate row to the right, Transpose again												  
+%% rotate_column_down(Board, ColumnNumber, NewBoard):-transpose(Board, NewBoard2),
+												      rotate_row_right(NewBoard2, ColumnNumber, NewBoard3),
+												      transpose(NewBoard3, NewBoard).
 %% -------------------------------------------------------------------------------------------%%
 
 
