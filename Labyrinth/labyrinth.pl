@@ -166,6 +166,48 @@ transpose(Matrix, Output):-
 
 %% -------------------------------------------------------------------------------------------%%
 
+
+%% -------------------------------------------------------------------------------------------%%
+%% JChong:
+%% If I'm not wrong, Board is a List of Lists that represents a matrix, right??
+%% So, we need to implement predicates to move columns and rows (rotation) in the Board:
+
+%% Rotate Row i Right
+%% Rotate Row i Left
+%% Rotate Column j Up
+%% Rotate Column j Down
+
+%%
+%% JChong:
+%% Helper functions to rotate a row or column in the board matrix
+%% Rotate List Left
+%% rotate_list_left(List, NewList): rotates a List to the left, moving the first element to the back of the list,
+%% 									and puts the result in NewList
+rotate_list_left([],[]).
+rotate_list_left([First|Rest], NewList):- append(Rest, [First], NewList).												 
+
+%% 
+%% Rotate List Right
+%% rotate_list_right(List, NewList): rotates a List to the right, moving the last element to the front of the list,
+%%									 and puts the result in NewList
+%% rotate_list_right([],[]).
+%% rotate_get_everything_but_last(List, NewList): helper predicate to implement rotate_list_right() 
+%%                                                get the original List, without the last element of the list in NewList
+rotate_get_everything_but_last([First,Second|[]], [First]).										 
+rotate_get_everything_but_last([First|Rest], [First|RestNewList]):- rotate_get_everything_but_last(Rest, RestNewList).
+rotate_list_right(List, NewList):- 	rotate_get_everything_but_last(List, ListMinusLast),
+									append(ListMinusLast, Last, List),
+									append(Last, ListMinusLast, NewList).
+%% rotate_list_right is not working properly with empty lists. Im trying to debug. Maybe something relate to cuts,
+%% but I still don't get the idea of the cut and how to used it. Reading about that on Prolog. So I'll finish Later
+%% Missing the next predicates:
+%% rotate_row_left(Board, RowNumber, NewBoard)
+%% rotate_row_right(Board, RowNumber, NewBoard)
+%% rotate_column_left(Board, ColumnNumber, NewBoard)
+%% rotate_column_right(Board, ColumnNumber, NewBoard)
+%% -------------------------------------------------------------------------------------------%%
+
+
 % Checks for connections between two pieces.
 	
 pieces_connected_right(Left,Right) :- has_left_connection(Right),has_right_connection(Left).
