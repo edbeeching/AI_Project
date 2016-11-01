@@ -254,16 +254,49 @@ rotate_row_right(Board, RowNumber, NewBoard):- nth1(RowNumber, Board, Row),
 											   rotate_list_right(Row, NewRow),
 											   replace_nth(Board, RowNumber, NewRow, NewBoard).								
 
-%% <- Warning: I haven't tested this predicates yet. I'm taking a rest to study Complexity. Sorry!
+%% JChong: Update, code testing. I generated the Board:
+%%       1     2     3     4     5     6     7
+%% 1 [[ 110,   11,  111, 1001,  111,   11,   11],
+%% 2  [ 101, 1010, 1010,   11, 1101, 1010,  111],
+%% 3  [1110, 1110, 1110,  101,  111,  101, 1011],
+%% 4  [ 101, 1100, 1010, 1010, 1100,  111, 1001],
+%% 5  [1110,  110, 1101,   11, 1011,   11, 1011],
+%% 6  [ 101,  101,  101, 1010, 1100, 1010, 1010],
+%% 7  [1100,   11, 1101,  110, 1101, 1010, 1001]]
+%% rotate_column_up([[110,11,111,1001,111,11,11],[101,1010,1010,11,1101,1010,111],[1110,1110,1110,101,111,101,1011],[101,1100,1010,1010,1100,111,1001],[1110,110,1101,11,1011,11,1011],[101,101,101,1010,1100,1010,1010],[1100,11,1101,110,1101,1010,1001]], 3, M)
+%% should give:
+%%
+%%       1     2     3     4     5     6     7
+%% 1 [[ 110,   11, 1010, 1001,  111,   11,   11],
+%% 2  [ 101, 1010, 1110,   11, 1101, 1010,  111],
+%% 3  [1110, 1110, 1010,  101,  111,  101, 1011],
+%% 4  [ 101, 1100, 1101, 1010, 1100,  111, 1001],
+%% 5  [1110,  110,  101,   11, 1011,   11, 1011],
+%% 6  [ 101,  101, 1101, 1010, 1100, 1010, 1010],
+%% 7  [1100,   11,  111,  110, 1101, 1010, 1001]]
+%%
+%% rotate_column_down([[110,11,111,1001,111,11,11],[101,1010,1010,11,1101,1010,111],[1110,1110,1110,101,111,101,1011],[101,1100,1010,1010,1100,111,1001],[1110,110,1101,11,1011,11,1011],[101,101,101,1010,1100,1010,1010],[1100,11,1101,110,1101,1010,1001]], 6, M)
+%% should give:
+%%       1     2     3     4     5     6     7
+%% 1 [[ 110,   11,  111, 1001,  111, 1010,   11],
+%% 2  [ 101, 1010, 1010,   11, 1101,   11,  111],
+%% 3  [1110, 1110, 1110,  101,  111, 1010, 1011],
+%% 4  [ 101, 1100, 1010, 1010, 1100,  101, 1001],
+%% 5  [1110,  110, 1101,   11, 1011,  111, 1011],
+%% 6  [ 101,  101,  101, 1010, 1100,   11, 1010],
+%% 7  [1100,   11, 1101,  110, 1101, 1010, 1001]]
+%%
+
+%% Implementation of Vertical Rotations:
 %% Rotates the Column j Up: Transpose Matrix, Rotate row to the left, Transpose again
 %% rotate_column_up(Board, ColumnNumber, NewBoard)
 rotate_column_up(Board, ColumnNumber, NewBoard):- transpose(Board, NewBoard2),
 												  rotate_row_left(NewBoard2, ColumnNumber, NewBoard3),
 												  transpose(NewBoard3, NewBoard).
-%% Rotate the Column j Down: Transpose Matrix, Rotate row to the right, Transpose again												  
-%% rotate_column_down(Board, ColumnNumber, NewBoard):-transpose(Board, NewBoard2),
-%												      rotate_row_right(NewBoard2, ColumnNumber, NewBoard3),
-%												      transpose(NewBoard3, NewBoard).
+%% Rotates the Column j Down: Transpose Matrix, Rotate row to the right, Transpose again												  
+rotate_column_down(Board, ColumnNumber, NewBoard):-transpose(Board, NewBoard2),
+											      rotate_row_right(NewBoard2, ColumnNumber, NewBoard3),
+											      transpose(NewBoard3, NewBoard).
 %% -------------------------------------------------------------------------------------------%%
 
 
