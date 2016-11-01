@@ -40,17 +40,34 @@
 % [      ,     ,      ,     ,      ,     ,      ],
 % [ 1100 ,     , 1101 ,     , 1101 ,     , 1001 ]]
 %
-% The game is played with the following predicate
+% The game is played with the following predicates
 
 % setup(_) To set up the Game Board
 
 % 
 
-setup(Y):- retractall(board(X)),!,create_board(X),  assert(board(X)),board(Y),write_board(Y).
+setup(Y):- 	retractall(board(X)),
+			!,create_board(X),  
+			assert(board(X)),
+			board(Y),
+			write_board(Y).
+			
 setup(Y):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
 
 
-
+move(Player,I,J).
+shift_row_left(Row):- 	board(Board),
+						rotate_row_left(Board,Row,NewBoard), 
+						retractall(board(Board)),!,
+						assert(board(NewBoard)).
+						
+shift_row_right(Row):- 	board(Board),
+						rotate_row_right(Board,Row,NewBoard),
+						retractall(board(Board)),!,
+						assert(board(NewBoard)).
+						
+shift_column_up(Row).
+shift_column_down(Row).
 
 
 
@@ -245,8 +262,8 @@ rotate_column_up(Board, ColumnNumber, NewBoard):- transpose(Board, NewBoard2),
 												  transpose(NewBoard3, NewBoard).
 %% Rotate the Column j Down: Transpose Matrix, Rotate row to the right, Transpose again												  
 %% rotate_column_down(Board, ColumnNumber, NewBoard):-transpose(Board, NewBoard2),
-												      rotate_row_right(NewBoard2, ColumnNumber, NewBoard3),
-												      transpose(NewBoard3, NewBoard).
+%												      rotate_row_right(NewBoard2, ColumnNumber, NewBoard3),
+%												      transpose(NewBoard3, NewBoard).
 %% -------------------------------------------------------------------------------------------%%
 
 
