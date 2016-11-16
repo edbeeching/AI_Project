@@ -17,7 +17,7 @@
 % The game is played with the following predicates
 % setup(_) To set up the Game Board
 
-setup(H):- 	retractall(board(X)),
+setup(H):- 	retractall(board(_)),
 			create_players(H),
 			!,create_board(X),
 			assert(board(X)),
@@ -32,7 +32,12 @@ move(Player,I,J).
 %---------------------------------------------------------------
 
 % Players are labelled "a" and "b" and positions are i/j e.g player(a,h1, 1/2) would be player "a" with heuristic at row 1 column 2.
-create_players(H1/H2) :- retractall(player(X,Y,Z)), assert(player(a,H1,1/1)), assert(player(b,H2,1/7)).
+create_players(H1/H2) :- retractall(player(_,_,_)), retractall(treasure_list(_,_)),retractall(treasure_index(_,_)),
+						assert(player(a,H1,1/1)), assert(player(b,H2,1/7)),
+						setup_treasure_lists(P1_List,P2_List), 
+						assert(treasure_list(a,P1_List)),
+						assert(treasure_list(b,P2_List)),
+						assert(treasure_index(a,1)),assert(treasure_index(b,1)).
 % Treasure locations [sword, ring, map, keys, helmet, gold, fairy, gem, chest, candle, book, crown]
 treasures([	sword/1/3, ring/1/5, map/3/1, 
 			keys/3/3, helmet/3/5, gold/3/7, 
@@ -59,7 +64,7 @@ mix_treasures([T1,T2,T3,T4,T5, T6, T7,T8,T9,T10,T11,T12],[T2,T3,T4,T5, T6, T7,T8
 get_first_5([T1,T2,T3,T4,T5|_Rest],[T1,T2,T3,T4,T5]).
 get_next_5([_T1,_T2,_T3,_T4,_T5,T6,T7,T8,T9,T10|_REST],[T6,T7,T8,T9,T10]).
 
-
+% get_target(Player,I/J):- treasure_index(a,N), 
 
 %---------------------------------------------------------------
 %		Section 3. Predicates setting up the game board.
@@ -212,21 +217,25 @@ transpose(Matrix, Output):-
 
 %these predicates permantly move the board at the end of an AI heuristic or when the human player decides on a partciular move
 shift_row_left(Row):- 	board(Board),
-						rotate_row_left(Board,Row,NewBoard), 
+						rotate_row_left(Board,Row,NewBoard),
+						check_shifted_players(Row,left),
 						retractall(board(Board)),!,
 						assert(board(NewBoard)).
 						
 shift_row_right(Row):- 	board(Board),
 						rotate_row_right(Board,Row,NewBoard),
+						check_shifted_players(Row,right),
 						retractall(board(Board)),!,
 						assert(board(NewBoard)).
 						
 shift_column_up(Column):- 	board(Board),
-						rotate_column_up(Board,Column,NewBoard), 
+						rotate_column_up(Board,Column,NewBoard),
+						check_shifted_players(Column,up), 
 						retractall(board(Board)),!,
 						assert(board(NewBoard)).
 shift_column_down(Column):- 	board(Board),
 						rotate_column_down(Board,Column,NewBoard), 
+						check_shifted_players(Column,down), 
 						retractall(board(Board)),!,
 						assert(board(NewBoard)).
 
@@ -383,7 +392,6 @@ has_down_connection(Piece) :-
 %get a particular piece at an index i,j			
 %get_piece()
 get_piece(Board, Row,Col,Piece) :- get_entry(Row,1,Board, List),get_entry(Col,1,List, Piece).
-%get_piece(Row,Col,Board,Piece) :- get_entry(Row,1,Board, List),write(List),nl,get_entry(Col,1,List, Piece).
 get_entry(Row,Row,[Head|_Tail],Head):-  !.
 get_entry(Row,Index,[_Head|Tail],List):- 
 			Index < Row, I2 is Index + 1 , 
@@ -487,11 +495,16 @@ get_possible_locations(PlayerList) :- player(a,_,Ia/Ja),player(b,_,Ib/Jb),
 									  create_shifted_player(Ia,Ja,Move,Ra,Ca),create_shifted_player(Ib,Jb,Move,Rb,Cb)),PlayerList).
 
 create_shifted_player(X,Y,0/nil,X,Y):-!.
-create_shifted_player(I,J,I/Left,I,NewJ) :- J2 is J + 6, NewJ is mod(J2,7),!. % I use addition and mod to sort out wraparound
-create_shifted_player(I,J,I/Right,I,NewJ) :- J2 is J + 1, NewJ is mod(J2,7),!.
-create_shifted_player(I,J,J/Up,NewI,J) :- I2 is I + 6, NewI is mod(I2,7),!.
-create_shifted_player(I,J,J/Down,NewI,J):- I2 is I + 1, NewI is mod(I2,7),!.
+create_shifted_player(I,J,I/left,I,NewJ) :- J2 is J + 5, NewJ is mod(J2,7) +1,!. % I use addition and mod to sort out wraparound
+create_shifted_player(I,J,I/right,I,NewJ) :- J2 is J +7, NewJ is mod(J2,7) +1,!.
+create_shifted_player(I,J,J/up,NewI,J) :- I2 is I + 5, NewI is mod(I2,7) +1,!.
+create_shifted_player(I,J,J/down,NewI,J):- I2 is I +7, NewI is mod(I2,7) +1,!.
 create_shifted_player(I,J,_/_,I,J).
+
+check_shifted_players(C_R,Dir):- check_player_shift(a,C_R,Dir),check_player_shift(b,C_R,Dir).
+
+check_player_shift(Player,C_R,Dir):- player(Player,H1,I/J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I/J)),assert(player(Player,H1,NewI/NewJ)).
+check_player_shift(Player,C_R,Dir).
 
 
 move_player(C,I/J):-player(C,H,_/_),retractall(player(C,_,_/_)),assert(player(C,H,I/J)).
