@@ -46,9 +46,7 @@ treasures([	sword/1/3, ring/1/5, map/3/1,
 
 % Create the treasure lists for the two players and assert them these in are the format treasure_list(Player, List, CurrentIndex)
 %create_treasure_lists():- retractall(treasure_list(Player,List,CurrentTargetIndex)),						  setup_treasure_lists(P1,P2),						  assert(treasure_list(a,P1,1)), 						  assert(treasure_list(b,P2,1))).
-get_treasure_list(Player,List):- treasure_list(Player,P1_List), extract_treasures(P1_List,List).
-extract_treasures([],[]):-!.
-extract_treasures([Treasure/_/_|Tail],[Treasure|Rest]):- extract_treasures(Tail,Rest).
+
 % sets up the 5 treasures for each player, this uses random to mix the lists a bit
 setup_treasure_lists(Player1List,Player2List):- treasures(Treasures),
 												mix_treasures(Treasures,T1),
@@ -497,15 +495,15 @@ get_possible_locations(PlayerList) :- player(a,_,Ia/Ja),player(b,_,Ib/Jb),
 									  create_shifted_player(Ia,Ja,Move,Ra,Ca),create_shifted_player(Ib,Jb,Move,Rb,Cb)),PlayerList).
 
 create_shifted_player(X,Y,0/nil,X,Y):-!.
-create_shifted_player(I,J,I/left,I,NewJ) :- J2 is J + 5, NewJ is mod(J2,7) +1,!. % I use addition and mod to sort out wraparound
-create_shifted_player(I,J,I/right,I,NewJ) :- J2 is J +7, NewJ is mod(J2,7) +1,!.
-create_shifted_player(I,J,J/up,NewI,J) :- I2 is I + 5, NewI is mod(I2,7) +1,!.
-create_shifted_player(I,J,J/down,NewI,J):- I2 is I +7, NewI is mod(I2,7) +1,!.
+create_shifted_player(I,J,I/Left,I,NewJ) :- J2 is J + 6, NewJ is mod(J2,7),!. % I use addition and mod to sort out wraparound
+create_shifted_player(I,J,I/Right,I,NewJ) :- J2 is J + 1, NewJ is mod(J2,7),!.
+create_shifted_player(I,J,J/Up,NewI,J) :- I2 is I + 6, NewI is mod(I2,7),!.
+create_shifted_player(I,J,J/Down,NewI,J):- I2 is I + 1, NewI is mod(I2,7),!.
 create_shifted_player(I,J,_/_,I,J).
 
 check_shifted_players(C_R,Dir):- check_player_shift(a,C_R,Dir),check_player_shift(b,C_R,Dir).
 
-check_player_shift(Player,C_R,Dir):- player(Player,H1,I/J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I/J)),assert(player(Player,H1,NewI/NewJ)).
+check_player_shift(Player,C_R,Dir):- player(Player,H1,I,J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I,J),assert(player(Player,H1,NewI,NewJ)).
 check_player_shift(Player,C_R,Dir).
 
 

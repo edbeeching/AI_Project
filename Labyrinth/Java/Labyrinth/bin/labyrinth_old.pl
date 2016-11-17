@@ -1,77 +1,4 @@
 
-
-%
-%	The code base is split up into the following sections:
-%	1. Predicates that are used by the user to play the game
-%	2. Predicates for setting up the player starting positions, their treasure lists, etc
-%	3. Predicates for seting the game board, moving the game board.
-%	4. Predicates for a particular game board to find connected pieces
-%	5. Predicates for different heuristics used in the game.
-
-
-
-%---------------------------------------------------------------
-%				Section 1. Predicates for Game playing.
-%---------------------------------------------------------------
-
-% The game is played with the following predicates
-% setup(_) To set up the Game Board
-
-setup(H):- 	retractall(board(_)),
-			create_players(H),
-			!,create_board(X),
-			assert(board(X)),
-			board(Y),
-			write_board(Y).
-			
-setup(H):- create_board(X),create_players(H),  assert(board(X)),board(Y),write_board(Y).
-
-move(Player,I,J).
-%---------------------------------------------------------------
-%				Section 2. Predicates setting up players.
-%---------------------------------------------------------------
-
-% Players are labelled "a" and "b" and positions are i/j e.g player(a,h1, 1/2) would be player "a" with heuristic at row 1 column 2.
-create_players(H1/H2) :- retractall(player(_,_,_)), retractall(treasure_list(_,_)),retractall(treasure_index(_,_)),
-						assert(player(a,H1,1/1)), assert(player(b,H2,1/7)),
-						setup_treasure_lists(P1_List,P2_List), 
-						assert(treasure_list(a,P1_List)),
-						assert(treasure_list(b,P2_List)),
-						assert(treasure_index(a,1)),assert(treasure_index(b,1)).
-% Treasure locations [sword, ring, map, keys, helmet, gold, fairy, gem, chest, candle, book, crown]
-treasures([	sword/1/3, ring/1/5, map/3/1, 
-			keys/3/3, helmet/3/5, gold/3/7, 
-			fairy/5/1, gem/5/3, chest/5/5, 
-			candle/5/7, book/7/3, crown/7/5]).
-
-% Create the treasure lists for the two players and assert them these in are the format treasure_list(Player, List, CurrentIndex)
-%create_treasure_lists():- retractall(treasure_list(Player,List,CurrentTargetIndex)),						  setup_treasure_lists(P1,P2),						  assert(treasure_list(a,P1,1)), 						  assert(treasure_list(b,P2,1))).
-get_treasure_list(Player,List):- treasure_list(Player,P1_List), extract_treasures(P1_List,List).
-extract_treasures([],[]):-!.
-extract_treasures([Treasure/_/_|Tail],[Treasure|Rest]):- extract_treasures(Tail,Rest).
-% sets up the 5 treasures for each player, this uses random to mix the lists a bit
-setup_treasure_lists(Player1List,Player2List):- treasures(Treasures),
-												mix_treasures(Treasures,T1),
-												mix_treasures(T1,T2),
-												mix_treasures(T2,T3),
-												mix_treasures(T3,T4),
-												mix_treasures(T4,T5),
-												get_first_5(T5,Player1List),
-												get_next_5(T5,Player2List).
-												
-
-mix_treasures([T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12],[T5,T1,T6,T2,T10,T11,T4,T7,T8,T3,T12,T9 ]):-random_between(0,1,P),P is 1,!.
-mix_treasures([T1,T2,T3,T4,T5, T6, T7,T8,T9,T10,T11,T12],[T2,T3,T4,T5, T6, T7,T8,T9,T10,T11,T12,T1]).
-
-get_first_5([T1,T2,T3,T4,T5|_Rest],[T1,T2,T3,T4,T5]).
-get_next_5([_T1,_T2,_T3,_T4,_T5,T6,T7,T8,T9,T10|_REST],[T6,T7,T8,T9,T10]).
-
-% get_target(Player,I/J):- treasure_index(a,N), 
-
-%---------------------------------------------------------------
-%		Section 3. Predicates setting up the game board.
-%---------------------------------------------------------------
-
 % 	Predicates for setting up the board
 
 % 	Pieces are defined by the connections they can make. 1000 would be a 
@@ -113,6 +40,42 @@ get_next_5([_T1,_T2,_T3,_T4,_T5,T6,T7,T8,T9,T10|_REST],[T6,T7,T8,T9,T10]).
 % [      ,     ,      ,     ,      ,     ,      ],
 % [ 1100 ,     , 1101 ,     , 1101 ,     , 1001 ]]
 %
+% The game is played with the following predicates
+
+% setup(_) To set up the Game Board
+
+% 
+
+setup(Y):- 	retractall(board(X)),
+			!,create_board(X),  
+			assert(board(X)),
+			board(Y),
+			write_board(Y).
+			
+setup(Y):- create_board(X),  assert(board(X)),board(Y),write_board(Y).
+
+
+move(Player,I,J).
+shift_row_left(Row):- 	board(Board),
+						rotate_row_left(Board,Row,NewBoard), 
+						retractall(board(Board)),!,
+						assert(board(NewBoard)).
+						
+shift_row_right(Row):- 	board(Board),
+						rotate_row_right(Board,Row,NewBoard),
+						retractall(board(Board)),!,
+						assert(board(NewBoard)).
+						
+shift_column_up(Column):- 	board(Board),
+						rotate_column_up(Board,Column,NewBoard), 
+						retractall(board(Board)),!,
+						assert(board(NewBoard)).
+shift_column_down(Column):- 	board(Board),
+						rotate_column_down(Board,Column,NewBoard), 
+						retractall(board(Board)),!,
+						assert(board(NewBoard)).
+
+
 
 
 
@@ -215,32 +178,7 @@ transpose(Matrix, Output):-
 	split_matrix(Matrix,Row1,Rest),
 	transpose(Rest,X),
 	append([Row1],X,Output).
-
-
-%these predicates permantly move the board at the end of an AI heuristic or when the human player decides on a partciular move
-shift_row_left(Row):- 	board(Board),
-						rotate_row_left(Board,Row,NewBoard),
-						check_shifted_players(Row,left),
-						retractall(board(Board)),!,
-						assert(board(NewBoard)).
-						
-shift_row_right(Row):- 	board(Board),
-						rotate_row_right(Board,Row,NewBoard),
-						check_shifted_players(Row,right),
-						retractall(board(Board)),!,
-						assert(board(NewBoard)).
-						
-shift_column_up(Column):- 	board(Board),
-						rotate_column_up(Board,Column,NewBoard),
-						check_shifted_players(Column,up), 
-						retractall(board(Board)),!,
-						assert(board(NewBoard)).
-shift_column_down(Column):- 	board(Board),
-						rotate_column_down(Board,Column,NewBoard), 
-						check_shifted_players(Column,down), 
-						retractall(board(Board)),!,
-						assert(board(NewBoard)).
-
+	
 %% -------------------------------------------------------------------------------------------%%
 
 %%Hmmmm, maybe instead of using transpose, could we use a predicate to move the last
@@ -367,12 +305,7 @@ rotate_column_down(Board, ColumnNumber, NewBoard):-transpose(Board, NewBoard2),
 											      transpose(NewBoard3, NewBoard).
 %% -------------------------------------------------------------------------------------------%%
 
-%---------------------------------------------------------------
-%		Section 4. Predicates for Searching the board
-%---------------------------------------------------------------
-%
 
-% The following predicates implement a graph search BFS on a particular board
 % Checks for connections between two pieces.
 	
 pieces_connected_right(Left,Right) :- has_left_connection(Right),has_right_connection(Left).
@@ -393,7 +326,8 @@ has_down_connection(Piece) :-
 
 %get a particular piece at an index i,j			
 %get_piece()
-get_piece(Board, Row,Col,Piece) :- get_entry(Row,1,Board, List),get_entry(Col,1,List, Piece).
+get_piece(Row,Col,Piece) :- board(Board), get_entry(Row,1,Board, List),get_entry(Col,1,List, Piece).
+%get_piece(Row,Col,Board,Piece) :- get_entry(Row,1,Board, List),write(List),nl,get_entry(Col,1,List, Piece).
 get_entry(Row,Row,[Head|_Tail],Head):-  !.
 get_entry(Row,Index,[_Head|Tail],List):- 
 			Index < Row, I2 is Index + 1 , 
@@ -403,33 +337,33 @@ get_entry(Row,Index,[_Head|Tail],List):-
 % Get_connections(Row,Column,ConnectionList). This predicate is a bit too
 % complicated and should be simplified.
 
-get_connections(Board, Row,Column,ConnectionList) :- 
-		get_connections(Board, Row,Column, [] ,ConnectionList,1),!.
+get_connections(Row,Column,ConnectionList) :- 
+		get_connections(Row,Column, [] ,ConnectionList,1),!.
 		
-get_connections(Board, Row, Column, ConnectionList ,ConnectionList,5):- !.
-get_connections(Board, Row, Column, List ,ConnectionList,1):-
-	get_piece(Board, Row, Column, P1),R1 is Row - 1, get_piece(Board, R1, Column, P2),
-	pieces_connected_up(P1, P2),!,get_connections(Board, Row, Column, [R1/Column|List], ConnectionList,2).
-get_connections(Board, Row, Column, List , ConnectionList,1):-
-	get_connections(Board, Row, Column, List , ConnectionList,2).
+get_connections(Row,Column, ConnectionList ,ConnectionList,5):- !.
+get_connections(Row,Column, List ,ConnectionList,1):-
+	get_piece(Row,Column,P1),R1 is Row - 1, get_piece(R1,Column,P2),
+	pieces_connected_up(P1,P2),!,get_connections(Row,Column, [R1/Column|List] ,ConnectionList,2).
+get_connections(Row,Column, List ,ConnectionList,1):-
+	get_connections(Row,Column, List ,ConnectionList,2).
 	
-get_connections(Board,Row, Column, List ,ConnectionList,2):-
-	get_piece(Board,Row, Column, P1),R1 is Row + 1, get_piece(Board,R1, Column, P2),
-	pieces_connected_down(P1,P2),!,get_connections(Board,Row, Column, [R1/Column|List], ConnectionList,3).
-get_connections(Board,Row,Column, List, ConnectionList,2):-
-	get_connections(Board,Row,Column, List, ConnectionList,3).
+get_connections(Row,Column, List ,ConnectionList,2):-
+	get_piece(Row,Column,P1),R1 is Row + 1, get_piece(R1,Column,P2),
+	pieces_connected_down(P1,P2),!,get_connections(Row,Column, [R1/Column|List] ,ConnectionList,3).
+get_connections(Row,Column, List ,ConnectionList,2):-
+	get_connections(Row,Column, List ,ConnectionList,3).
 	
-get_connections(Board, Row, Column, List ,ConnectionList,3):-
-	get_piece(Board, Row, Column,P1),C1 is Column - 1, get_piece(Board, Row, C1, P2),
-	pieces_connected_left(P1, P2),!,get_connections(Board, Row, Column, [Row/C1|List], ConnectionList,4).
-get_connections(Board, Row, Column, List ,ConnectionList,3):-
-	get_connections(Board, Row, Column, List ,ConnectionList,4).
+get_connections(Row,Column, List ,ConnectionList,3):-
+	get_piece(Row,Column,P1),C1 is Column - 1, get_piece(Row,C1,P2),
+	pieces_connected_left(P1,P2),!,get_connections(Row,Column, [Row/C1|List] ,ConnectionList,4).
+get_connections(Row,Column, List ,ConnectionList,3):-
+	get_connections(Row,Column, List ,ConnectionList,4).
 	
-get_connections(Board, Row, Column, List ,ConnectionList,4):-
-	get_piece(Board, Row, Column,P1),C1 is Column + 1, get_piece(Board, Row, C1, P2),
-	pieces_connected_right(P1, P2),!,get_connections(Board, Row, Column, [Row/C1|List], ConnectionList,5).
-get_connections(Board, Row, Column, List, ConnectionList,4):-
-	get_connections(Board, Row, Column, List, ConnectionList,5).
+get_connections(Row,Column, List ,ConnectionList,4):-
+	get_piece(Row,Column,P1),C1 is Column + 1, get_piece(Row,C1,P2),
+	pieces_connected_right(P1,P2),!,get_connections(Row,Column, [Row/C1|List] ,ConnectionList,5).
+get_connections(Row,Column, List ,ConnectionList,4):-
+	get_connections(Row,Column, List ,ConnectionList,5).
 
 % Add connections to search frontier The lists are defined index i/j  eg... [1/2,4/5,3/4...i/j]
 
@@ -450,111 +384,20 @@ check_connections([_Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 
 % The graph search Algorithm graph_search_BFS(StartI,StartJ,ListOfVisitedNodes)
 % The ListOfVisitedNodes are all the nodes in the maze connected to index (i,j)
-graph_search_BFS(Board, StartI, StartJ, ListOfVisitedNodes):-
-	graph_search_BFS_acc(Board, [StartI/StartJ], [], ListOfVisitedNodes).
+graph_search_BFS(StartI,StartJ,ListOfVisitedNodes):-
+	graph_search_BFS_acc([StartI/StartJ],[],ListOfVisitedNodes).
 
-graph_search_BFS_acc(Board, [], Visited, Visited):-!.
-graph_search_BFS_acc(Board, [I/J|Frontier], Acc, Visited):-
-	get_connections(Board, I, J, ConnectionList),
-	add_connections(ConnectionList, Acc, Frontier, Newfrontier),
-	graph_search_BFS_acc(Board, Newfrontier, [I/J|Acc], Visited).
+graph_search_BFS_acc([],Visited,Visited):-!.
+graph_search_BFS_acc([I/J|Frontier],Acc,Visited):-
+	get_connections(I,J,ConnectionList),
+	add_connections(ConnectionList,Acc,Frontier,Newfrontier),
+	graph_search_BFS_acc(Newfrontier,[I/J|Acc],Visited).
 
 % Can move to predicate, true if there is a path from startI/startJ to finishI/finishJ
 % can_move(StartI/StartJ,FinishI/FinishJ)
 
-can_move(StartI/StartJ, FinishI/FinishJ):- board(Board),
-	graph_search_BFS(Board,StartI, StartJ, List), member(FinishI/FinishJ, List),!.
-
-%---------------------------------------------------------------
-%		Section 5. Predicates for Heuristics
-%---------------------------------------------------------------
-
-
-% First, the potential maze moves for heuristic to explore 0/0/0 refers to not moving the maze at all
-
-maze_moves([0/nil, 2/up, 2/down, 4/up, 4/down, 6/up, 6/down, 2/left, 2/right, 4/left, 4/right, 6/left, 6/right]).
-
-
-% Create the 13 possible maze boards: create_shifted_board(Board,Move,NewBoard )
-
-create_shifted_board(Board, 0/nil, Board ):- !.
-create_shifted_board(Board, Row/left, NewBoard ):- rotate_row_left(Board, Row, NewBoard), !.
-create_shifted_board(Board, Row/right, NewBoard ):- rotate_row_right(Board, Row, NewBoard), !.
-create_shifted_board(Board, Column/up, NewBoard ):- rotate_column_up(Board, Column, NewBoard), !.
-create_shifted_board(Board, Column/down, NewBoard ):- rotate_column_down(Board, Column, NewBoard), !.
-
-% get the 13 possible maze boards
-get_possible_boards(BoardList):- board(CurrentBoard),maze_moves(Moves),
-								 findall(NewBoard,(member(Move,Moves), create_shifted_board(CurrentBoard, Move,NewBoard)),
-								 BoardList).
-
-% unfortunately, the players can also move when the board moves and this must be accounted for.
-% get a list of possible player locations in format [(a/1/2,b/4/5), (......), etc]
-
-get_possible_locations(PlayerList) :- player(a,_,Ia/Ja),player(b,_,Ib/Jb),
-									  maze_moves(Moves),
-									  findall((a/Ra/Ca,b/Rb/Cb),(member(Move,Moves),
-									  create_shifted_player(Ia,Ja,Move,Ra,Ca),create_shifted_player(Ib,Jb,Move,Rb,Cb)),PlayerList).
-
-create_shifted_player(X,Y,0/nil,X,Y):-!.
-create_shifted_player(I,J,I/left,I,NewJ) :- J2 is J + 5, NewJ is mod(J2,7) +1,!. % I use addition and mod to sort out wraparound
-create_shifted_player(I,J,I/right,I,NewJ) :- J2 is J +7, NewJ is mod(J2,7) +1,!.
-create_shifted_player(I,J,J/up,NewI,J) :- I2 is I + 5, NewI is mod(I2,7) +1,!.
-create_shifted_player(I,J,J/down,NewI,J):- I2 is I +7, NewI is mod(I2,7) +1,!.
-create_shifted_player(I,J,_/_,I,J).
-
-check_shifted_players(C_R,Dir):- check_player_shift(a,C_R,Dir),check_player_shift(b,C_R,Dir).
-
-check_player_shift(Player,C_R,Dir):- player(Player,H1,I/J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I/J)),assert(player(Player,H1,NewI/NewJ)).
-check_player_shift(Player,C_R,Dir).
-
-
-move_player(C,I/J):-player(C,H,_/_),retractall(player(C,_,_/_)),assert(player(C,H,I/J)).
-								 
-								 
-% Get a list of lists of nodes connected to a given player for all 13 board combinations
-get_list_of_board_connections(Player, LocationsList):- 	board(CurrentBoard),player(Player,_,I/J),maze_moves(Moves),
-														findall(ListOfVisitedNodes,(member(Move,Moves),
-														create_shifted_player(I,J,Move,NewI,NewJ),
-														create_shifted_board(CurrentBoard,Move,NewBoard),
-														graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes)),LocationsList).
-
-
-%-------------------------------------------------------
-%						HEURISTICS
-%-------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+can_move(StartI/StartJ, FinishI/FinishJ):-
+	graph_search_BFS(StartI,StartJ,List), member(FinishI/FinishJ,List),!.
 
 
 
