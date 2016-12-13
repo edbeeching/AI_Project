@@ -74,14 +74,46 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getSource()==player1OptionsBox){
-			System.out.println("combox box 1 toggled");
+			int i = player1OptionsBox.getSelectedIndex();
+			switch(i){
+				case 0:
+					gameInfo.player1Heuristic = "h0";
+					break;
+				case 1:
+					gameInfo.player1Heuristic = "h1";
+					break;
+				case 2:
+					gameInfo.player1Heuristic = "h2";
+					break;
+				case 3:
+					gameInfo.player1Heuristic = "h3";
+					break;
+				case 4:
+					gameInfo.player1Heuristic = "h4";
+					break;	
+			}
+			System.out.println("combox box 1 toggled" + i);
 		}
 		if(e.getSource()==player2OptionsBox){
-			System.out.println("combox box 2 toggled");
+			int i = player2OptionsBox.getSelectedIndex();
+			switch(i){
+				case 0:
+					gameInfo.player2Heuristic = "h0";
+					break;
+				case 1:
+					gameInfo.player2Heuristic = "h1";
+					break;
+				case 2:
+					gameInfo.player2Heuristic = "h2";
+					break;
+				case 3:
+					gameInfo.player2Heuristic = "h3";
+					break;
+				case 4:
+					gameInfo.player2Heuristic = "h4";
+					break;	
+			}
+			System.out.println("combox box 2 toggled"+ i);
 		}
-		
-	
-		
 	}
-	
 }

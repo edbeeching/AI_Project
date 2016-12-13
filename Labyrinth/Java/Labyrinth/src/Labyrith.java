@@ -1,27 +1,18 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 public class Labyrith extends JPanel implements ActionListener, MouseMotionListener{
@@ -58,8 +49,9 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
 		controlPanel.setPreferredSize(new Dimension(200,600));
 		controlPanel.setBorder(BorderFactory.createTitledBorder("Control Panel"));
 		
-		BoxLayout boxLayout =  new BoxLayout(controlPanel,BoxLayout.Y_AXIS);
-		controlPanel.setLayout(boxLayout);
+		//BoxLayout boxLayout =  new BoxLayout(controlPanel,BoxLayout.Y_AXIS);
+		//controlPanel.setLayout(new BoxLayout(controlPanel,BoxLayout.Y_AXIS));
+		controlPanel.setLayout(new GridLayout(4, 1));
 		frame.getContentPane().add(controlPanel, BorderLayout.EAST);	
 		
 		JButton button = new JButton();
@@ -78,9 +70,15 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(BorderFactory.createTitledBorder("Info"));
-		JPanel treasurePanel = new JPanel();
-		treasurePanel.setBorder(BorderFactory.createTitledBorder("Treasures"));
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.X_AXIS));
+		JPanel treasurePanel = gameBoard.setupTreasurePanel();
+		
+
+		
+		
+		
 		JPanel debugPanel = new JPanel();
+		debugPanel.setLayout(new BoxLayout(debugPanel, BoxLayout.X_AXIS));
 		debugPanel.setBorder(BorderFactory.createTitledBorder("Debug"));
 		
 		controlPanel.add(infoPanel);
@@ -139,7 +137,8 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
     	}
 	}
 	public static void main(String[] args) {
-    	EventQueue.invokeLater(new Runnable() {
+    	//EventQueue.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Labyrith demo = new Labyrith();

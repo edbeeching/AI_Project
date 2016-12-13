@@ -26,18 +26,24 @@ setup(H):- 	retractall(board(_)),
 			
 setup(H):- create_board(X),create_players(H),  assert(board(X)),board(Y),write_board(Y).
 
+
+
+
 move(Player,I,J).
 %---------------------------------------------------------------
 %				Section 2. Predicates setting up players.
 %---------------------------------------------------------------
 
 % Players are labelled "a" and "b" and positions are i/j e.g player(a,h1, 1/2) would be player "a" with heuristic at row 1 column 2.
-create_players(H1/H2) :- retractall(player(_,_,_)), retractall(treasure_list(_,_)),retractall(treasure_index(_,_)),
+create_players(H1/H2) :- retractall(player(_,_,_)),retractall(game_state(_,_)), retractall(treasure_list(_,_)),retractall(treasure_index(_,_)),
 						assert(player(a,H1,1/1)), assert(player(b,H2,1/7)),
+						assert(game_state(a,1)),
 						setup_treasure_lists(P1_List,P2_List), 
 						assert(treasure_list(a,P1_List)),
 						assert(treasure_list(b,P2_List)),
 						assert(treasure_index(a,1)),assert(treasure_index(b,1)).
+% Game states can be a,1 a,2 b,1 b,2
+get_current_player(Player):- game_state(Player,_).
 % Treasure locations [sword, ring, map, keys, helmet, gold, fairy, gem, chest, candle, book, crown]
 treasures([	sword/1/3, ring/1/5, map/3/1, 
 			keys/3/3, helmet/3/5, gold/3/7, 
@@ -46,7 +52,9 @@ treasures([	sword/1/3, ring/1/5, map/3/1,
 
 % Create the treasure lists for the two players and assert them these in are the format treasure_list(Player, List, CurrentIndex)
 %create_treasure_lists():- retractall(treasure_list(Player,List,CurrentTargetIndex)),						  setup_treasure_lists(P1,P2),						  assert(treasure_list(a,P1,1)), 						  assert(treasure_list(b,P2,1))).
-
+get_treasure_list(Player,List):- treasure_list(Player,P1_List), extract_treasures(P1_List,List).
+extract_treasures([],[]):-!.
+extract_treasures([Treasure/_/_|Tail],[Treasure|Rest]):- extract_treasures(Tail,Rest).
 % sets up the 5 treasures for each player, this uses random to mix the lists a bit
 setup_treasure_lists(Player1List,Player2List):- treasures(Treasures),
 												mix_treasures(Treasures,T1),
@@ -65,6 +73,20 @@ get_first_5([T1,T2,T3,T4,T5|_Rest],[T1,T2,T3,T4,T5]).
 get_next_5([_T1,_T2,_T3,_T4,_T5,T6,T7,T8,T9,T10|_REST],[T6,T7,T8,T9,T10]).
 
 % get_target(Player,I/J):- treasure_index(a,N), 
+get_target(Player,I/J):- treasure_list(Player,List),treasure_index(Player,Index),Index < 6,!,get_element_number(Index,List,_Treasure/I/J).
+get_target(a,1/1):- treasure_index(a,6).
+get_target(b,1/7):- treasure_index(b,6).
+
+
+check_reached_target(Player):- get_target(Player,Target),
+								player(Player,_,Target),!,
+								treasure_index(Player,Index),
+								NewIndex is Index + 1, 
+								retractall(treasure_index(Player,Index)),
+								assert(treasure_index(Player,NewIndex)).
+check_reached_target(Player).
+
+
 
 %---------------------------------------------------------------
 %		Section 3. Predicates setting up the game board.
@@ -216,6 +238,20 @@ transpose(Matrix, Output):-
 
 
 %these predicates permantly move the board at the end of an AI heuristic or when the human player decides on a partciular move
+
+try_to_shift_board(Row/left):-try_to_shift_row_left(Row).
+try_to_shift_board(Row/right):-try_to_shift_row_right(Row).
+try_to_shift_board(Column/up):-try_to_shift_column_up(Column).
+try_to_shift_board(Column/down):-try_to_shift_column_down(Column).
+
+
+try_to_shift_row_left(Row):- game_state(Player,1), shift_row_left(Row),retractall(game_state(_,_)),assert(game_state(Player,2)).
+try_to_shift_row_right(Row):- game_state(Player,1), shift_row_right(Row),retractall(game_state(_,_)),assert(game_state(Player,2)).
+try_to_shift_column_up(Column):- game_state(Player,1), shift_column_up(Column),retractall(game_state(_,_)),assert(game_state(Player,2)).
+try_to_shift_column_down(Column):- game_state(Player,1), shift_column_down(Column),retractall(game_state(_,_)),assert(game_state(Player,2)).
+
+
+
 shift_row_left(Row):- 	board(Board),
 						rotate_row_left(Board,Row,NewBoard),
 						check_shifted_players(Row,left),
@@ -460,8 +496,10 @@ graph_search_BFS_acc(Board, [I/J|Frontier], Acc, Visited):-
 % Can move to predicate, true if there is a path from startI/startJ to finishI/finishJ
 % can_move(StartI/StartJ,FinishI/FinishJ)
 
-can_move(StartI/StartJ, FinishI/FinishJ):- board(Board),
+can_move(StartI/StartJ, FinishI/FinishJ):- game_state(_,2),board(Board),
 	graph_search_BFS(Board,StartI, StartJ, List), member(FinishI/FinishJ, List),!.
+
+
 
 %---------------------------------------------------------------
 %		Section 5. Predicates for Heuristics
@@ -470,10 +508,10 @@ can_move(StartI/StartJ, FinishI/FinishJ):- board(Board),
 
 % First, the potential maze moves for heuristic to explore 0/0/0 refers to not moving the maze at all
 
-maze_moves([0/nil, 2/up, 2/down, 4/up, 4/down, 6/up, 6/down, 2/left, 2/right, 4/left, 4/right, 6/left, 6/right]).
+maze_moves([2/up, 2/down, 4/up, 4/down, 6/up, 6/down, 2/left, 2/right, 4/left, 4/right, 6/left, 6/right]).
 
 
-% Create the 13 possible maze boards: create_shifted_board(Board,Move,NewBoard )
+% Create the 12 possible maze boards: create_shifted_board(Board,Move,NewBoard )
 
 create_shifted_board(Board, 0/nil, Board ):- !.
 create_shifted_board(Board, Row/left, NewBoard ):- rotate_row_left(Board, Row, NewBoard), !.
@@ -481,7 +519,7 @@ create_shifted_board(Board, Row/right, NewBoard ):- rotate_row_right(Board, Row,
 create_shifted_board(Board, Column/up, NewBoard ):- rotate_column_up(Board, Column, NewBoard), !.
 create_shifted_board(Board, Column/down, NewBoard ):- rotate_column_down(Board, Column, NewBoard), !.
 
-% get the 13 possible maze boards
+% get the 12 possible maze boards
 get_possible_boards(BoardList):- board(CurrentBoard),maze_moves(Moves),
 								 findall(NewBoard,(member(Move,Moves), create_shifted_board(CurrentBoard, Move,NewBoard)),
 								 BoardList).
@@ -495,22 +533,23 @@ get_possible_locations(PlayerList) :- player(a,_,Ia/Ja),player(b,_,Ib/Jb),
 									  create_shifted_player(Ia,Ja,Move,Ra,Ca),create_shifted_player(Ib,Jb,Move,Rb,Cb)),PlayerList).
 
 create_shifted_player(X,Y,0/nil,X,Y):-!.
-create_shifted_player(I,J,I/Left,I,NewJ) :- J2 is J + 6, NewJ is mod(J2,7),!. % I use addition and mod to sort out wraparound
-create_shifted_player(I,J,I/Right,I,NewJ) :- J2 is J + 1, NewJ is mod(J2,7),!.
-create_shifted_player(I,J,J/Up,NewI,J) :- I2 is I + 6, NewI is mod(I2,7),!.
-create_shifted_player(I,J,J/Down,NewI,J):- I2 is I + 1, NewI is mod(I2,7),!.
+create_shifted_player(I,J,I/left,I,NewJ) :- J2 is J + 5, NewJ is mod(J2,7) +1,!. % I use addition and mod to sort out wraparound
+create_shifted_player(I,J,I/right,I,NewJ) :- J2 is J +7, NewJ is mod(J2,7) +1,!.
+create_shifted_player(I,J,J/up,NewI,J) :- I2 is I + 5, NewI is mod(I2,7) +1,!.
+create_shifted_player(I,J,J/down,NewI,J):- I2 is I +7, NewI is mod(I2,7) +1,!.
 create_shifted_player(I,J,_/_,I,J).
 
 check_shifted_players(C_R,Dir):- check_player_shift(a,C_R,Dir),check_player_shift(b,C_R,Dir).
 
-check_player_shift(Player,C_R,Dir):- player(Player,H1,I,J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I,J),assert(player(Player,H1,NewI,NewJ)).
+check_player_shift(Player,C_R,Dir):- player(Player,H1,I/J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I/J)),assert(player(Player,H1,NewI/NewJ)).
 check_player_shift(Player,C_R,Dir).
 
 
-move_player(C,I/J):-player(C,H,_/_),retractall(player(C,_,_/_)),assert(player(C,H,I/J)).
+move_player(a,I/J):-game_state(a,2),player(a,H,_/_),retractall(player(a,_,_/_)),assert(player(a,H,I/J)),retractall(game_state(a,_)),assert(game_state(b,1)),check_reached_target(a).
+move_player(b,I/J):-game_state(b,2),player(b,H,_/_),retractall(player(b,_,_/_)),assert(player(b,H,I/J)),retractall(game_state(b,_)),assert(game_state(a,1)),check_reached_target(b).
 								 
 								 
-% Get a list of lists of nodes connected to a given player for all 13 board combinations
+% Get a list of lists of nodes connected to a given player for all 12 board combinations
 get_list_of_board_connections(Player, LocationsList):- 	board(CurrentBoard),player(Player,_,I/J),maze_moves(Moves),
 														findall(ListOfVisitedNodes,(member(Move,Moves),
 														create_shifted_player(I,J,Move,NewI,NewJ),
@@ -522,16 +561,74 @@ get_list_of_board_connections(Player, LocationsList):- 	board(CurrentBoard),play
 %						HEURISTICS
 %-------------------------------------------------------
 
+make_move(Move):- 	try_to_shift_board(Move).
+
+try_and_make_move(Player,H):- game_state(Player,1),make_best_move(H,Player).
+% Distance Functions
+
+man_distance(X1/Y1,X2/Y2,ManDist):-
+	D1 is abs(X1 - X2), D2 is abs(Y1 - Y2),
+	ManDist is D1 + D2 .
 
 
+make_best_local_move(Player,h1):- game_state(Player,2),
+								  player(Player,_,I/J),
+								  board(Board),
+								  graph_search_BFS(Board,I,J,Locations),
+								  get_target(Player,Target),
+								  get_best_local_best(I/J,Target,Locations,Move),
+								  move_player(Player,Move).
 
+get_best_local_best(I/J,Target,Locations,Move):- get_best_local_best_acc(Target,Locations,0,I/J,Move).
 
+get_best_local_best_acc(_Target,[],_BestScore,Move,Move):-!.
+get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
+					man_distance(Target,Head,ManDist),Score2 is 12 - ManDist, Score2 > BestScore,!,
+					get_best_local_best_acc(Target,Tail,Score2,Head,Move).
+get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
+					get_best_local_best_acc(Target,Tail,BestScore,Acc,Move).
 
+%-------------------------------------------------------
+%						HEURISTIC 1 (H1)
+% This heuristic evaluates the manhattan distance between the player and its target.
+% This heurictic ignores the other player in it's calculation entirely, it also only looks 1 ahead and tends to get stuck
+%-------------------------------------------------------
+make_best_move(h1, Player):- get_target(Player,Target),
+						get_list_of_board_connections(Player, LocationsList), 
+						h1_evaluate_moves(Target, LocationsList,Move), write(Move),make_move(Move).
+						
+						
 
+h1_evaluate_moves(Target,LocationsList,Move):-  h1_score_moves(Target,LocationsList,Scores),
+												get_index_of_highest(Scores,Index),
+												maze_moves(Moves),
+												get_element_number(Index,Moves,Move).
 
+h1_score_moves(_Target,[],[]):-!.
+h1_score_moves(Target,[Head|LocationsList],[Score|Scores]):-
+	h1_get_best_score(Target,Head,0,Score),
+		h1_score_moves(Target,LocationsList,Scores).
+	
+	
+h1_get_best_score(_Target,[],Score,Score):-!.
+h1_get_best_score(Target,[Position|Rest],Acc,Score):-
+	man_distance(Target,Position,ManDist),
+	Score2 is 12 - ManDist,
+	Acc2 is max(Acc,Score2),
+	h1_get_best_score(Target,Rest,Acc2,Score).
 
+get_index_of_highest(Scores,Index):- get_index_of_highest_acc(Scores,Index,1,0,1).
 
+get_index_of_highest_acc([],Index,Index,_ScoreAcc,_Counter):-!.
+get_index_of_highest_acc([Head|Scores],Index,IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, !,  C2 is Counter +1,
+			get_index_of_highest_acc(Scores,Index,Counter,Head,C2).
+get_index_of_highest_acc([_Head|Scores],Index,IndexAcc,ScoreAcc,Counter):-   C2 is Counter +1,
+			get_index_of_highest_acc(Scores,Index,IndexAcc,ScoreAcc,C2).
 
+get_element_number(1,[Head|_Tail],Head):-!.
+get_element_number(N,[_Head|Tail],E):-
+	N2 is N - 1,
+	get_element_number(N2,Tail,E).
 
 
 

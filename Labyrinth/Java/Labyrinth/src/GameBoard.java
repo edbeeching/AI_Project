@@ -7,20 +7,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 public class GameBoard extends JLayeredPane {
 
@@ -31,6 +32,7 @@ public class GameBoard extends JLayeredPane {
 	public JLabel player2_label;
 	private Player player1;
 	private Player player2;
+	private Player currentPlayer;
 	
 	
 	private JFrame frame;
@@ -39,20 +41,36 @@ public class GameBoard extends JLayeredPane {
 	private Map<Integer,Integer> pieceTypeMap;
 	private Map<Integer,Integer> pieceRotMap;
 	private QueryProlog queryProlog;
+	private GameInfo gameInfo;
+	private GameBoard gameBoard;
 	
-	private JLabel crownLabel;
+	private SwingWorker<Object, Object> worker;
 	
 	
 	public GameBoard(JFrame frame, GameInfo gameInfo){
 		super();
+		this.frame = frame;
+		this.gameInfo = gameInfo;
+		gameBoard = this;
 		queryProlog = new QueryProlog(gameInfo);
 		ArrayList<String> boardStrings = queryProlog.getBoard();
+		
 		initialise(boardStrings);
-		
+		startTimer();
 
-		
-		this.frame = frame;
-		
+	}
+	private void startTimer(){
+		worker = new SwingWorker<Object, Object>(){
+			@Override
+			protected Object doInBackground() throws Exception {
+				while(true){
+					//System.out.println("updating");
+					currentPlayer.update(gameBoard, queryProlog);
+					Thread.sleep(1000);	
+				}
+			}
+		};
+		worker.execute();
 	}
 
 	private void initialise(ArrayList<String> boardStrings) {
@@ -65,8 +83,17 @@ public class GameBoard extends JLayeredPane {
 		}else{
 			setupBoardFromString(boardStrings);
 		}
-		player1 = new HumanPlayer(true,0);
-		player2 = new HumanPlayer(true,0);
+		if(gameInfo.player1Heuristic == "h0"){
+			player1 = new HumanPlayer("a");
+		}else{
+			player1 = new AI_Player("a", gameInfo.player1Heuristic);
+		}
+		if(gameInfo.player2Heuristic == "h0"){
+			player2 = new HumanPlayer("b");
+		}else{
+			player2 = new AI_Player("b",gameInfo.player2Heuristic);
+		}
+		currentPlayer = player1;
 		Point player1Indices = queryProlog.getPlayerPosition("a");
 		Point player2Indices = queryProlog.getPlayerPosition("b");
 		
@@ -200,7 +227,6 @@ public class GameBoard extends JLayeredPane {
 			locations[j+10] = new Point(140 + 140*j + 40,420+40);
 		}
 		
-		
 		for(int i=0; i< treasureImages.size();i++){
 			ImageIcon icon = new ImageIcon( treasureImages.get(i));
 			
@@ -210,8 +236,67 @@ public class GameBoard extends JLayeredPane {
 			this.add(label,new Integer(2),0);
 		}
 	}
+	public JPanel setupTreasurePanel(){
+		JPanel treasurePanel = new JPanel();
+		treasurePanel.setLayout(new BoxLayout(treasurePanel, BoxLayout.Y_AXIS));
+		treasurePanel.setBorder(BorderFactory.createTitledBorder("Treasures"));
+		JPanel player1TreasurePanel = new JPanel();
+		player1TreasurePanel.setLayout(new BoxLayout(player1TreasurePanel, BoxLayout.X_AXIS));
+		JPanel player2TreasurePanel = new JPanel();
+		player2TreasurePanel.setLayout(new BoxLayout(player2TreasurePanel, BoxLayout.X_AXIS));
+		ArrayList<String> prologTreasureList = queryProlog.getTreasureList("a");
+		String[] treasureList = {"sword", "ring", "map", "keys", "helmet", "gold",
+				 "fairy", "gem", "chest", "candle", "book", "crown"};
+		// This is quite inefficient but treasure list is small so it's OK
+		for(String treasure : prologTreasureList){
+			for(int i=0; i<treasureList.length; i++){
+				//System.out.println(treasure + " " + treasureList[i] );
+				if(treasureList[i].compareTo(treasure)==0){
+					System.out.println("adding " + treasure);
+					ImageIcon icon = new ImageIcon(treasureImages.get(i));
+					JLabel label = new JLabel(icon);
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.red));
+					//label.setBackground(Color.BLACK);
+					player1TreasurePanel.add(label);
+				}
+			}
+		}
+		
+		prologTreasureList.clear();
+		prologTreasureList = queryProlog.getTreasureList("b");
+		for(String treasure : prologTreasureList){
+			for(int i=0; i<treasureList.length; i++){
+				//System.out.println(treasure + " " + treasureList[i] );
+				if(treasureList[i].compareTo(treasure)==0){
+					System.out.println("adding " + treasure);
+					ImageIcon icon = new ImageIcon(treasureImages.get(i));
+					JLabel label = new JLabel(icon);
+					label.setOpaque(true);
+					label.setBorder(BorderFactory.createLineBorder(Color.green));
+					//label.setBackground(Color.BLACK);
+					player2TreasurePanel.add(label);
+				}
+			}
+		}
+		treasurePanel.add(Box.createVerticalStrut(20));
+		treasurePanel.add(player1TreasurePanel);
+		treasurePanel.add(Box.createVerticalStrut(20));
+		treasurePanel.add(player2TreasurePanel);
+//		
+//		ImageIcon icon = new ImageIcon(treasureImages.get(0));
+//		JLabel testLabel = new JLabel(icon);
+//		//testLabel.setBounds(10, 10, 64, 64);
+//		//testLabel.setBounds(new Rectangle(32,32));
+//		testLabel.setOpaque(true);
+		//testLabel.setBackground(Color.BLACK);
+		
+		
+		
+		return treasurePanel;
+	}
 
-	private void recreateBoardFromString(ArrayList<String> boardStrings){
+	public void recreateBoardFromString(ArrayList<String> boardStrings){
 		
 		boardPanel.removeAll();
 		pieces.clear();
@@ -312,7 +397,6 @@ public class GameBoard extends JLayeredPane {
         ImageIcon icon = new ImageIcon(path);
         
         return icon;
-       
     }
 	
 	private class ShiftAction extends AbstractAction{
@@ -355,29 +439,34 @@ public class GameBoard extends JLayeredPane {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			checkPieces(e);
-			
 		}
 		private void checkPieces(ActionEvent e){
 			for(MazePiece piece  : pieces){
 				if((MazePiece)e.getSource() == piece){
 					Point point = (Point) ((MazePiece)e.getSource()).getClientProperty("pos");
 					System.out.print((point.getX()+1) + " " + (point.getY()+1)+ " ");
-					boolean canMove = queryProlog.canMove("a",(int)point.getX()+1, (int)point.getY() +1);
+					String player = queryProlog.getCurrentPlayer();
+					boolean canMove = queryProlog.canMove(player,(int)point.getX()+1, (int)point.getY() +1);
 					System.out.println(canMove? "Can move": "Can't move");
 					if(canMove){
-						queryProlog.tryAndMove("a",(int)point.getX()+1, (int)point.getY() +1);
-//						Point player1Indices = queryProlog.getPlayerPosition("a");
-//
-//						int p1_x = (int)(player1Indices.getX()-1)*70 + 48;
-//						int p1_y = (int)(player1Indices.getY()-1)*70 + 48;
-//						player1_label.setBounds(p1_x,p1_y,16,16);
+						
+						queryProlog.tryAndMove(player,(int)point.getX()+1, (int)point.getY() +1);
 						updatePlayerPositons();
+						swapCurrentPlayer();
 					}
 				}
 			}
 		}
 	}
-
+	public void swapCurrentPlayer() {
+		if(currentPlayer == player1){
+			System.out.println("Swapping");
+			currentPlayer = player2;
+		}else{
+			currentPlayer = player1;
+		}	
+	}
+	
+	
 }

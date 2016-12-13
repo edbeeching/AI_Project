@@ -26,6 +26,9 @@ setup(H):- 	retractall(board(_)),
 			
 setup(H):- create_board(X),create_players(H),  assert(board(X)),board(Y),write_board(Y).
 
+
+
+
 move(Player,I,J).
 %---------------------------------------------------------------
 %				Section 2. Predicates setting up players.
@@ -34,10 +37,13 @@ move(Player,I,J).
 % Players are labelled "a" and "b" and positions are i/j e.g player(a,h1, 1/2) would be player "a" with heuristic at row 1 column 2.
 create_players(H1/H2) :- retractall(player(_,_,_)), retractall(treasure_list(_,_)),retractall(treasure_index(_,_)),
 						assert(player(a,H1,1/1)), assert(player(b,H2,1/7)),
+						assert(game_state(a,1)),
 						setup_treasure_lists(P1_List,P2_List), 
 						assert(treasure_list(a,P1_List)),
 						assert(treasure_list(b,P2_List)),
 						assert(treasure_index(a,1)),assert(treasure_index(b,1)).
+% Game states can be a,1 a,2 b,1 b,2
+get_current_player(Player):- game_state(Player,_).
 % Treasure locations [sword, ring, map, keys, helmet, gold, fairy, gem, chest, candle, book, crown]
 treasures([	sword/1/3, ring/1/5, map/3/1, 
 			keys/3/3, helmet/3/5, gold/3/7, 

@@ -12,7 +12,7 @@ public class QueryProlog {
 		initialise(gameInfo);
 	}
 	private void initialise(GameInfo gameInfo){
-		String string = "consult('C:/Users/Edward/Documents/Java/Labyrinth/prolog/labyrinth.pl')";
+		String string = "consult('prolog/labyrinth.pl')";
 		Query query = new Query(string);
 		System.out.println(string + " " + (query.hasSolution() ? "suceeded" : "failed"));
 		query.close();
@@ -110,7 +110,7 @@ public class QueryProlog {
 	}
 	public ArrayList<String> requestShiftLeft(int row) {
 		
-		String shiftLeft = "shift_row_left("+ row +  ")";
+		String shiftLeft = "try_to_shift_row_left("+ row +  ")";
 		Query shiftQuery = new Query(shiftLeft);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
@@ -118,7 +118,7 @@ public class QueryProlog {
 		return getBoard();
 	}
 	public ArrayList<String> requestShiftRight(int row) {
-		String shiftRight = "shift_row_right("+ row +  ")";
+		String shiftRight = "try_to_shift_row_right("+ row +  ")";
 		Query shiftQuery = new Query(shiftRight);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
@@ -126,7 +126,7 @@ public class QueryProlog {
 		return getBoard();
 	}
 	public ArrayList<String> requestShiftUp(int column) {
-		String shiftUp = "shift_column_up("+ column +  ")";
+		String shiftUp = "try_to_shift_column_up("+ column +  ")";
 		Query shiftQuery = new Query(shiftUp);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
@@ -134,7 +134,7 @@ public class QueryProlog {
 		return getBoard();
 	}
 	public ArrayList<String> requestShiftDown(int column) {
-		String shiftDown = "shift_column_down("+ column +  ")";
+		String shiftDown = "try_to_shift_column_down("+ column +  ")";
 		Query shiftQuery = new Query(shiftDown);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
@@ -149,9 +149,38 @@ public class QueryProlog {
 		moveQuery.close();
 		return canMove; 
 	}
+	
+	public boolean tryAndMakeMove(String player, String heuristic){
+		String moveString = "try_and_make_move(" + player + "," + heuristic +").";
+		Query moveQuery = new Query(moveString);
+		System.out.println(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
+		moveQuery.close();
+		if(!moveQuery.hasSolution()){
+			return false;
+		}
+		return true;
+	}
+	
+	public void makeBestLocalMove(String player, String heuristic){
+		String localMoveString = "make_best_local_move(" + player + "," + heuristic +").";
+		Query localMoveQuery = new Query(localMoveString);
+		System.out.println(localMoveString + " " + (localMoveQuery.hasSolution() ? "suceeded" : "failed"));
+		localMoveQuery.close();
+	}
+	
+	public boolean isGameState(String player, int state){
+		String stateString = "game_state(" + player + "," + state +").";
+		Query stateQuery = new Query(stateString);
+		System.out.println(stateQuery + " " + (stateQuery.hasSolution() ? "suceeded" : "failed"));
+		stateQuery.close();
+		if(!stateQuery.hasSolution()){
+			return false;
+		}
+		return true;
+	}
 
 	public boolean canMove(String player, int i, int j) {
-		String positionString = "player(" + player +",_,I/J)";
+		String positionString = "player(" + player +",_,I/J).";
 		Query positionQuery = new Query(positionString);
 		System.out.println(positionString + " " + (positionQuery.hasSolution() ? "suceeded" : "failed"));
 		positionQuery.close();
@@ -176,5 +205,18 @@ public class QueryProlog {
 		
 		
 		//move_player(C,I/J)
+	}
+	public String getCurrentPlayer() {
+		String playerString = "get_current_player(Player).";
+		Query playerQuery = new Query(playerString);
+		System.out.println(playerString + " " + (playerQuery.hasSolution() ? "suceeded" : "failed"));
+		playerQuery.close();
+		if(!playerQuery.hasSolution()){
+			return null;
+		}
+		Term playerTerm = playerQuery.oneSolution().get("Player");
+		return playerTerm.toString();
+		
+		
 	}
 }
