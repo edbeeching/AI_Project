@@ -43,6 +43,7 @@ public class GameBoard extends JLayeredPane {
 	private QueryProlog queryProlog;
 	private GameInfo gameInfo;
 	private GameBoard gameBoard;
+	private JPanel treasurePanel;
 	
 	private SwingWorker<Object, Object> worker;
 	
@@ -57,7 +58,8 @@ public class GameBoard extends JLayeredPane {
 		
 		initialise(boardStrings);
 		startTimer();
-
+		Point pos  = queryProlog.getTreasurePositions();
+		System.out.println(" player a: " + pos.getX() + "player b:"+ pos.getY());
 	}
 	private void startTimer(){
 		worker = new SwingWorker<Object, Object>(){
@@ -66,6 +68,7 @@ public class GameBoard extends JLayeredPane {
 				while(true){
 					//System.out.println("updating");
 					currentPlayer.update(gameBoard, queryProlog);
+					setupTreasurePanel();
 					Thread.sleep(1000);	
 				}
 			}
@@ -237,7 +240,14 @@ public class GameBoard extends JLayeredPane {
 		}
 	}
 	public JPanel setupTreasurePanel(){
-		JPanel treasurePanel = new JPanel();
+		
+		if(treasurePanel == null){
+			System.out.println("nul");
+			treasurePanel = new JPanel();
+		}else{
+			treasurePanel.removeAll();
+		}
+		
 		treasurePanel.setLayout(new BoxLayout(treasurePanel, BoxLayout.Y_AXIS));
 		treasurePanel.setBorder(BorderFactory.createTitledBorder("Treasures"));
 		JPanel player1TreasurePanel = new JPanel();
@@ -247,7 +257,11 @@ public class GameBoard extends JLayeredPane {
 		ArrayList<String> prologTreasureList = queryProlog.getTreasureList("a");
 		String[] treasureList = {"sword", "ring", "map", "keys", "helmet", "gold",
 				 "fairy", "gem", "chest", "candle", "book", "crown"};
+		
+		Point pos  = queryProlog.getTreasurePositions();
+		System.out.println(pos.x + " " + pos.y);
 		// This is quite inefficient but treasure list is small so it's OK
+		int counter = 1;
 		for(String treasure : prologTreasureList){
 			for(int i=0; i<treasureList.length; i++){
 				//System.out.println(treasure + " " + treasureList[i] );
@@ -257,12 +271,17 @@ public class GameBoard extends JLayeredPane {
 					JLabel label = new JLabel(icon);
 					label.setOpaque(true);
 					label.setBorder(BorderFactory.createLineBorder(Color.red));
-					//label.setBackground(Color.BLACK);
+					label.setBackground(Color.GRAY);
+					if(counter == (int)pos.getX()){
+						System.out.println(counter);
+						label.setBackground(Color.WHITE);
+					}
 					player1TreasurePanel.add(label);
+					counter++;
 				}
 			}
 		}
-		
+		counter = 1; 
 		prologTreasureList.clear();
 		prologTreasureList = queryProlog.getTreasureList("b");
 		for(String treasure : prologTreasureList){
@@ -274,8 +293,12 @@ public class GameBoard extends JLayeredPane {
 					JLabel label = new JLabel(icon);
 					label.setOpaque(true);
 					label.setBorder(BorderFactory.createLineBorder(Color.green));
-					//label.setBackground(Color.BLACK);
+					label.setBackground(Color.GRAY);
+					if(counter == pos.getY()){
+						label.setBackground(Color.WHITE);
+					}
 					player2TreasurePanel.add(label);
+					counter ++;
 				}
 			}
 		}
@@ -290,7 +313,8 @@ public class GameBoard extends JLayeredPane {
 //		//testLabel.setBounds(new Rectangle(32,32));
 //		testLabel.setOpaque(true);
 		//testLabel.setBackground(Color.BLACK);
-		
+		treasurePanel.revalidate();
+		treasurePanel.repaint();
 		
 		
 		return treasurePanel;

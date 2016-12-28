@@ -54,27 +54,24 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
 		controlPanel.setLayout(new GridLayout(4, 1));
 		frame.getContentPane().add(controlPanel, BorderLayout.EAST);	
 		
-		JButton button = new JButton();
-		button.setBounds(10,10,40,40);
-		button.setText("Generate Maze!");
-		button.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				generateMaze();
-				
-			}
-		});
-		controlPanel.add(button);
+//		JButton button = new JButton();
+//		button.setBounds(10,10,40,40);
+//		button.setText("Generate Maze!");
+//		button.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				generateMaze();
+//				
+//			}
+//		});
+//		controlPanel.add(button);
 		
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(BorderFactory.createTitledBorder("Info"));
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.X_AXIS));
 		JPanel treasurePanel = gameBoard.setupTreasurePanel();
-		
-
-		
 		
 		
 		JPanel debugPanel = new JPanel();

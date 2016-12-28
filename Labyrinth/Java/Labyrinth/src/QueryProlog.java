@@ -76,6 +76,30 @@ public class QueryProlog {
 		// Just to be confusing, x and y are swapped in my implementation of prolog :)
 		return new Point(J.intValue(),I.intValue());
 	}
+	public Point getTreasurePositions(){
+		Point pos = new Point();
+		
+		String player1TreasureString = "treasure_index(a,Index).";
+		Query player1TreasureQuery = new Query(player1TreasureString);
+		System.out.println(player1TreasureString + " " + (player1TreasureQuery.hasSolution() ? "suceeded" : "failed"));
+		player1TreasureQuery.close();
+		if(!player1TreasureQuery.hasSolution()){
+			return null;
+		}
+		 pos.x = player1TreasureQuery.oneSolution().get("Index").intValue();
+		
+		 String player2TreasureString = "treasure_index(b,Index).";
+			Query player2TreasureQuery = new Query(player2TreasureString);
+			System.out.println(player2TreasureString + " " + (player2TreasureQuery.hasSolution() ? "suceeded" : "failed"));
+			player2TreasureQuery.close();
+			if(!player2TreasureQuery.hasSolution()){
+				return null;
+			}
+			 pos.y = player2TreasureQuery.oneSolution().get("Index").intValue();
+		 
+		 
+		return pos;
+	}
 //	public ArrayList<ArrayList<String>> generateMaze(){
 //		
 //		ArrayList<ArrayList<String>> mazeStrings = new ArrayList<ArrayList<String>>();
