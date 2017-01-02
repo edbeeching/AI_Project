@@ -636,21 +636,161 @@ get_element_number(N,[_Head|Tail],E):-
 
 
 
+	
+%-------------------------------------------------------
+%						HEURISTIC 3 (H3)
+% Tries to search 2 moves ahead and evaluates the move that maximizes the score in the second move
+%-------------------------------------------------------
 
 
 
+% Get a list of lists of nodes connected to a given player for all 12 board combinations
+% 
+
+% First get a list of 12 boards and the list of nodes reachable for each board
+% put it in a list of type[Move/Score, .....]
+%
+% Remember ListOfScores has the format Move/Score/I/J
+h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores):- 	
+								player(Player,_,I/J),
+								get_target(Player, Target),
+								maze_moves(Moves),
+								findall(Move/Score/IK/JK, (
+													member(Move, Moves),
+													create_shifted_player(I,J,Move,NewI,NewJ),
+													create_shifted_board(CurrentBoard,Move,NewBoard),
+													graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes1),
+													h3_get_list_of_board_connections_second_move(NewBoard, Target, ListOfVisitedNodes1, Score/IK/JK)
+													% write(Score)
+													), ListOfScores),
+								write(ListOfScores).
+																
+h3_get_list_of_board_connections_second_move(CurrentBoard, Target, ListOfVisitedNodes1, Score):-
+											maze_moves(Moves),
+											findall(MaxScore/I/J, (member(Move, Moves),
+																	member(I/J, ListOfVisitedNodes1),
+																	create_shifted_player(I,J,Move,NewI,NewJ),
+																	create_shifted_board(CurrentBoard,Move,NewBoard),
+																	graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes),
+																	% write(Target), write(ListOfVisitedNodes),
+																	h3_get_score(Target, ListOfVisitedNodes, ListOfScores),
+																	h3_get_highest_score(ListOfScores, MaxScore)
+															), Scores
+													),
+											% write(Scores),
+											h3_get_highest_score_I_J(Scores, Score).
+
+% Score based on man_distance from Position to Target											
+h3_man_score(Target, Position, Score):-
+	man_distance(Target, Position, Distance),
+	Score is 12 - Distance.
+	
+% Given a ListOfVisitedNodes calculate the scores in ListOfScores
+h3_get_score(Target, ListOfVisitedNodes, ListOfScores):-
+	findall(Score, ( member(Position, ListOfVisitedNodes),
+					 % write(Position), write(Target),
+					 h3_man_score(Target, Position, Score)
+					), ListOfScores
+			).
+
+% Given a list of scores, find the highest number
+h3_get_highest_score(ListOfScores, MaxScore):-
+	h3_get_highest_score_acc(ListOfScores, 0, MaxScore).
+
+h3_get_highest_score_acc([], ScoreAcc, ScoreAcc):- !.
+h3_get_highest_score_acc([Score|ListOfScores], ScoreAcc, MaxScore):-
+	Score2 is max(Score, ScoreAcc),
+	h3_get_highest_score_acc(ListOfScores, Score2, MaxScore).
+	
+% Get Score and the I/J
+% h3_get_score_I_J()
+% Find the highest and the I/J
+% Scores has the format Score/I/J
+h3_get_highest_score_I_J([Score/I/J|ListOfScores], MaxScore):- 
+	h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], Score/I/J, MaxScore).
+
+h3_get_highest_score_I_J_acc([], ScoreAcc/I/J, ScoreAcc/I/J):- !.
+
+h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
+	Score =< ScoreAcc, !,
+	h3_get_highest_score_I_J_acc(ListOfScores, ScoreAcc/IK/JK, MaxScore).
+	
+h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
+	Score > ScoreAcc,
+	h3_get_highest_score_I_J_acc(ListOfScores, Score/I/J, MaxScore).
+
+	
+
+% Find the max score
+h3_get_max([Move/Score/I/J|ListOfScores], MaxScoreInt):-
+	h3_get_max_acc([Move/Score/I/J|ListOfScores], 0, MaxScoreInt).
+	
+h3_get_max_acc([], MaxAcc, MaxAcc):- !.
+h3_get_max_acc([Move/Score/I/J|ListOfScores], MaxAcc, MaxScoreInt):-
+	MaxAcc2 is max(Score, MaxAcc),
+	h3_get_max_acc(ListOfScores, MaxAcc2, MaxScoreInt).
+	
+% Considers the Move, and the distance to Target
+h3_get_all_max(ListOfScores, NewListOfScores):-
+	h3_get_max(ListOfScores, Max),
+	findall(
+			Move/Max/I/J,
+			(
+				member(Move/Max/I/J, ListOfScores)
+			), NewListOfScores
+			).
+
+h3_get_highest_score_move_I_J(Target, ListOfScores, MaxMoveScoreIJ):- 
+	h3_get_all_max(ListOfScores, [Move/Score/I/J|NewListOfScores]),
+	h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], 12, Move/Score/I/J, MaxMoveScoreIJ).
 
 
+h3_get_highest_score_move_I_J_acc(Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
+h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+	man_distance(Target, I/J, NewDistance),
+	NewDistance >= DistanceAcc, !,
+	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
+h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+	man_distance(Target, I/J, NewDistance),
+	NewDistance < DistanceAcc,
+	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
 
+									
+write_list_of_scores([]):- !, nl.
+write_list_of_scores([Move/Score/I/J|Tail]):-
+	write(Move/Score/I/J), nl, write_list_of_scores(Tail).
+		
+testing_first_move(ListOfScores):-
+	setup(Game), 
+	board(CurrentBoard), 
+	h3_get_list_of_board_connections(CurrentBoard, a, ListOfScores), 
+	%write(ListOfScores),
+	%write_list_of_scores(ListOfScores),
+	make_best_move(h3, a),
+	nl.
 
+	
+% h3 Heuristics Make Best Local Move:
+% This is different to H1, in the sense that, we have recorded the best next position into the 
+% knowledge base, then, we move there, then retractall
+make_best_move(h3, Player):-!, get_target(Player,Target),
+						board(CurrentBoard),
+						h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores), 
+						%write_list_of_scores(ListOfScores),
+						%write(ListOfScores),
+						h3_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J), 
+						write(Move/Score/I/J),
+						assert(h3_best_position(Player,I/J)),
+						make_move(Move).
 
+make_best_local_move(Player, h3):- game_state(Player, 2),
+								% No need to do the graph search
+								% But we need to retrieve the move that we stored in the knowledge base
+								h3_best_position(Player,Move),
+								move_player(Player,Move),
+								retractall(h3_best_position(_,_)).
+	
 
-
-
-
-
-
-
-
-
+	
+% h3_make_best_move()
