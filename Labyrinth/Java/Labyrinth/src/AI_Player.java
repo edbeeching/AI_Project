@@ -27,14 +27,14 @@ public class AI_Player extends Player {
 	@Override
 	public boolean update(GameBoard gameBoard, QueryProlog queryProlog, JLabel timeLabel) {
 		
-		System.out.println("update");
+		//System.out.println("update");
 		Logger.info("------------------------------------------------------------------------------------");
 		Logger.info("update");
 		if(queryProlog.isGameState(this.name, 1)){
 			//ArrayList<String> board = queryProlog.getBoard();
 			long start_time = System.currentTimeMillis();
 			queryProlog.tryAndMakeMove(this.name, this.heuristic);
-			System.out.println("Search took" + (System.currentTimeMillis() - start_time ) +"ms");
+			//System.out.println("Search took" + (System.currentTimeMillis() - start_time ) +"ms");
 			Logger.info("Search took" + (System.currentTimeMillis() - start_time ) +"ms");
 			EventQueue.invokeLater(new Runnable() {
 			    @Override
@@ -67,7 +67,7 @@ public class AI_Player extends Player {
 			}
 		}
 		if(queryProlog.haveIWon(this.name)){
-			System.out.println("Player " + this.name + " has won!");
+			//System.out.println("Player " + this.name + " has won!");
 			Logger.info("Player " + this.name + " has won!");
 			return true;
 		}

@@ -84,7 +84,7 @@ public class GameBoard extends JLayeredPane {
 		initialise(boardStrings);
 		startTimer();
 		Point pos  = queryProlog.getTreasurePositions();
-		System.out.println(" player a: " + pos.getX() + "player b:"+ pos.getY());
+		//System.out.println(" player a: " + pos.getX() + "player b:"+ pos.getY());
 		Logger.info(" player a: " + pos.getX() + "player b:"+ pos.getY());
 	}
 	private void startTimer(){
@@ -260,7 +260,7 @@ public class GameBoard extends JLayeredPane {
 		try {
 			loadImages(pieceImages);
 		} catch (IOException e) {
-			System.out.println("Could not find images");
+			//System.out.println("Could not find images");
 			Logger.info("Could not find images");
 			e.printStackTrace();
 		}
@@ -287,7 +287,7 @@ public class GameBoard extends JLayeredPane {
 		this.add(boardPanel);
 		addTreasures(this);
 		
-		System.out.println("Board created");
+		//System.out.println("Board created");
 		Logger.info("Board created");
 		
 	}
@@ -297,7 +297,7 @@ public class GameBoard extends JLayeredPane {
 		try {
 			loadTreasures(treasureImages);
 		} catch (IOException e) {
-			System.out.println("Could not find treasure images");
+			//System.out.println("Could not find treasure images");
 			Logger.info("Could not find treasure images");
 			e.printStackTrace();
 		}
@@ -328,7 +328,7 @@ public class GameBoard extends JLayeredPane {
 	public JPanel setupTreasurePanel(){
 		
 		Point pos  = queryProlog.getTreasurePositions();
-		System.out.println(pos.x + " " + pos.y);
+		//System.out.println(pos.x + " " + pos.y);
 		Logger.info(pos.x + " " + pos.y);
 		if(treasurePanel == null){
 			System.out.println("null");
@@ -361,7 +361,7 @@ public class GameBoard extends JLayeredPane {
 			for(int i=0; i<treasureList.length; i++){
 				//System.out.println(treasure + " " + treasureList[i] );
 				if(treasureList[i].compareTo(treasure)==0){
-					System.out.println("adding " + treasure);
+					//System.out.println("adding " + treasure);
 					Logger.info("adding " + treasure);
 					ImageIcon icon = new ImageIcon(treasureImages.get(i));
 					JLabel label = new JLabel(icon);
@@ -383,7 +383,7 @@ public class GameBoard extends JLayeredPane {
 			for(int i=0; i<treasureList.length; i++){
 				//System.out.println(treasure + " " + treasureList[i] );
 				if(treasureList[i].compareTo(treasure)==0){
-					System.out.println("adding " + treasure);
+					//System.out.println("adding " + treasure);
 					Logger.info("adding " + treasure);
 					ImageIcon icon = new ImageIcon(treasureImages.get(i));
 					JLabel label = new JLabel(icon);
@@ -448,7 +448,7 @@ public class GameBoard extends JLayeredPane {
 		}
 		boardPanel.validate();
 		
-		System.out.println("Board recreated");
+		//System.out.println("Board recreated");
 		Logger.info("Board recreated");
 	}
 	private void createMaps() {
@@ -590,7 +590,7 @@ public class GameBoard extends JLayeredPane {
 	}
 	public void swapCurrentPlayer() {
 		if(currentPlayer == player1){
-			System.out.println("Swapping");
+			//System.out.println("Swapping");
 			Logger.info("Swapping");
 			currentPlayer = player2;
 			EventQueue.invokeLater(new Runnable() {

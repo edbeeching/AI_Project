@@ -1,0 +1,1730 @@
+2017-01-02 22:20:38 GameBoard.<init>()	Hello World!
+2017-01-02 22:20:38 QueryProlog.initialise()	consult('prolog/labyrinth.pl') suceeded
+2017-01-02 22:20:38 QueryProlog.initialise()	setup(h3/h3). suceeded
+2017-01-02 22:20:38 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:38 GameBoard.setupBoardFromString()	Board created
+2017-01-02 22:20:38 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:38 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:38 QueryProlog.getTreasureList()	get_treasure_list(a,List). suceeded
+2017-01-02 22:20:38 GameBoard.initialise()	[keys, chest, helmet, sword, ring]
+2017-01-02 22:20:38 QueryProlog.getTreasureList()	get_treasure_list(b,List). suceeded
+2017-01-02 22:20:38 GameBoard.initialise()	[fairy, candle, book, gold, map]
+2017-01-02 22:20:38 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:38 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:38 GameBoard.<init>()	 player a: 1.0player b:1.0
+2017-01-02 22:20:38 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:38 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	null
+2017-01-02 22:20:38 QueryProlog.getTreasureList()	get_treasure_list(a,List). suceeded
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding keys
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding chest
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding helmet
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding sword
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding ring
+2017-01-02 22:20:38 QueryProlog.getTreasureList()	get_treasure_list(b,List). suceeded
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding fairy
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding candle
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding book
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding gold
+2017-01-02 22:20:38 GameBoard.setupTreasurePanel()	adding map
+2017-01-02 22:20:38 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:38 AI_Player.update()	update
+2017-01-02 22:20:38 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:39 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:39 AI_Player.update()	Search took119ms
+2017-01-02 22:20:39 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:39 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:39 AI_Player.update()		110,	1110,	111,	101,	111,	1100,	11
+2017-01-02 22:20:39 AI_Player.update()		1010,	110,	1010,	110,	11,	1101,	1001
+2017-01-02 22:20:39 AI_Player.update()		1110,	1011,	1110,	101,	111,	1010,	1011
+2017-01-02 22:20:39 AI_Player.update()		1101,	110,	1110,	1010,	1001,	101,	11
+2017-01-02 22:20:39 AI_Player.update()		1110,	1011,	1101,	1110,	1011,	11,	1011
+2017-01-02 22:20:39 AI_Player.update()		11,	1001,	1010,	11,	101,	1001,	1100
+2017-01-02 22:20:39 AI_Player.update()		1100,	110,	1101,	11,	1101,	110,	1001
+2017-01-02 22:20:39 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:39 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:39 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:39 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:39 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:39 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:39 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:39 QueryProlog.getTreasureList()	get_treasure_list(a,List). suceeded
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding keys
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding chest
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding helmet
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding sword
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding ring
+2017-01-02 22:20:39 QueryProlog.getTreasureList()	get_treasure_list(b,List). suceeded
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding fairy
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding candle
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding book
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding gold
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	adding map
+2017-01-02 22:20:39 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:39 AI_Player.update()	update
+2017-01-02 22:20:39 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:39 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:39 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:39 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:39 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:39 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:39 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:39 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:39 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:39 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:40 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:40 AI_Player.update()	update
+2017-01-02 22:20:40 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:40 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:40 AI_Player.update()	Search took95ms
+2017-01-02 22:20:40 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:40 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:40 AI_Player.update()		110,	1110,	111,	101,	111,	1101,	11
+2017-01-02 22:20:40 AI_Player.update()		1010,	110,	1010,	110,	11,	1010,	1001
+2017-01-02 22:20:40 AI_Player.update()		1110,	1011,	1110,	101,	111,	101,	1011
+2017-01-02 22:20:40 AI_Player.update()		1101,	110,	1110,	1010,	1001,	11,	11
+2017-01-02 22:20:40 AI_Player.update()		1110,	1011,	1101,	1110,	1011,	1001,	1011
+2017-01-02 22:20:40 AI_Player.update()		11,	1001,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:40 AI_Player.update()		1100,	110,	1101,	11,	1101,	1100,	1001
+2017-01-02 22:20:40 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:40 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:40 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:40 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:40 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:40 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:40 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:40 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:40 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:40 AI_Player.update()	update
+2017-01-02 22:20:40 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:40 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:40 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:40 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:40 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:40 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:40 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:40 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:40 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:41 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:41 AI_Player.update()	update
+2017-01-02 22:20:41 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:41 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:41 AI_Player.update()	Search took253ms
+2017-01-02 22:20:41 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:41 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:41 AI_Player.update()		110,	1110,	111,	110,	111,	1101,	11
+2017-01-02 22:20:41 AI_Player.update()		1010,	110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:41 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:41 AI_Player.update()		1101,	110,	1110,	1110,	1001,	11,	11
+2017-01-02 22:20:41 AI_Player.update()		1110,	1011,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:41 AI_Player.update()		11,	1001,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:41 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:41 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:41 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:41 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:41 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:41 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:41 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:41 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:41 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:42 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:42 AI_Player.update()	update
+2017-01-02 22:20:42 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:42 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:42 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:42 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:42 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:42 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:42 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:42 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:42 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:42 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:42 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:42 AI_Player.update()	update
+2017-01-02 22:20:42 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:42 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:42 AI_Player.update()	Search took193ms
+2017-01-02 22:20:42 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:42 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:42 AI_Player.update()		110,	1110,	111,	110,	111,	1101,	11
+2017-01-02 22:20:42 AI_Player.update()		1010,	110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:42 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:42 AI_Player.update()		110,	1110,	1110,	1001,	11,	11,	1101
+2017-01-02 22:20:42 AI_Player.update()		1110,	1011,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:42 AI_Player.update()		11,	1001,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:42 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:42 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:42 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:42 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:42 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:42 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:42 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:42 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:42 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:43 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:43 AI_Player.update()	update
+2017-01-02 22:20:43 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:43 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:43 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:43 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:43 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:43 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:43 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:43 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:43 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:43 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:43 AI_Player.update()	update
+2017-01-02 22:20:43 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:44 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:44 AI_Player.update()	Search took306ms
+2017-01-02 22:20:44 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:44 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:44 AI_Player.update()		110,	110,	111,	110,	111,	1101,	11
+2017-01-02 22:20:44 AI_Player.update()		1010,	1011,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:44 AI_Player.update()		1110,	1110,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:44 AI_Player.update()		110,	1011,	1110,	1001,	11,	11,	1101
+2017-01-02 22:20:44 AI_Player.update()		1110,	1001,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:44 AI_Player.update()		11,	110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:44 AI_Player.update()		1100,	1110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:44 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:44 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:44 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:44 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:44 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:44 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:44 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:44 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:44 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:44 AI_Player.update()	update
+2017-01-02 22:20:44 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:44 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:44 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:44 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:44 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:44 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:44 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:44 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:44 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:44 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:45 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:45 AI_Player.update()	update
+2017-01-02 22:20:45 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:45 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:45 AI_Player.update()	Search took490ms
+2017-01-02 22:20:45 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:45 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:45 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:45 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:45 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:45 AI_Player.update()		110,	1001,	1110,	1001,	11,	11,	1101
+2017-01-02 22:20:45 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:45 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:45 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:45 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:45 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:45 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:45 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:45 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:45 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:45 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:45 GameBoard.setupTreasurePanel()	1 1
+2017-01-02 22:20:46 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:46 AI_Player.update()	update
+2017-01-02 22:20:46 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:46 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:46 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:46 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:46 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:46 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:46 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:46 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:46 QueryProlog.getTreasureList()	get_treasure_list(a,List). suceeded
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding keys
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding chest
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding helmet
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding sword
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding ring
+2017-01-02 22:20:46 QueryProlog.getTreasureList()	get_treasure_list(b,List). suceeded
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding fairy
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding candle
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding book
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding gold
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	adding map
+2017-01-02 22:20:46 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:46 AI_Player.update()	update
+2017-01-02 22:20:46 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:46 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:46 AI_Player.update()	Search took325ms
+2017-01-02 22:20:46 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:46 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:46 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:46 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:46 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:46 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:20:46 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:46 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:46 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:46 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:46 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:46 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:46 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:46 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:46 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:46 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:46 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:47 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:47 AI_Player.update()	update
+2017-01-02 22:20:47 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:47 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:47 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:47 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:47 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:47 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:47 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:47 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:47 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:47 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:47 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:47 AI_Player.update()	update
+2017-01-02 22:20:47 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:47 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:47 AI_Player.update()	Search took49ms
+2017-01-02 22:20:47 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:47 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:47 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:47 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:47 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:47 AI_Player.update()		1110,	1001,	11,	11,	1101,	110,	1001
+2017-01-02 22:20:47 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:47 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:47 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:47 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:47 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:47 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:47 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:47 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:47 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:47 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:47 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:48 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:48 AI_Player.update()	update
+2017-01-02 22:20:48 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:48 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:48 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:48 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:48 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:48 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:48 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:48 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:48 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:48 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:48 AI_Player.update()	update
+2017-01-02 22:20:48 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:49 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:49 AI_Player.update()	Search took40ms
+2017-01-02 22:20:49 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:49 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:49 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:49 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:49 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:49 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:20:49 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:49 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:49 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:49 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:49 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:49 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:49 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:49 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:49 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:49 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:49 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:49 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:49 AI_Player.update()	update
+2017-01-02 22:20:49 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:49 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:49 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:49 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:49 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:49 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:49 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:49 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:49 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:49 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:50 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:50 AI_Player.update()	update
+2017-01-02 22:20:50 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:50 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:50 AI_Player.update()	Search took292ms
+2017-01-02 22:20:50 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:50 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:50 AI_Player.update()		110,	1011,	111,	110,	111,	1100,	11
+2017-01-02 22:20:50 AI_Player.update()		1010,	1110,	1010,	101,	11,	1101,	1001
+2017-01-02 22:20:50 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1010,	1011
+2017-01-02 22:20:50 AI_Player.update()		1001,	1110,	1001,	11,	11,	101,	110
+2017-01-02 22:20:50 AI_Player.update()		1110,	110,	1101,	11,	1011,	1101,	1011
+2017-01-02 22:20:50 AI_Player.update()		11,	1110,	1010,	11,	101,	1001,	1100
+2017-01-02 22:20:50 AI_Player.update()		1100,	110,	1101,	101,	1101,	110,	1001
+2017-01-02 22:20:50 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:50 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:50 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:50 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:50 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:50 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:50 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:50 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:50 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:50 AI_Player.update()	update
+2017-01-02 22:20:50 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:50 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:50 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:50 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:50 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:50 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:50 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:50 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:50 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:51 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:51 AI_Player.update()	update
+2017-01-02 22:20:51 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:51 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:51 AI_Player.update()	Search took44ms
+2017-01-02 22:20:51 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:51 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:51 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:51 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:51 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:51 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:20:51 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:51 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:51 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:51 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:51 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:51 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:51 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:51 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:51 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:51 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:51 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:51 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:51 AI_Player.update()	update
+2017-01-02 22:20:51 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:51 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:51 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:51 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:51 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:51 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:51 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:51 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:51 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:51 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:52 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:52 AI_Player.update()	update
+2017-01-02 22:20:52 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:52 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:52 AI_Player.update()	Search took265ms
+2017-01-02 22:20:52 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:52 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:52 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:52 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:52 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:52 AI_Player.update()		1110,	1001,	11,	11,	1101,	110,	1001
+2017-01-02 22:20:52 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:52 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:52 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:52 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:52 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:52 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:52 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:52 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:52 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:52 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:52 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:53 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:53 AI_Player.update()	update
+2017-01-02 22:20:53 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:53 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:53 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:53 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:53 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:53 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:53 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:53 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:53 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:53 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:53 AI_Player.update()	update
+2017-01-02 22:20:53 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:53 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:53 AI_Player.update()	Search took54ms
+2017-01-02 22:20:53 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:53 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:53 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:53 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:53 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:53 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:20:53 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:53 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:53 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:53 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:53 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:53 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:53 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:53 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:53 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:53 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:53 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:54 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:54 AI_Player.update()	update
+2017-01-02 22:20:54 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:54 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:54 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:54 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:54 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:54 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:54 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:54 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:54 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:54 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:54 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:54 AI_Player.update()	update
+2017-01-02 22:20:54 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:54 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:54 AI_Player.update()	Search took35ms
+2017-01-02 22:20:54 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:54 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:54 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:54 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:54 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:54 AI_Player.update()		1110,	1001,	11,	11,	1101,	110,	1001
+2017-01-02 22:20:54 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:54 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:54 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:54 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:54 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:54 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:54 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:54 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:54 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:54 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:54 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:55 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:55 AI_Player.update()	update
+2017-01-02 22:20:55 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:55 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:55 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:55 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:55 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:55 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:55 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:55 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:55 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:55 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:55 AI_Player.update()	update
+2017-01-02 22:20:55 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:55 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:55 AI_Player.update()	Search took51ms
+2017-01-02 22:20:55 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:55 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:55 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:55 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:55 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:55 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:20:55 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:55 AI_Player.update()		11,	1110,	1010,	11,	101,	110,	1100
+2017-01-02 22:20:55 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:55 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:55 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:55 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:55 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:55 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:55 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:55 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:55 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:56 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:56 AI_Player.update()	update
+2017-01-02 22:20:56 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:56 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:56 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:56 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:56 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:56 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:56 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:56 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:56 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:56 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:56 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:56 AI_Player.update()	update
+2017-01-02 22:20:56 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:56 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:56 AI_Player.update()	Search took69ms
+2017-01-02 22:20:56 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:56 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:56 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:20:56 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:20:56 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:20:56 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:20:56 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:20:56 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:20:56 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:20:56 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:56 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:56 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:56 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:56 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:56 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:56 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:56 GameBoard.setupTreasurePanel()	1 2
+2017-01-02 22:20:57 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:57 AI_Player.update()	update
+2017-01-02 22:20:57 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:57 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:57 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:57 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:57 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:57 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:57 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:57 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:20:57 QueryProlog.getTreasureList()	get_treasure_list(a,List). suceeded
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding keys
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding chest
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding helmet
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding sword
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding ring
+2017-01-02 22:20:57 QueryProlog.getTreasureList()	get_treasure_list(b,List). suceeded
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding fairy
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding candle
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding book
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding gold
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	adding map
+2017-01-02 22:20:57 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:57 AI_Player.update()	update
+2017-01-02 22:20:57 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:20:57 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:20:57 AI_Player.update()	Search took60ms
+2017-01-02 22:20:57 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:57 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:57 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:20:57 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:20:57 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:20:57 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:20:57 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:20:57 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:20:57 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:20:57 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:57 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:57 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:57 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:57 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:57 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:57 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:57 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:20:58 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:58 AI_Player.update()	update
+2017-01-02 22:20:58 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:20:58 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:20:58 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:20:58 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:58 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:58 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:20:58 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:20:58 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:58 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:58 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:20:58 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:58 AI_Player.update()	update
+2017-01-02 22:20:58 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:20:59 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:20:59 AI_Player.update()	Search took99ms
+2017-01-02 22:20:59 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:20:59 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:59 AI_Player.update()		110,	110,	111,	110,	111,	1010,	11
+2017-01-02 22:20:59 AI_Player.update()		1010,	1011,	1010,	101,	11,	101,	1001
+2017-01-02 22:20:59 AI_Player.update()		1110,	1110,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:20:59 AI_Player.update()		1001,	1011,	1001,	11,	11,	1001,	110
+2017-01-02 22:20:59 AI_Player.update()		1110,	1110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:20:59 AI_Player.update()		1110,	110,	11,	101,	110,	1100,	11
+2017-01-02 22:20:59 AI_Player.update()		1100,	1010,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:20:59 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:20:59 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:20:59 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:59 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:59 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:59 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:59 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:59 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:20:59 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:20:59 AI_Player.update()	update
+2017-01-02 22:20:59 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:20:59 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:20:59 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:20:59 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:20:59 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:20:59 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:20:59 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:20:59 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:20:59 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:00 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:00 AI_Player.update()	update
+2017-01-02 22:21:00 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:00 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:00 AI_Player.update()	Search took17ms
+2017-01-02 22:21:00 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:00 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:00 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:00 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:00 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:00 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:00 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:00 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:00 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:00 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:00 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:00 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:00 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:00 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:00 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:00 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:00 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:00 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:00 AI_Player.update()	update
+2017-01-02 22:21:00 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:00 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:00 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:00 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:00 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:00 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:00 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:00 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:00 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:00 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:01 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:01 AI_Player.update()	update
+2017-01-02 22:21:01 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:01 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:01 AI_Player.update()	Search took97ms
+2017-01-02 22:21:01 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:01 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:01 AI_Player.update()		110,	1011,	111,	110,	111,	1101,	11
+2017-01-02 22:21:01 AI_Player.update()		1010,	1110,	1010,	101,	11,	1010,	1001
+2017-01-02 22:21:01 AI_Player.update()		1110,	1011,	1110,	1010,	111,	101,	1011
+2017-01-02 22:21:01 AI_Player.update()		1001,	1110,	1001,	11,	11,	1101,	110
+2017-01-02 22:21:01 AI_Player.update()		1110,	110,	1101,	11,	1011,	1001,	1011
+2017-01-02 22:21:01 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:01 AI_Player.update()		1100,	110,	1101,	101,	1101,	1100,	1001
+2017-01-02 22:21:01 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:01 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:01 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:01 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:01 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:01 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:01 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:01 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:01 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:01 AI_Player.update()	update
+2017-01-02 22:21:01 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:01 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:01 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:01 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:01 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:01 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:01 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:01 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:01 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:02 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:02 AI_Player.update()	update
+2017-01-02 22:21:02 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:02 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:02 AI_Player.update()	Search took60ms
+2017-01-02 22:21:02 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:02 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:02 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:02 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:02 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:02 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:02 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:02 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:02 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:02 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:02 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:02 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:02 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:02 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:02 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:02 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:02 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:02 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:02 AI_Player.update()	update
+2017-01-02 22:21:02 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:02 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:02 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:02 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:02 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:02 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:02 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:02 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:02 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:02 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:03 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:03 AI_Player.update()	update
+2017-01-02 22:21:03 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:03 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:03 AI_Player.update()	Search took248ms
+2017-01-02 22:21:03 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:03 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:03 AI_Player.update()		110,	110,	111,	110,	111,	1010,	11
+2017-01-02 22:21:03 AI_Player.update()		1010,	1011,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:03 AI_Player.update()		1110,	1110,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:03 AI_Player.update()		1001,	1011,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:03 AI_Player.update()		1110,	1110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:03 AI_Player.update()		1110,	110,	11,	101,	110,	1100,	11
+2017-01-02 22:21:03 AI_Player.update()		1100,	1010,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:03 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:03 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:03 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:03 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:03 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:03 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:03 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:03 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:04 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:04 AI_Player.update()	update
+2017-01-02 22:21:04 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:04 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:04 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:04 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:04 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:04 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:04 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:04 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:04 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:04 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:04 AI_Player.update()	update
+2017-01-02 22:21:04 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:04 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:04 AI_Player.update()	Search took17ms
+2017-01-02 22:21:04 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:04 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:04 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:04 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:04 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:04 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:04 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:04 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:04 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:04 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:04 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:04 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:04 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:04 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:04 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:04 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:04 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:05 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:05 AI_Player.update()	update
+2017-01-02 22:21:05 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:05 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:05 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:05 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:05 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:05 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:05 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:05 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:05 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:05 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:05 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:05 AI_Player.update()	update
+2017-01-02 22:21:05 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:05 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:05 AI_Player.update()	Search took215ms
+2017-01-02 22:21:05 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:05 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:05 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:05 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:05 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:05 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:05 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:05 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:05 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:05 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:05 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:05 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:05 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:05 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:05 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:05 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:05 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:06 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:06 AI_Player.update()	update
+2017-01-02 22:21:06 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:06 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:06 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:06 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:06 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:06 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:06 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:06 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:06 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:06 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:06 AI_Player.update()	update
+2017-01-02 22:21:06 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:06 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:06 AI_Player.update()	Search took77ms
+2017-01-02 22:21:06 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:06 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:06 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:06 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:06 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:06 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:06 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:06 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:06 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:06 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:06 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:06 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:06 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:06 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:06 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:06 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:06 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:07 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:07 AI_Player.update()	update
+2017-01-02 22:21:07 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:07 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:07 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:07 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:07 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:07 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:07 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:07 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:07 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:07 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:07 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:07 AI_Player.update()	update
+2017-01-02 22:21:07 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:08 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:08 AI_Player.update()	Search took281ms
+2017-01-02 22:21:08 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:08 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:08 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:08 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:08 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:08 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:08 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:08 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:08 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:08 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:08 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:08 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:08 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:08 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:08 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:08 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:08 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:08 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:08 AI_Player.update()	update
+2017-01-02 22:21:08 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:08 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:08 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:08 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:08 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:08 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:08 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:08 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:08 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:09 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:09 AI_Player.update()	update
+2017-01-02 22:21:09 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:09 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:09 AI_Player.update()	Search took80ms
+2017-01-02 22:21:09 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:09 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:09 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:09 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:09 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:09 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:09 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:09 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:09 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:09 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:09 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:09 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:09 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:09 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:09 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:09 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:09 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:09 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:09 AI_Player.update()	update
+2017-01-02 22:21:09 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:09 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:09 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:09 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:09 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:09 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:09 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:09 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:09 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:09 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:10 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:10 AI_Player.update()	update
+2017-01-02 22:21:10 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:10 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:10 AI_Player.update()	Search took219ms
+2017-01-02 22:21:10 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:10 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:10 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:10 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:10 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:10 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:10 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:10 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:10 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:10 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:10 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:10 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:10 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:10 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:10 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:10 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:10 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:10 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:10 AI_Player.update()	update
+2017-01-02 22:21:10 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:10 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:10 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:10 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:10 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:10 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:10 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:10 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:10 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:11 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:11 AI_Player.update()	update
+2017-01-02 22:21:11 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:11 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:11 AI_Player.update()	Search took72ms
+2017-01-02 22:21:11 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:11 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:11 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:11 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:11 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:11 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:11 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:11 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:11 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:11 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:11 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:11 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:11 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:11 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:11 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:11 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:11 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:12 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:12 AI_Player.update()	update
+2017-01-02 22:21:12 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:12 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:12 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:12 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:12 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:12 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:12 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:12 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:12 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:12 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:12 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:12 AI_Player.update()	update
+2017-01-02 22:21:12 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:12 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:12 AI_Player.update()	Search took266ms
+2017-01-02 22:21:12 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:12 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:12 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:12 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:12 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:12 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:12 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:12 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:12 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:12 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:12 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:12 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:12 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:12 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:12 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:12 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:12 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:13 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:13 AI_Player.update()	update
+2017-01-02 22:21:13 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:13 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:13 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:13 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:13 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:13 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:13 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:13 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:13 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:13 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:13 AI_Player.update()	update
+2017-01-02 22:21:13 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:13 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:13 AI_Player.update()	Search took80ms
+2017-01-02 22:21:13 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:13 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:13 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:13 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:13 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:13 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:13 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:13 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:13 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:13 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:13 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:13 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:13 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:13 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:13 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:13 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:13 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:14 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:14 AI_Player.update()	update
+2017-01-02 22:21:14 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:14 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:14 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:14 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:14 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:14 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:14 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:14 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:14 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:14 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:14 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:14 AI_Player.update()	update
+2017-01-02 22:21:14 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:15 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:15 AI_Player.update()	Search took221ms
+2017-01-02 22:21:15 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:15 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:15 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:15 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:15 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:15 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:15 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:15 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:15 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:15 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:15 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:15 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:15 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:15 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:15 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:15 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:15 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:15 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:15 AI_Player.update()	update
+2017-01-02 22:21:15 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:15 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:15 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:15 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:15 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:15 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:15 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:15 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:15 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:16 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:16 AI_Player.update()	update
+2017-01-02 22:21:16 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:16 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:16 AI_Player.update()	Search took85ms
+2017-01-02 22:21:16 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:16 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:16 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:16 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:16 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:16 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:16 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:16 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:16 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:16 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:16 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:16 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:16 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:16 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:16 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:16 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:16 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:16 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:16 AI_Player.update()	update
+2017-01-02 22:21:16 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:16 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:16 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:16 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:16 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:16 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:16 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:16 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:16 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:16 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:17 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:17 AI_Player.update()	update
+2017-01-02 22:21:17 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:17 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:17 AI_Player.update()	Search took269ms
+2017-01-02 22:21:17 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:17 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:17 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:17 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:17 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:17 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:17 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:17 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:17 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:17 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:17 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:17 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:17 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:17 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:17 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:17 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:17 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:17 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:17 AI_Player.update()	update
+2017-01-02 22:21:17 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:17 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:17 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:17 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:17 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:17 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:17 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:17 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:17 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:18 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:18 AI_Player.update()	update
+2017-01-02 22:21:18 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:18 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:18 AI_Player.update()	Search took79ms
+2017-01-02 22:21:18 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:18 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:18 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:18 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:18 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:18 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:18 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:18 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:18 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:18 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:18 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:18 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:18 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:18 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:18 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:18 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:18 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:19 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:19 AI_Player.update()	update
+2017-01-02 22:21:19 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:19 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:19 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:19 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:19 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:19 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:19 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:19 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:19 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:19 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:19 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:19 AI_Player.update()	update
+2017-01-02 22:21:19 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:19 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:19 AI_Player.update()	Search took219ms
+2017-01-02 22:21:19 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:19 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:19 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:19 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:19 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:19 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:19 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:19 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:19 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:19 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:19 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:19 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:19 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:19 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:19 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:19 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:19 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:20 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:20 AI_Player.update()	update
+2017-01-02 22:21:20 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:20 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:20 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:20 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:20 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:20 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:20 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:20 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:20 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:20 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:20 AI_Player.update()	update
+2017-01-02 22:21:20 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:20 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:20 AI_Player.update()	Search took86ms
+2017-01-02 22:21:20 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:20 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:20 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:20 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:20 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:20 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:20 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:20 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:20 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:20 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:20 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:20 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:20 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:20 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:20 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:20 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:20 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:21 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:21 AI_Player.update()	update
+2017-01-02 22:21:21 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:21 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:21 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:21 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:21 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:21 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:21 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:21 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:21 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:21 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:21 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:21 AI_Player.update()	update
+2017-01-02 22:21:21 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:22 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:22 AI_Player.update()	Search took266ms
+2017-01-02 22:21:22 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:22 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:22 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:22 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:22 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:22 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:22 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:22 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:22 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:22 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:22 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:22 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:22 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:22 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:22 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:22 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:22 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:22 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:22 AI_Player.update()	update
+2017-01-02 22:21:22 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:22 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:22 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:22 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:22 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:22 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:22 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:22 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:22 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:23 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:23 AI_Player.update()	update
+2017-01-02 22:21:23 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:23 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:23 AI_Player.update()	Search took82ms
+2017-01-02 22:21:23 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:23 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:23 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:23 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:23 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:23 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:23 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:23 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:23 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:23 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:23 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:23 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:23 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:23 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:23 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:23 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:23 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:23 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:23 AI_Player.update()	update
+2017-01-02 22:21:23 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:23 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:23 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:23 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:23 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:23 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:23 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:23 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:23 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:23 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:24 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:24 AI_Player.update()	update
+2017-01-02 22:21:24 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:24 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:24 AI_Player.update()	Search took214ms
+2017-01-02 22:21:24 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:24 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:24 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:24 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:24 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:24 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:24 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:24 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:24 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:24 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:24 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:24 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:24 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:24 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:24 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:24 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:24 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:24 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:24 AI_Player.update()	update
+2017-01-02 22:21:24 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:24 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:24 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:24 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:24 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:24 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:24 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:24 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:24 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:25 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:25 AI_Player.update()	update
+2017-01-02 22:21:25 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:25 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:25 AI_Player.update()	Search took85ms
+2017-01-02 22:21:25 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:25 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:25 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:25 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:25 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:25 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:25 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:25 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:25 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:25 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:25 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:25 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:25 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:25 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:25 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:25 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:25 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:26 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:26 AI_Player.update()	update
+2017-01-02 22:21:26 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:26 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:26 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:26 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:26 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:26 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:26 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:26 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:26 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:26 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:26 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:26 AI_Player.update()	update
+2017-01-02 22:21:26 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:26 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:26 AI_Player.update()	Search took258ms
+2017-01-02 22:21:26 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:26 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:26 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:26 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:26 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:26 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:26 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:26 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:26 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:26 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:26 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:26 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:26 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:26 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:26 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:26 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:26 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:27 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:27 AI_Player.update()	update
+2017-01-02 22:21:27 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:27 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:27 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:27 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:27 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:27 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:27 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:27 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:27 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:27 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:27 AI_Player.update()	update
+2017-01-02 22:21:27 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:27 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:27 AI_Player.update()	Search took80ms
+2017-01-02 22:21:27 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:27 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:27 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:27 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:27 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:27 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:27 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:27 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:27 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:27 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:27 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:27 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:27 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:27 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:27 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:27 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:27 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:28 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:28 AI_Player.update()	update
+2017-01-02 22:21:28 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:28 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:28 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:28 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:28 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:28 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:28 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:28 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:28 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:28 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:28 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:28 AI_Player.update()	update
+2017-01-02 22:21:28 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:29 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:29 AI_Player.update()	Search took217ms
+2017-01-02 22:21:29 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:29 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:29 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:29 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:29 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:29 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:29 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:29 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:29 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:29 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:29 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:29 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:29 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:29 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:29 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:29 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:29 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:29 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:29 AI_Player.update()	update
+2017-01-02 22:21:29 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:29 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:29 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:29 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:29 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:29 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:29 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:29 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:29 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:30 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:30 AI_Player.update()	update
+2017-01-02 22:21:30 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:30 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:30 AI_Player.update()	Search took79ms
+2017-01-02 22:21:30 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:30 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:30 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:30 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:30 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:30 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:30 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:30 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:30 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:30 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:30 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:30 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:30 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:30 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:30 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:30 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:30 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:30 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:30 AI_Player.update()	update
+2017-01-02 22:21:30 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:30 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:30 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:30 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:30 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:30 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:30 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:30 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:30 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:30 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:31 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:31 AI_Player.update()	update
+2017-01-02 22:21:31 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:31 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:31 AI_Player.update()	Search took257ms
+2017-01-02 22:21:31 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:31 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:31 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:31 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:31 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:31 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:31 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:31 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:31 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:31 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:31 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:31 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:31 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:31 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:31 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:31 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:31 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:31 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:31 AI_Player.update()	update
+2017-01-02 22:21:31 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:31 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:31 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:31 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:31 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:31 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:31 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:31 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:31 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:32 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:32 AI_Player.update()	update
+2017-01-02 22:21:32 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:32 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:32 AI_Player.update()	Search took71ms
+2017-01-02 22:21:32 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:32 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:32 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:32 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:32 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:32 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:32 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:32 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:32 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:32 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:32 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:32 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:32 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:32 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:32 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:32 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:32 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:33 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:33 AI_Player.update()	update
+2017-01-02 22:21:33 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:33 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:33 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:33 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:33 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:33 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:33 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:33 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:33 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:33 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:33 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:33 AI_Player.update()	update
+2017-01-02 22:21:33 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:33 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:33 AI_Player.update()	Search took204ms
+2017-01-02 22:21:33 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:33 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:33 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:33 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:33 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:33 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:33 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:33 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:33 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:33 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:33 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:33 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:33 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:33 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:33 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:33 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:33 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:34 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:34 AI_Player.update()	update
+2017-01-02 22:21:34 QueryProlog.isGameState()	game_state( b, 1 ) failed
+2017-01-02 22:21:34 QueryProlog.isGameState()	game_state( b, 2 ) suceeded
+2017-01-02 22:21:34 QueryProlog.makeBestLocalMove()	make_best_local_move(b,h3). suceeded
+2017-01-02 22:21:34 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:34 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:34 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:34 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:34 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:34 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:34 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:34 AI_Player.update()	update
+2017-01-02 22:21:34 QueryProlog.isGameState()	game_state( a, 1 ) suceeded
+2017-01-02 22:21:34 QueryProlog.tryAndMakeMove()	try_and_make_move(a,h3). suceeded
+2017-01-02 22:21:34 AI_Player.update()	Search took86ms
+2017-01-02 22:21:34 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:34 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:34 AI_Player.update()		110,	1011,	111,	110,	111,	1010,	11
+2017-01-02 22:21:34 AI_Player.update()		1010,	1110,	1010,	101,	11,	101,	1001
+2017-01-02 22:21:34 AI_Player.update()		1110,	1011,	1110,	1010,	111,	1101,	1011
+2017-01-02 22:21:34 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:34 AI_Player.update()		1110,	110,	1101,	11,	1011,	1100,	1011
+2017-01-02 22:21:34 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:34 AI_Player.update()		1100,	110,	1101,	101,	1101,	1101,	1001
+2017-01-02 22:21:34 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:34 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:34 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:34 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:34 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:34 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:34 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:34 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:35 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:35 AI_Player.update()	update
+2017-01-02 22:21:35 QueryProlog.isGameState()	game_state( a, 1 ) failed
+2017-01-02 22:21:35 QueryProlog.isGameState()	game_state( a, 2 ) suceeded
+2017-01-02 22:21:35 QueryProlog.makeBestLocalMove()	make_best_local_move(a,h3). suceeded
+2017-01-02 22:21:35 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:35 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:35 GameBoard.swapCurrentPlayer()	Swapping
+2017-01-02 22:21:35 QueryProlog.haveIWon()	have_I_won(a). failed
+2017-01-02 22:21:35 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:35 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:35 GameBoard.setupTreasurePanel()	1 3
+2017-01-02 22:21:35 AI_Player.update()	------------------------------------------------------------------------------------
+2017-01-02 22:21:35 AI_Player.update()	update
+2017-01-02 22:21:35 QueryProlog.isGameState()	game_state( b, 1 ) suceeded
+2017-01-02 22:21:36 QueryProlog.tryAndMakeMove()	try_and_make_move(b,h3). suceeded
+2017-01-02 22:21:36 AI_Player.update()	Search took254ms
+2017-01-02 22:21:36 QueryProlog.getBoard()	board(X). suceeded
+2017-01-02 22:21:36 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:36 AI_Player.update()		110,	1011,	111,	101,	111,	1010,	11
+2017-01-02 22:21:36 AI_Player.update()		1010,	1110,	1010,	1010,	11,	101,	1001
+2017-01-02 22:21:36 AI_Player.update()		1110,	1011,	1110,	11,	111,	1101,	1011
+2017-01-02 22:21:36 AI_Player.update()		1001,	1110,	1001,	11,	11,	1001,	110
+2017-01-02 22:21:36 AI_Player.update()		1110,	110,	1101,	101,	1011,	1100,	1011
+2017-01-02 22:21:36 AI_Player.update()		1110,	1010,	11,	101,	110,	1100,	11
+2017-01-02 22:21:36 AI_Player.update()		1100,	110,	1101,	110,	1101,	1101,	1001
+2017-01-02 22:21:36 AI_Player.update()	----------------------------------------------------------------------
+2017-01-02 22:21:36 GameBoard.recreateBoardFromString()	Board recreated
+2017-01-02 22:21:36 QueryProlog.getPlayerPosition()	player(a,_,I/J) suceeded
+2017-01-02 22:21:36 QueryProlog.getPlayerPosition()	player(b,_,I/J) suceeded
+2017-01-02 22:21:36 QueryProlog.haveIWon()	have_I_won(b). failed
+2017-01-02 22:21:36 QueryProlog.getTreasurePositions()	treasure_index(a,Index). suceeded
+2017-01-02 22:21:36 QueryProlog.getTreasurePositions()	treasure_index(b,Index). suceeded
+2017-01-02 22:21:36 GameBoard.setupTreasurePanel()	1 3

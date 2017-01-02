@@ -782,15 +782,26 @@ make_best_move(h3, Player):-!, get_target(Player,Target),
 						%write_list_of_scores(ListOfScores),
 						%write(ListOfScores),
 						h3_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J), 
-						write(Move/Score/I/J),
+						nl, write(Player),write(' '), write(Move/Score/I/J),nl,
 						assert(h3_best_position(Player,I/J)),
 						make_move(Move).
-
+make_best_local_move(Player,h3):- game_state(Player,2),
+								  player(Player,_,I/J),
+								  board(Board),
+								  graph_search_BFS(Board,I,J,Locations),
+								  get_target(Player,Target),
+								  member(Target,Locations),!,
+								  move_player(Player,Target),
+								  write('1 step'),nl,
+								  retractall(h3_best_position(_,_)).
+								  
+								  
 make_best_local_move(Player, h3):- game_state(Player, 2),
 								% No need to do the graph search
 								% But we need to retrieve the move that we stored in the knowledge base
 								h3_best_position(Player,Move),
 								move_player(Player,Move),
+								write('2 step'),nl,
 								retractall(h3_best_position(_,_)).
 	
 
