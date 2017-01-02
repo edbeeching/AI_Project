@@ -86,7 +86,7 @@ check_reached_target(Player):- get_target(Player,Target),
 								assert(treasure_index(Player,NewIndex)).
 check_reached_target(Player).
 
-
+have_I_won(Player):-treasure_index(Player,7).
 
 %---------------------------------------------------------------
 %		Section 3. Predicates setting up the game board.
@@ -588,6 +588,8 @@ get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
 get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
 					get_best_local_best_acc(Target,Tail,BestScore,Acc,Move).
 
+
+					
 %-------------------------------------------------------
 %						HEURISTIC 1 (H1)
 % This heuristic evaluates the manhattan distance between the player and its target.

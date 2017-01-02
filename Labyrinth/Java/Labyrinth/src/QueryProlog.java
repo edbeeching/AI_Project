@@ -5,21 +5,32 @@ import java.util.List;
 import org.jpl7.Query;
 import org.jpl7.Term;
 import org.jpl7.fli.Prolog;
+import org.pmw.tinylog.Logger;
 
 public class QueryProlog {
 
 	public QueryProlog(GameInfo gameInfo){
 		initialise(gameInfo);
 	}
+	public void reset(GameInfo gameInfo){
+		String setupString = "setup(" + gameInfo.player1Heuristic + "/" + gameInfo.player2Heuristic + ").";
+		Query querySetup = new Query(setupString);
+		System.out.println(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
+		querySetup.close();	
+		
+	}
 	private void initialise(GameInfo gameInfo){
 		String string = "consult('prolog/labyrinth.pl')";
 		Query query = new Query(string);
 		System.out.println(string + " " + (query.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(string + " " + (query.hasSolution() ? "suceeded" : "failed"));
 		query.close();
 		
 		String setupString = "setup(" + gameInfo.player1Heuristic + "/" + gameInfo.player2Heuristic + ").";
 		Query querySetup = new Query(setupString);
-		System.out.println(string + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
+		System.out.println(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
 		querySetup.close();
 	}
 //	public boolean generateMaze(ArrayList<MazePiece> pieces){
@@ -32,6 +43,7 @@ public class QueryProlog {
 		String boardQueryString = "board(X).";
 		Query boardQuery = new Query(boardQueryString);
 		System.out.println(boardQueryString + " " + (boardQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(boardQueryString + " " + (boardQuery.hasSolution() ? "suceeded" : "failed"));
 		Term term = boardQuery.oneSolution().get("X");
 		
 		
@@ -64,6 +76,7 @@ public class QueryProlog {
 		String positionString = "player(" + player +",_,I/J)";
 		Query positionQuery = new Query(positionString);
 		System.out.println(positionString + " " + (positionQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(positionString + " " + (positionQuery.hasSolution() ? "suceeded" : "failed"));
 		positionQuery.close();
 		if(!positionQuery.hasSolution()){
 			return null;
@@ -82,20 +95,22 @@ public class QueryProlog {
 		String player1TreasureString = "treasure_index(a,Index).";
 		Query player1TreasureQuery = new Query(player1TreasureString);
 		System.out.println(player1TreasureString + " " + (player1TreasureQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(player1TreasureString + " " + (player1TreasureQuery.hasSolution() ? "suceeded" : "failed"));
 		player1TreasureQuery.close();
 		if(!player1TreasureQuery.hasSolution()){
 			return null;
 		}
 		 pos.x = player1TreasureQuery.oneSolution().get("Index").intValue();
 		
-		 String player2TreasureString = "treasure_index(b,Index).";
-			Query player2TreasureQuery = new Query(player2TreasureString);
-			System.out.println(player2TreasureString + " " + (player2TreasureQuery.hasSolution() ? "suceeded" : "failed"));
-			player2TreasureQuery.close();
-			if(!player2TreasureQuery.hasSolution()){
-				return null;
-			}
-			 pos.y = player2TreasureQuery.oneSolution().get("Index").intValue();
+		String player2TreasureString = "treasure_index(b,Index).";
+		Query player2TreasureQuery = new Query(player2TreasureString);
+		System.out.println(player2TreasureString + " " + (player2TreasureQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(player2TreasureString + " " + (player2TreasureQuery.hasSolution() ? "suceeded" : "failed"));
+		player2TreasureQuery.close();
+		if(!player2TreasureQuery.hasSolution()){
+			return null;
+		}
+		 pos.y = player2TreasureQuery.oneSolution().get("Index").intValue();
 		 
 		 
 		return pos;
@@ -115,6 +130,7 @@ public class QueryProlog {
 		String treasureString = "get_treasure_list("+player+",List).";
 		Query treasureQuery = new Query(treasureString);
 		System.out.println(treasureString + " " + (treasureQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(treasureString + " " + (treasureQuery.hasSolution() ? "suceeded" : "failed"));
 		treasureQuery.close();
 		Term term = treasureQuery.oneSolution().get("List");
 		Term t = term;
@@ -137,6 +153,7 @@ public class QueryProlog {
 		String shiftLeft = "try_to_shift_row_left("+ row +  ")";
 		Query shiftQuery = new Query(shiftLeft);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
 		
 		return getBoard();
@@ -145,6 +162,7 @@ public class QueryProlog {
 		String shiftRight = "try_to_shift_row_right("+ row +  ")";
 		Query shiftQuery = new Query(shiftRight);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
 		
 		return getBoard();
@@ -153,6 +171,7 @@ public class QueryProlog {
 		String shiftUp = "try_to_shift_column_up("+ column +  ")";
 		Query shiftQuery = new Query(shiftUp);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
 		
 		return getBoard();
@@ -161,6 +180,7 @@ public class QueryProlog {
 		String shiftDown = "try_to_shift_column_down("+ column +  ")";
 		Query shiftQuery = new Query(shiftDown);
 		System.out.println(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(shiftQuery + " " + (shiftQuery.hasSolution() ? "suceeded" : "failed"));
 		shiftQuery.close();
 		
 		return getBoard();
@@ -178,6 +198,7 @@ public class QueryProlog {
 		String moveString = "try_and_make_move(" + player + "," + heuristic +").";
 		Query moveQuery = new Query(moveString);
 		System.out.println(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
 		moveQuery.close();
 		if(!moveQuery.hasSolution()){
 			return false;
@@ -189,6 +210,7 @@ public class QueryProlog {
 		String localMoveString = "make_best_local_move(" + player + "," + heuristic +").";
 		Query localMoveQuery = new Query(localMoveString);
 		System.out.println(localMoveString + " " + (localMoveQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(localMoveString + " " + (localMoveQuery.hasSolution() ? "suceeded" : "failed"));
 		localMoveQuery.close();
 	}
 	
@@ -196,6 +218,7 @@ public class QueryProlog {
 		String stateString = "game_state(" + player + "," + state +").";
 		Query stateQuery = new Query(stateString);
 		System.out.println(stateQuery + " " + (stateQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(stateQuery + " " + (stateQuery.hasSolution() ? "suceeded" : "failed"));
 		stateQuery.close();
 		if(!stateQuery.hasSolution()){
 			return false;
@@ -207,6 +230,7 @@ public class QueryProlog {
 		String positionString = "player(" + player +",_,I/J).";
 		Query positionQuery = new Query(positionString);
 		System.out.println(positionString + " " + (positionQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(positionString + " " + (positionQuery.hasSolution() ? "suceeded" : "failed"));
 		positionQuery.close();
 		if(!positionQuery.hasSolution()){
 			return false;
@@ -224,6 +248,7 @@ public class QueryProlog {
 		String moveString = "move_player(" + player + "," + i + "/" + j +").";
 		Query moveQuery = new Query(moveString);
 		System.out.println(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
 		moveQuery.close();
 		
 		
@@ -234,6 +259,7 @@ public class QueryProlog {
 		String playerString = "get_current_player(Player).";
 		Query playerQuery = new Query(playerString);
 		System.out.println(playerString + " " + (playerQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(playerString + " " + (playerQuery.hasSolution() ? "suceeded" : "failed"));
 		playerQuery.close();
 		if(!playerQuery.hasSolution()){
 			return null;
@@ -242,5 +268,14 @@ public class QueryProlog {
 		return playerTerm.toString();
 		
 		
+	}
+	public boolean haveIWon(String player) {
+		// TODO Auto-generated method stub
+		String wonString = "have_I_won(" + player + ").";
+		Query wonQuery = new Query(wonString);
+		System.out.println(wonString + " " + (wonQuery.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(wonString + " " + (wonQuery.hasSolution() ? "suceeded" : "failed"));
+		return wonQuery.hasSolution();
+
 	}
 }
