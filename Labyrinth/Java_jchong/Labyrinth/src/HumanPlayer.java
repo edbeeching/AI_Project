@@ -1,3 +1,4 @@
+import javax.swing.JLabel;
 
 public class HumanPlayer extends Player {
 
@@ -19,8 +20,12 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public void update(GameBoard board, QueryProlog queryProlog) {
-		return;	
+	public boolean update(GameBoard board, QueryProlog queryProlog, JLabel timeLabel) {
+		if(queryProlog.haveIWon(this.name)){
+			System.out.println("Player " + this.name + " has won!");
+			return true;
+		}
+		return false;
 	}
 
 }

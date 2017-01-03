@@ -1,15 +1,21 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.geom.Line2D;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -21,8 +27,10 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
 	private JLayeredPane gamePanel;
 	private GameBoard gameBoard;
 	public Labyrith() {
+		
 		initialize();
 	}
+	
     private void initialize() {
     	System.out.println("Initialising");
     	frame = new JFrame();
@@ -70,7 +78,18 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
 		
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(BorderFactory.createTitledBorder("Info"));
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.X_AXIS));
+		
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+		JLabel turnLabel = new JLabel("<html><font color='red'>Red</font> players turn. </html>");
+		JLabel timeLabel = new JLabel("Search time in ms: 1 ");
+		JLabel player1InfoLabel = new JLabel("Player 1 has won 0 times");
+		JLabel player2InfoLabel = new JLabel("Player 2 has won 0 times");
+		gameBoard.setInfoPanels(turnLabel,timeLabel,player1InfoLabel,player2InfoLabel);
+		
+		infoPanel.add(turnLabel);
+		infoPanel.add(timeLabel);
+		infoPanel.add(player1InfoLabel);
+		infoPanel.add(player2InfoLabel);
 		JPanel treasurePanel = gameBoard.setupTreasurePanel();
 		
 		
@@ -81,6 +100,16 @@ public class Labyrith extends JPanel implements ActionListener, MouseMotionListe
 		controlPanel.add(infoPanel);
 		controlPanel.add(treasurePanel);
 		controlPanel.add(debugPanel);
+
+		
+    }
+    @Override
+    public void paint(Graphics g){
+    	super.paint(g);
+    	gameBoard.paint(g);
+    	
+    	
+    	
     }
     private void generateMaze(){
     	System.out.print("[");
