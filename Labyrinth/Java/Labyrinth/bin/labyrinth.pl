@@ -22,9 +22,12 @@ setup(H):- 	retractall(board(_)),
 			!,create_board(X),
 			assert(board(X)),
 			board(Y),
-			write_board(Y).
+			write_board(Y),
+			retractall(history(_)),
+			assert(history([])),
+			update_history(),!.
 			
-setup(H):- create_board(X),create_players(H),  assert(board(X)),board(Y),write_board(Y).
+setup(H):- create_board(X),create_players(H),  assert(board(X)),board(Y),write_board(Y),retractall(history(_)),assert(history([])),update_history().
 
 
 
@@ -245,10 +248,10 @@ try_to_shift_board(Column/up):-try_to_shift_column_up(Column).
 try_to_shift_board(Column/down):-try_to_shift_column_down(Column).
 
 
-try_to_shift_row_left(Row):- game_state(Player,1), shift_row_left(Row),retractall(game_state(_,_)),assert(game_state(Player,2)).
-try_to_shift_row_right(Row):- game_state(Player,1), shift_row_right(Row),retractall(game_state(_,_)),assert(game_state(Player,2)).
-try_to_shift_column_up(Column):- game_state(Player,1), shift_column_up(Column),retractall(game_state(_,_)),assert(game_state(Player,2)).
-try_to_shift_column_down(Column):- game_state(Player,1), shift_column_down(Column),retractall(game_state(_,_)),assert(game_state(Player,2)).
+try_to_shift_row_left(Row):- game_state(Player,1), shift_row_left(Row),retractall(game_state(_,_)),assert(game_state(Player,2)),update_history().
+try_to_shift_row_right(Row):- game_state(Player,1), shift_row_right(Row),retractall(game_state(_,_)),assert(game_state(Player,2)),update_history().
+try_to_shift_column_up(Column):- game_state(Player,1), shift_column_up(Column),retractall(game_state(_,_)),assert(game_state(Player,2)),update_history().
+try_to_shift_column_down(Column):- game_state(Player,1), shift_column_down(Column),retractall(game_state(_,_)),assert(game_state(Player,2)),update_history().
 
 
 
@@ -274,7 +277,10 @@ shift_column_down(Column):- 	board(Board),
 						check_shifted_players(Column,down), 
 						retractall(board(Board)),!,
 						assert(board(NewBoard)).
+% The game board history
 
+update_history():- history(H),retractall(history(_)),board(Board),player(a,A2,A3),player(b,B2,B3),get_target(a,A4),get_target(b,B4),
+					append(H,[Board/a/A2/A3/A4/b/B2/B3/B4],H2), assert(history(H2)),nl,write(H2),nl.
 %% -------------------------------------------------------------------------------------------%%
 
 %%Hmmmm, maybe instead of using transpose, could we use a predicate to move the last
@@ -563,7 +569,12 @@ get_list_of_board_connections(Player, LocationsList):- 	board(CurrentBoard),play
 
 make_move(Move):- 	try_to_shift_board(Move).
 
-try_and_make_move(Player,H):- game_state(Player,1),make_best_move(H,Player).
+
+
+
+try_and_make_move(Player,H):- 	game_state(Player,1),
+								%board(Board),graph_search_BFS(Board,I,J,ListOfVisitedNodes),write(Player/I/J),nl,write(ListOfVisitedNodes),nl,
+								make_best_move(H,Player).
 % Distance Functions
 
 man_distance(X1/Y1,X2/Y2,ManDist):-
@@ -595,7 +606,7 @@ get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
 % This heuristic evaluates the manhattan distance between the player and its target.
 % This heurictic ignores the other player in it's calculation entirely, it also only looks 1 ahead and tends to get stuck
 %-------------------------------------------------------
-make_best_move(h1, Player):- get_target(Player,Target),
+make_best_move(h1, Player):- !,get_target(Player,Target),
 						get_list_of_board_connections(Player, LocationsList), 
 						h1_evaluate_moves(Target, LocationsList,Move), write(Move),make_move(Move).
 						
@@ -634,7 +645,203 @@ get_element_number(N,[_Head|Tail],E):-
 
 
 
+	
+%-------------------------------------------------------
+%						HEURISTIC 2 (H2)
+% Tries to move towards the closest fixed tile in the maze such that it requires the 
+% minimum number of board shifts
+%-------------------------------------------------------
 
+% These are tiles that never move
+h2_list_of_fixed_tiles([1/1, 1/3, 1/5, 1/7, 3/1, 3/3, 3/5, 3/7, 5/1, 5/3, 5/5, 5/7, 7/1, 7/3, 7/5, 7/7]).
+% When positioned over one of the fixed tiles, 
+% These are the only valid moves that h2 considers
+h2_valid_fixed_move(1/1, [2/up,2/down,2/left,2/right]).
+h2_valid_fixed_move(1/3, [2/up,2/down,2/left,2/right,4/up,4/down]).
+h2_valid_fixed_move(1/5, [4/up,4/down,2/left,2/right,6/up,6/down]).
+h2_valid_fixed_move(1/7, [6/up,6/down,2/left,2/right]).
+h2_valid_fixed_move(3/1, [2/up,2/down,2/left,2/right,4/left,4/right]).
+h2_valid_fixed_move(3/3, [4/up,4/down,2/left,2/right,4/left,4/right]).
+h2_valid_fixed_move(3/5, [4/up,4/down,4/left,4/right,6/up,6/down]).
+h2_valid_fixed_move(3/7, [6/up,6/down,2/left,2/right,4/left,4/right]).
+h2_valid_fixed_move(5/1, [2/up,2/down,4/left,4/right,6/left,6/right]).
+h2_valid_fixed_move(5/3, [2/up,2/down,4/up,4/down,4/left,4/right]).
+h2_valid_fixed_move(5/5, [4/up,4/down,4/left,4/right,6/left,6/right]).
+h2_valid_fixed_move(5/7, [6/up,6/down,4/left,4/right,6/left,6/right]).
+h2_valid_fixed_move(7/1, [2/up,2/down,6/left,6/right]).
+h2_valid_fixed_move(7/3, [2/up,2/down,4/up,4/down,6/left,6/right]).
+h2_valid_fixed_move(7/5, [4/up,4/down,6/up,6/down,6/left,6/right]).
+h2_valid_fixed_move(7/7, [6/up,6/down,6/left,6/right]).
+
+% Get a List of M/Sc/IK/JK,
+h2_get_list_of_board_connections(CurrentBoard, Player, ListOfScores):-
+								player(Player,_,I/J),
+								get_target(Player, Target),	
+								graph_search_BFS(CurrentBoard,I,J,ListOfVisitedNodes),
+								h2_score_add(Target, ListOfVisitedNodes, IsTarget),
+								write(ListOfVisitedNodes),
+								findall(M/Sc/IK/JK, (
+													h2_list_of_fixed_tiles(FixTiles),
+													member(FixI/FixJ, FixTiles),
+													h2_valid_fixed_move(FixI/FixJ, Moves),
+													member(FixI/FixJ, ListOfVisitedNodes),
+													% write(FixI/FixJ),nl,
+													member(Move, Moves),
+													nl,
+													write("Player: "), write(Player),nl,
+													write("Target: "), write(Target),nl,
+													write("Move: "), write(Move),nl,
+													write("FixI/FixJ: "), write(FixI/FixJ),nl,
+													write("IsTarget: "), write(IsTarget),nl,
+													
+													h2_get_scores_I_J(CurrentBoard, I/J, Target, Move, FixI/FixJ, IsTarget, M/Sc/IK/JK),
+													% write(Move)
+													write(M/Sc/IK/JK), nl
+													), ListOfScores),
+													write(ListOfScores), nl
+													.
+								
+h2_score_add(Target, ListOfVisitedNodes, 100):- member(Target, ListOfVisitedNodes), !.
+h2_score_add(Target, ListOfVisitedNodes1, 0).
+
+h2_get_feasible_shifts(Board, PlayerI/PlayerJ, TargetI/TargetJ, FMoves):-
+	maze_moves(Moves),
+	findall(Move,
+				(
+					member(Move, Moves),
+					create_shifted_player(PlayerI,PlayerJ,Move,NewI,NewJ),
+					create_shifted_board(Board,Move,NewBoard),
+					graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes),
+					member(TargetI/TargetJ, ListOfVisitedNodes)
+				), FMoves
+			).
+
+h2_get_default_move(Moves, Move):-
+	random_permutation(Moves, [Move|PMoves]).
+
+h2_get_default_position(ListOfVisitedNodes, Position):-
+	random_permutation(ListOfVisitedNodes, [Position|Tail]).
+	
+% Get the M/Sc/I/J 
+% If the Player is Connected to Target, return 100 in score and guess a Move that doesn't disconnect Player with Target
+h2_get_scores_I_J(Board, PlayerI/PlayerJ, TargetI/TargetJ, Move, TileI/TileJ, IsTarget, M/100/TargetI/TargetJ):-
+	IsTarget >= 100,
+	h2_get_feasible_shifts(Board, PlayerI/PlayerJ, TargetI/TargetJ, [FMoves]),
+	random_permutation(FMoves, [M|Tail])
+	length([M|Tail], Len),
+	Len > 0, !.
+% What happens if the Player is connected to Target but a move disconnects them?
+h2_get_scores_I_J(Board, PlayerI/PlayerJ, TargetI/TargetJ, Move, TileI/TileJ, IsTarget, M/100/PositionI/PositionJ):-
+	IsTarget >= 100,
+	h2_get_feasible_shifts(Board, PlayerI/PlayerJ, TargetI/TargetJ, [_|FMoves]),
+	length([_|FMoves], Len),
+	Len =< 0, 
+	maze_moves(Moves),
+	h2_get_default_move(Moves, M),
+	create_shifted_player(PlayerI,PlayerJ,M,NewI,NewJ),
+	create_shifted_board(Board,M,NewBoard),
+	graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes),
+	h2_get_default_position(ListOfVisitedNodes, PositionI/PositionJ),
+	!.
+	
+% If the Player can reach in up to 3 moves from the Fixed Tiles
+h2_get_scores_I_J(Board, PlayerI/PlayerJ, TargetI/TargetJ, Move, TileI/TileJ, IsTarget, Move/Score/TileI/TileJ):-
+	IsTarget =< 0,
+	h2_test_3_moves(Board, Target, TileI/TileJ, Move, Score),
+	write("k"),
+	Score > 0, !.
+% Otherwise
+h2_get_scores_I_J(Board, PlayerI/PlayerJ, TargetI/TargetJ, Move, TileI/TileJ, IsTarget, M/0/TileI/TileJ):-
+	IsTarget =< 0,
+	maze_moves(Moves),
+	h2_get_default_move(Moves, M),
+	!.
+
+	
+	
+% Found in one move of type Move, Therefore the value of h2 is 1 move, and the score is 4 - 1
+h2_test_3_moves(Board, Target, TileI/TileJ, Move, 3):-
+	create_shifted_board(Board, Move, NewBoard),
+	write("Old Board:"), nl,
+	write_board(Board), nl,
+	write("New Board:"), nl,
+	write_board(NewBoard), nl,
+	create_shifted_player(TileI,TileJ,Move,NewI,NewJ),
+	graph_search_BFS(NewBoard, NewI, NewJ, ListOfVisitedNodes),
+	write("Move: "), write(Move), write(" * List of nodes from "), write(TileI/TileJ), write(" "), write(ListOfVisitedNodes), nl,
+	member(Target, ListOfVisitedNodes), !.
+% Found in two moves of type Move, score is 4 - 2
+%h2_test_3_moves(Board, Target, TileI/TileJ, Move, 2):-
+%	create_shifted_board(Board, Move, NewBoard),
+%	create_shifted_board(NewBoard, Move, NewBoard2),
+%	graph_search_BFS(NewBoard2, TileI, TileJ, ListOfVisitedNodes),
+%	write("Move: "), write(Move), write(" ** List of nodes from "), write(TileI/TileJ), write(" "), write(ListOfVisitedNodes), nl,
+%	member(Target, ListOfVisitedNodes), !.
+% Found in three moves of type Move, score is 4 - 3
+%h2_test_3_moves(Board, Target, TileI/TileJ, Move, 1):-
+%	create_shifted_board(Board, Move, NewBoard),
+%	create_shifted_board(NewBoard, Move, NewBoard2),
+%	create_shifted_board(NewBoard2, Move, NewBoard3),
+%	graph_search_BFS(NewBoard3, TileI, TileJ, ListOfVisitedNodes),
+%	write("Move: "), write(Move), write(" *** List of nodes from "), write(TileI/TileJ), write(" "), write(ListOfVisitedNodes), nl,
+%	member(Target, ListOfVisitedNodes), !.
+% Not found, score is 0
+h2_test_3_moves(_, _, _/_, _, 0):- !.
+
+
+% Find the max score
+h2_get_max([Move/Score/I/J|ListOfScores], MaxScoreInt):-
+	h2_get_max_acc([Move/Score/I/J|ListOfScores], 0, MaxScoreInt).
+	
+h2_get_max_acc([], MaxAcc, MaxAcc):- !.
+h2_get_max_acc([Move/Score/I/J|ListOfScores], MaxAcc, MaxScoreInt):-
+	MaxAcc2 is max(Score, MaxAcc),
+	h2_get_max_acc(ListOfScores, MaxAcc2, MaxScoreInt).
+	
+% Considers the Move, and the distance to Target
+h2_get_all_max(ListOfScores, NewListOfScores):-
+	h2_get_max(ListOfScores, Max),
+	findall(
+			Move/Max/I/J,
+			(
+				member(Move/Max/I/J, ListOfScores)
+			), NewListOfScores
+			).
+
+h2_get_highest_score_move_I_J(Target, ListOfScores, MaxMoveScoreIJ):- 
+	h2_get_all_max(ListOfScores, [Move/Score/I/J|NewListOfScores]),
+	h2_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], 12, Move/Score/I/J, MaxMoveScoreIJ).
+
+
+h2_get_highest_score_move_I_J_acc(Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
+h2_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+	man_distance(Target, I/J, NewDistance),
+	NewDistance >= DistanceAcc, !,
+	h2_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
+
+h2_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+	man_distance(Target, I/J, NewDistance),
+	NewDistance < DistanceAcc,
+	h2_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
+
+
+
+
+make_best_move(h2, Player):-!, 	get_target(Player,Target),
+								board(CurrentBoard),
+								h2_get_list_of_board_connections(CurrentBoard, Player, ListOfScores),
+								h2_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J),
+								assert(h2_best_position(Player,I/J)),
+								make_move(Move),
+								write("Move: "), write(Move), nl.
+
+								
+make_best_local_move(Player, h2):- game_state(Player, 2),
+								% No need to do the graph search
+								% But we need to retrieve the move that we stored in the knowledge base
+								h2_best_position(Player,Move),
+								move_player(Player,Move),
+								retractall(h2_best_position(_,_)).		
 
 
 
@@ -653,19 +860,25 @@ get_element_number(N,[_Head|Tail],E):-
 % put it in a list of type[Move/Score, .....]
 %
 % Remember ListOfScores has the format Move/Score/I/J
+
+
+
+
 h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores):- 	
 								player(Player,_,I/J),
 								get_target(Player, Target),
 								maze_moves(Moves),
-								findall(Move/Score/IK/JK, (
+								findall(Move/Score2/IK/JK, (
 													member(Move, Moves),
+													%write(Move),nl,
 													create_shifted_player(I,J,Move,NewI,NewJ),
 													create_shifted_board(CurrentBoard,Move,NewBoard),
-													graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes1),
-													h3_get_list_of_board_connections_second_move(NewBoard, Target, ListOfVisitedNodes1, Score/IK/JK)
+													graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes1),score_add(Target,ListOfVisitedNodes1,Val),
+													h3_get_list_of_board_connections_second_move(NewBoard, Target, ListOfVisitedNodes1, Score1/IK/JK),
+													Score2 is Score1 + Val
 													% write(Score)
-													), ListOfScores),
-								write(ListOfScores).
+													), ListOfScores)
+								.%,write(Target/ListOfScores),nl,nl,nl.
 																
 h3_get_list_of_board_connections_second_move(CurrentBoard, Target, ListOfVisitedNodes1, Score):-
 											maze_moves(Moves),
@@ -674,14 +887,15 @@ h3_get_list_of_board_connections_second_move(CurrentBoard, Target, ListOfVisited
 																	create_shifted_player(I,J,Move,NewI,NewJ),
 																	create_shifted_board(CurrentBoard,Move,NewBoard),
 																	graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes),
-																	% write(Target), write(ListOfVisitedNodes),
+																	 %write(Target), write(ListOfVisitedNodes),
 																	h3_get_score(Target, ListOfVisitedNodes, ListOfScores),
 																	h3_get_highest_score(ListOfScores, MaxScore)
 															), Scores
 													),
-											% write(Scores),
+											%write(Scores),nl,nl,
 											h3_get_highest_score_I_J(Scores, Score).
-
+score_add(Target,ListOfVisitedNodes1,1):- member(Target,ListOfVisitedNodes1),!.
+score_add(Target,ListOfVisitedNodes1,0).
 % Score based on man_distance from Position to Target											
 h3_man_score(Target, Position, Score):-
 	man_distance(Target, Position, Distance),
@@ -755,10 +969,25 @@ h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], Dist
 
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	man_distance(Target, I/J, NewDistance),
-	NewDistance < DistanceAcc,
-	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
+	NewDistance < DistanceAcc, h3_check_valid_move(Move),
+	!,h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
+	
+h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+	write('INVALID MOVE '),write(Move),nl,
+	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
-									
+h3_check_valid_move(Move):- 
+						board(Board),player(a,A2,AI/AJ),player(b,B2,BI/BJ),get_target(a,A4),get_target(b,B4),
+						create_shifted_board(Board, Move, NewBoard),
+						create_shifted_player(AI, AJ, Move, NewAI, NewAJ), AA3 = NewAI/NewAJ,
+						create_shifted_player(BI, BJ, Move, NewBI, NewBJ), BB3 = NewBI/NewBJ,
+						history(H), \+ member(NewBoard/a/A2/AA3/A4/b/B2/BB3/B4,H).
+						
+
+
+
+
+
 write_list_of_scores([]):- !, nl.
 write_list_of_scores([Move/Score/I/J|Tail]):-
 	write(Move/Score/I/J), nl, write_list_of_scores(Tail).
@@ -776,23 +1005,47 @@ testing_first_move(ListOfScores):-
 % h3 Heuristics Make Best Local Move:
 % This is different to H1, in the sense that, we have recorded the best next position into the 
 % knowledge base, then, we move there, then retractall
-make_best_move(h3, Player):-!, get_target(Player,Target),
+%make_best_move(h3, Player):- get_target(Player,Target),
+%						get_list_of_board_connections(Player, LocationsList), 
+%						member(Target,LocationsList),!,
+%						h1_evaluate_moves(Target, LocationsList,Move), write(Move),make_move(Move).
+make_best_move(h3, Player):- get_target(Player,Target),
 						board(CurrentBoard),
 						h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores), 
 						%write_list_of_scores(ListOfScores),
 						%write(ListOfScores),
 						h3_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J), 
-						write(Move/Score/I/J),
+						%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
 						assert(h3_best_position(Player,I/J)),
 						make_move(Move).
-
+make_best_local_move(Player,h3):- game_state(Player,2),
+								  player(Player,_,I/J),
+								  board(Board),
+								  graph_search_BFS(Board,I,J,Locations),
+								  get_target(Player,Target),
+								  member(Target,Locations),!,
+								  move_player(Player,Target),
+								  %write('1 step'),nl,
+								  retractall(h3_best_position(_,_)).
+								  
+								  
 make_best_local_move(Player, h3):- game_state(Player, 2),
 								% No need to do the graph search
 								% But we need to retrieve the move that we stored in the knowledge base
 								h3_best_position(Player,Move),
 								move_player(Player,Move),
+								%write('2 step'),nl,
 								retractall(h3_best_position(_,_)).
 	
 
 	
 % h3_make_best_move()
+
+%-------------------------------------------------------
+%						HEURISTIC 4 (H4)
+% Tries to search 2 moves ahead and evaluates the move that maximizes the score in the second move
+%-------------------------------------------------------
+
+
+
+
