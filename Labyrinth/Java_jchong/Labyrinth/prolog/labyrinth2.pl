@@ -633,14 +633,8 @@ h1_get_best_score(Target,[Position|Rest],Acc,Score):-
 get_index_of_highest(Scores,Index):- get_index_of_highest_acc(Scores,Index,1,0,1).
 
 get_index_of_highest_acc([],Index,Index,_ScoreAcc,_Counter):-!.
-
-get_index_of_highest_acc([Head|Scores],Index,IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, 
-			maze_moves(Moves),
-			get_element_number(Counter,Moves,Move),
-			check_valid_move(Move),
-			!,  C2 is Counter +1,
+get_index_of_highest_acc([Head|Scores],Index,IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, !,  C2 is Counter +1,
 			get_index_of_highest_acc(Scores,Index,Counter,Head,C2).
-			
 get_index_of_highest_acc([_Head|Scores],Index,IndexAcc,ScoreAcc,Counter):-   C2 is Counter +1,
 			get_index_of_highest_acc(Scores,Index,IndexAcc,ScoreAcc,C2).
 
@@ -651,7 +645,7 @@ get_element_number(N,[_Head|Tail],E):-
 
 
 
-
+	
 %-------------------------------------------------------
 %						HEURISTIC 2 (H2)
 % Tries to move towards the closest fixed tile in the maze such that it requires the 
@@ -715,7 +709,7 @@ h2_get_list_of_board_connections_second_move(CurrentBoard, TargetA, TargetB, Lis
 											h3_get_highest_score_I_J(ScoresB, ScoreB/1/1),
 											
 											%write("Score B: "),write(ScoreB), nl, nl,
-											Score is ScoreA - ScoreB//3
+											Score is ScoreA - ScoreB//2
 											%write("Score: "),write(Score), nl, nl
 											.
 
@@ -761,7 +755,6 @@ make_best_local_move(Player, h2):- game_state(Player, 2),
 								retractall(h2_best_position(_,_)).
 
 	
-	
 %-------------------------------------------------------
 %						HEURISTIC 3 (H3)
 % Tries to search 2 moves ahead and evaluates the move that maximizes the score in the second move
@@ -776,9 +769,6 @@ make_best_local_move(Player, h2):- game_state(Player, 2),
 % put it in a list of type[Move/Score, .....]
 %
 % Remember ListOfScores has the format Move/Score/I/J
-
-
-
 
 h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores):- 	
 								player(Player,_,I/J),
@@ -855,7 +845,7 @@ h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore)
 
 % Find the max score
 h3_get_max([Move/Score/I/J|ListOfScores], MaxScoreInt):-
-	h3_get_max_acc([Move/Score/I/J|ListOfScores], 0, MaxScoreInt).
+	h3_get_max_acc([Move/Score/I/J|ListOfScores], -12, MaxScoreInt).
 	
 h3_get_max_acc([], MaxAcc, MaxAcc):- !.
 h3_get_max_acc([Move/Score/I/J|ListOfScores], MaxAcc, MaxScoreInt):-
@@ -885,14 +875,14 @@ h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], Dist
 
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	man_distance(Target, I/J, NewDistance),
-	NewDistance < DistanceAcc, check_valid_move(Move),
+	NewDistance < DistanceAcc, h3_check_valid_move(Move),
 	!,h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
 	
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	write('INVALID MOVE '),write(Move),nl,
 	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
-check_valid_move(Move):- 
+h3_check_valid_move(Move):- 
 						board(Board),player(a,A2,AI/AJ),player(b,B2,BI/BJ),get_target(a,A4),get_target(b,B4),
 						create_shifted_board(Board, Move, NewBoard),
 						create_shifted_player(AI, AJ, Move, NewAI, NewAJ), AA3 = NewAI/NewAJ,
