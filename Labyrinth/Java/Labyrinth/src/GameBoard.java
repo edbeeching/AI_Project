@@ -133,14 +133,14 @@ public class GameBoard extends JLayeredPane {
 	@Override
 	public void paint(Graphics g){
 		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
-        Line2D lin = new Line2D.Float(100, 100, 250, 260);
-        float[] dash1 = {1f, 1f, 1f};
-        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,
-                BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
-        //g2.setStroke(bs1);
-        g2.setColor(Color.red);
-        g2.draw(lin);
+//		Graphics2D g2 = (Graphics2D) g;
+//        Line2D lin = new Line2D.Float(100, 100, 250, 260);
+//        float[] dash1 = {1f, 1f, 1f};
+//        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,
+//                BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+//        //g2.setStroke(bs1);
+//        g2.setColor(Color.red);
+//        g2.draw(lin);
 	}
 	
 	private void restartBoard(){
