@@ -24,3 +24,18 @@ List of treasures, every element represents a treasure in a position, treasure/r
 The board is represented as a 7x7 Matrix (List of row Lists), setup with create_board
 
 
+
+
+Introduction
+The Game - Game Rules - Implementation (Data Structures and Algorithms)
+Java (UML, Prolog)
+Heuristics
+Tests / Results
+
+
+
+The main loop of the AI:
+
+try_and_make_move
+
+make_best_local_move

@@ -45,7 +45,7 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setBorder(BorderFactory.createTitledBorder("Option"));
 		
-		heuristicOptions = new String[]{"Human","Heuristic 1", "Heuristic 2", "Heuristic 3", "Heuristic 4"};
+		heuristicOptions = new String[]{"Human","Heuristic 1", "Heuristic 2", "Heuristic 3", "Heuristic 4","Heuristic 5"};
 		player1OptionsBox = new JComboBox<>(heuristicOptions);
 		player1OptionsBox.addItemListener(this);
 		player2OptionsBox = new JComboBox<>(heuristicOptions);
@@ -108,6 +108,9 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 					break;
 				case 4:
 					gameInfo.player1Heuristic = "h4";
+					break;		
+				case 5:
+					gameInfo.player1Heuristic = "h5";
 					break;	
 			}
 			System.out.println("combox box 1 toggled" + i);
@@ -129,6 +132,9 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 					break;
 				case 4:
 					gameInfo.player2Heuristic = "h4";
+					break;	
+				case 5:
+					gameInfo.player2Heuristic = "h5";
 					break;	
 			}
 			System.out.println("combox box 2 toggled"+ i);
