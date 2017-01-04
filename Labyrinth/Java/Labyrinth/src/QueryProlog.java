@@ -1,6 +1,5 @@
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jpl7.Query;
 import org.jpl7.Term;

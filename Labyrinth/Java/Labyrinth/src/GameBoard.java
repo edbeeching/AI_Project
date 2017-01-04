@@ -141,7 +141,17 @@ public class GameBoard extends JLayeredPane {
 //        //g2.setStroke(bs1);
 //        g2.setColor(Color.red);
 //        g2.draw(lin);
+		///int p1_x = (int)(1)*70 + 48;
+		//int p1_y = (int)(1)*70 + 48;
+//		g.setColor(Color.red);
+//		drawCircleByCenter(g, 56, 56, 8);
+//		g.setColor(Color.green);
+//		drawCircleByCenter(g, 6*70 +50, 56, 8);
 	}
+	void drawCircleByCenter(Graphics g, int x, int y, int radius){
+         //g.setColor(Color.LIGHT_GRAY);
+         g.drawOval(x-radius, y-radius, 2*radius, 2*radius);
+     }
 	
 	private void restartBoard(){
 		Logger.info("--------------------------------------------------------------------------");
