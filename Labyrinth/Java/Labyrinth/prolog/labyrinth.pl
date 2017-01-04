@@ -633,14 +633,8 @@ h1_get_best_score(Target,[Position|Rest],Acc,Score):-
 get_index_of_highest(Scores,Index):- get_index_of_highest_acc(Scores,Index,1,0,1).
 
 get_index_of_highest_acc([],Index,Index,_ScoreAcc,_Counter):-!.
-
-get_index_of_highest_acc([Head|Scores],Index,IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, 
-			maze_moves(Moves),
-			get_element_number(Counter,Moves,Move),
-			check_valid_move(Move),
-			!,  C2 is Counter +1,
+get_index_of_highest_acc([Head|Scores],Index,IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, !,  C2 is Counter +1,
 			get_index_of_highest_acc(Scores,Index,Counter,Head,C2).
-			
 get_index_of_highest_acc([_Head|Scores],Index,IndexAcc,ScoreAcc,Counter):-   C2 is Counter +1,
 			get_index_of_highest_acc(Scores,Index,IndexAcc,ScoreAcc,C2).
 
@@ -651,11 +645,11 @@ get_element_number(N,[_Head|Tail],E):-
 
 
 
-
+	
 %-------------------------------------------------------
 %						HEURISTIC 2 (H2)
-% Tries to move towards the closest fixed tile in the maze such that it requires the 
-% minimum number of board shifts
+% H2 is based on H3 but the score now considers the best position of
+% the oponent in the second shift of the board
 %-------------------------------------------------------
 h2_get_list_of_board_connections(CurrentBoard, Player_A, Player_B, ListOfScores):- 	
 								player(Player_A,_,IA/JA),
@@ -665,6 +659,7 @@ h2_get_list_of_board_connections(CurrentBoard, Player_A, Player_B, ListOfScores)
 								maze_moves(Moves),
 								findall(Move/Score2/IK/JK, (
 													member(Move, Moves),
+													h3_check_valid_move(Move),
 													%write(Move),nl,
 													create_shifted_player(IA,JA,Move,NewIA,NewJA),
 													create_shifted_player(IB,JB,Move,NewIB,NewJB),
@@ -715,7 +710,8 @@ h2_get_list_of_board_connections_second_move(CurrentBoard, TargetA, TargetB, Lis
 											h3_get_highest_score_I_J(ScoresB, ScoreB/1/1),
 											
 											%write("Score B: "),write(ScoreB), nl, nl,
-											Score is ScoreA - ScoreB//3
+											Score is ScoreA - ScoreB//2
+											% Score is 12 - ScoreB//2
 											%write("Score: "),write(Score), nl, nl
 											.
 
@@ -761,60 +757,73 @@ make_best_local_move(Player, h2):- game_state(Player, 2),
 								retractall(h2_best_position(_,_)).
 
 	
-	
 %-------------------------------------------------------
 %						HEURISTIC 3 (H3)
 % Tries to search 2 moves ahead and evaluates the move that maximizes the score in the second move
+% The score is based on the manhatan distance to target and defined as 12 - distance
 %-------------------------------------------------------
 
-
-
-% Get a list of lists of nodes connected to a given player for all 12 board combinations
-% 
-
 % First get a list of 12 boards and the list of nodes reachable for each board
-% put it in a list of type[Move/Score, .....]
-%
-% Remember ListOfScores has the format Move/Score/I/J
-
-
-
-
+% and for each of this boards, shift again, calculate the scores and put the maximum
+% in a list of type[Move/Score/I/J, .....] in ListOfScores 
+% Move/Score/I/J: Move is the shift of the board, Score the score according to our rules
+% I/J is the position where the player is going to move after the shift of the board
 h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores):- 	
-								player(Player,_,I/J),
-								get_target(Player, Target),
-								maze_moves(Moves),
-								findall(Move/Score2/IK/JK, (
-													member(Move, Moves),
-													%write(Move),nl,
-													create_shifted_player(I,J,Move,NewI,NewJ),
-													create_shifted_board(CurrentBoard,Move,NewBoard),
-													graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes1),score_add(Target,ListOfVisitedNodes1,Val),
-													h3_get_list_of_board_connections_second_move(NewBoard, Target, ListOfVisitedNodes1, Score1/IK/JK),
-													Score2 is Score1 + Val
-													% write(Score)
-													), ListOfScores)
+								player(Player,_,I/J), 			% Get Player's position I/J
+								get_target(Player, Target),		% Get Player's target position
+								maze_moves(Moves),				% Get the valid Moves
+								findall(Move/Score2/IK/JK, 		% ListOfScores is a list of Move/Score2/IK/JK
+										(
+										member(Move, Moves),	% For every Move in Moves
+										h3_check_valid_move(Move),
+										create_shifted_player(I,J,Move,NewI,NewJ), % Shift the Player with Move. New position into NewI, NewJ
+										create_shifted_board(CurrentBoard,Move,NewBoard), % Shift the Board with Move. New board into NewBoard
+										graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes1), % All reachable tiles from NewI, NewJ into ListOfVisitedNodes1
+										score_add(Target,ListOfVisitedNodes1,Val), % If the Target is reachable in one Move, just add 1 to the final Score. This guarantees that if we reach the Target in one move, the score is the maximum
+										h3_get_list_of_board_connections_second_move(NewBoard, 
+																					Target, 
+																					ListOfVisitedNodes1, 
+																					Score1/IK/JK), 	% Given the NewBoard, 
+																									% For each tile position in ListOfVisited Nodes1
+																									% Shift the board
+																									% and put the IK/JK that
+																									% maximizes the Score1
+										Score2 is Score1 + Val
+										), ListOfScores)
 								.%,write(Target/ListOfScores),nl,nl,nl.
-																
+% Executes the shift of the board for every node in ListOfVisitedNodes1 and evaluates the Score for each move. Then Put the one that maximizes the score in Score = MaxScore/I/J														
 h3_get_list_of_board_connections_second_move(CurrentBoard, Target, ListOfVisitedNodes1, Score):-
-											maze_moves(Moves),
-											findall(MaxScore/I/J, (member(Move, Moves),
-																	member(I/J, ListOfVisitedNodes1),
-																	create_shifted_player(I,J,Move,NewI,NewJ),
-																	create_shifted_board(CurrentBoard,Move,NewBoard),
-																	graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes),
-																	 %write(Target), write(ListOfVisitedNodes),
-																	h3_get_score(Target, ListOfVisitedNodes, ListOfScores),
-																	h3_get_highest_score(ListOfScores, MaxScore)
-															), Scores
+											maze_moves(Moves),			% Get the valid Moves
+											findall(MaxScore/I/J, 
+														(
+															member(Move, Moves), % For every Move in Moves
+															% h3_check_valid_move(Move), % <---- Can be here
+															member(I/J, ListOfVisitedNodes1), % For each node I/J in ListOfVisitedNodes1
+															create_shifted_player(I,J,Move,NewI,NewJ), % Shift the Player with Move
+															create_shifted_board(CurrentBoard,Move,NewBoard), % Shift the CurrentBoard with Move
+															graph_search_BFS(NewBoard,NewI,NewJ,ListOfVisitedNodes), % All tiles reachable from NewI, NewJ into ListOfVisitedNodes
+															%write(Target), write(ListOfVisitedNodes),
+															h3_get_score(Target, ListOfVisitedNodes, ListOfScores), % Get the scores
+															h3_get_highest_score(ListOfScores, MaxScore)			% Get the highest score
+														), 
+														Scores
 													),
 											%write(Scores),nl,nl,
 											h3_get_highest_score_I_J(Scores, Score).
+
+% If the Target is in ListOfVisitedNodes1, then add 1
 score_add(Target,ListOfVisitedNodes1,1):- member(Target,ListOfVisitedNodes1),!.
 score_add(Target,ListOfVisitedNodes1,0).
+
+% This is a circular man_distance
+h3_man_distance(X1/Y1,X2/Y2,ManDist):-
+	D1 is abs(X1 - X2), D2 is abs(Y1 - Y2),
+	D3 is 7 - D1, D4 is 7 - D2,
+	ManDist is min(D1, D3) + min(D2, D4).
+
 % Score based on man_distance from Position to Target											
 h3_man_score(Target, Position, Score):-
-	man_distance(Target, Position, Distance),
+	h3_man_distance(Target, Position, Distance),
 	Score is 12 - Distance.
 	
 % Given a ListOfVisitedNodes calculate the scores in ListOfScores
@@ -828,34 +837,28 @@ h3_get_score(Target, ListOfVisitedNodes, ListOfScores):-
 % Given a list of scores, find the highest number
 h3_get_highest_score(ListOfScores, MaxScore):-
 	h3_get_highest_score_acc(ListOfScores, 0, MaxScore).
-
 h3_get_highest_score_acc([], ScoreAcc, ScoreAcc):- !.
 h3_get_highest_score_acc([Score|ListOfScores], ScoreAcc, MaxScore):-
 	Score2 is max(Score, ScoreAcc),
 	h3_get_highest_score_acc(ListOfScores, Score2, MaxScore).
 	
-% Get Score and the I/J
-% h3_get_score_I_J()
-% Find the highest and the I/J
-% Scores has the format Score/I/J
+% Get the Score/I/J that maximizes the Score
 h3_get_highest_score_I_J([Score/I/J|ListOfScores], MaxScore):- 
 	h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], Score/I/J, MaxScore).
-
 h3_get_highest_score_I_J_acc([], ScoreAcc/I/J, ScoreAcc/I/J):- !.
-
 h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
 	Score =< ScoreAcc, !,
 	h3_get_highest_score_I_J_acc(ListOfScores, ScoreAcc/IK/JK, MaxScore).
-	
 h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
 	Score > ScoreAcc,
 	h3_get_highest_score_I_J_acc(ListOfScores, Score/I/J, MaxScore).
 
-	
-
+% These predicates help finding in a list of Move/Score/I/J the one that
+% maximizes the Score. If two or more scores are equal, break ties by the 
+% h3_man_distance
 % Find the max score
 h3_get_max([Move/Score/I/J|ListOfScores], MaxScoreInt):-
-	h3_get_max_acc([Move/Score/I/J|ListOfScores], 0, MaxScoreInt).
+	h3_get_max_acc([Move/Score/I/J|ListOfScores], -12, MaxScoreInt).
 	
 h3_get_max_acc([], MaxAcc, MaxAcc):- !.
 h3_get_max_acc([Move/Score/I/J|ListOfScores], MaxAcc, MaxScoreInt):-
@@ -876,64 +879,58 @@ h3_get_highest_score_move_I_J(Target, ListOfScores, MaxMoveScoreIJ):-
 	h3_get_all_max(ListOfScores, [Move/Score/I/J|NewListOfScores]),
 	h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], 12, Move/Score/I/J, MaxMoveScoreIJ).
 
-
 h3_get_highest_score_move_I_J_acc(Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
-	man_distance(Target, I/J, NewDistance),
+	h3_man_distance(Target, I/J, NewDistance),
 	NewDistance >= DistanceAcc, !,
 	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
-	man_distance(Target, I/J, NewDistance),
-	NewDistance < DistanceAcc, check_valid_move(Move),
+	h3_man_distance(Target, I/J, NewDistance),
+	NewDistance < DistanceAcc, h3_check_valid_move(Move),
 	!,h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
 	
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	write('INVALID MOVE '),write(Move),nl,
 	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
-check_valid_move(Move):- 
+% Check if a Move is valid
+% To do this checks in the history of moves for the same combinations
+% of next board, players, heuristics, new positions
+% If they are not in the History, then the Move is Valid
+h3_check_valid_move(Move):- 
 						board(Board),player(a,A2,AI/AJ),player(b,B2,BI/BJ),get_target(a,A4),get_target(b,B4),
 						create_shifted_board(Board, Move, NewBoard),
 						create_shifted_player(AI, AJ, Move, NewAI, NewAJ), AA3 = NewAI/NewAJ,
 						create_shifted_player(BI, BJ, Move, NewBI, NewBJ), BB3 = NewBI/NewBJ,
 						history(H), \+ member(NewBoard/a/A2/AA3/A4/b/B2/BB3/B4,H).
 						
-
-
-
-
-
-write_list_of_scores([]):- !, nl.
-write_list_of_scores([Move/Score/I/J|Tail]):-
-	write(Move/Score/I/J), nl, write_list_of_scores(Tail).
+%write_list_of_scores([]):- !, nl.
+%write_list_of_scores([Move/Score/I/J|Tail]):-
+%	write(Move/Score/I/J), nl, write_list_of_scores(Tail).
 		
-testing_first_move(ListOfScores):-
-	setup(Game), 
-	board(CurrentBoard), 
-	h3_get_list_of_board_connections(CurrentBoard, a, ListOfScores), 
+%testing_first_move(ListOfScores):-
+%	setup(Game), 
+%	board(CurrentBoard), 
+%	h3_get_list_of_board_connections(CurrentBoard, a, ListOfScores), 
 	%write(ListOfScores),
 	%write_list_of_scores(ListOfScores),
-	make_best_move(h3, a),
-	nl.
+%	make_best_move(h3, a),
+%	nl.
 
 	
 % h3 Heuristics Make Best Local Move:
 % This is different to H1, in the sense that, we have recorded the best next position into the 
 % knowledge base, then, we move there, then retractall
-%make_best_move(h3, Player):- get_target(Player,Target),
-%						get_list_of_board_connections(Player, LocationsList), 
-%						member(Target,LocationsList),!,
-%						h1_evaluate_moves(Target, LocationsList,Move), write(Move),make_move(Move).
 make_best_move(h3, Player):- get_target(Player,Target),
-						board(CurrentBoard),
-						h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores), 
-						%write_list_of_scores(ListOfScores),
-						%write(ListOfScores),
-						h3_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J), 
-						%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
-						assert(h3_best_position(Player,I/J)),
-						make_move(Move).
+							board(CurrentBoard),
+							h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores), 
+							%write_list_of_scores(ListOfScores),
+							%write(ListOfScores),
+							h3_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J), 
+							%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
+							assert(h3_best_position(Player,I/J)),
+							make_move(Move).
 make_best_local_move(Player,h3):- game_state(Player,2),
 								  player(Player,_,I/J),
 								  board(Board),
@@ -943,7 +940,6 @@ make_best_local_move(Player,h3):- game_state(Player,2),
 								  move_player(Player,Target),
 								  %write('1 step'),nl,
 								  retractall(h3_best_position(_,_)).
-								  
 								  
 make_best_local_move(Player, h3):- game_state(Player, 2),
 								% No need to do the graph search

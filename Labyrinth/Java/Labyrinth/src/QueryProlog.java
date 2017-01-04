@@ -7,19 +7,29 @@ import org.jpl7.Term;
 import org.jpl7.fli.Prolog;
 import org.pmw.tinylog.Logger;
 
+/**
+ * The QueryProlog class is used to communicate between the Labyrinth user interface and the Game AI in prolog.
+ * 
+ * @author Edward Beeching
+ *
+ */
+
 public class QueryProlog {
 
+	/**
+	 * Instantiate and initialise the query prolog class, user parameters are contained in the GameInfo class.
+	 * 
+	 * @param gameInfo
+	 */	
 	public QueryProlog(GameInfo gameInfo){
 		initialise(gameInfo);
 	}
-	public void reset(GameInfo gameInfo){
-		String setupString = "setup(" + gameInfo.player1Heuristic + "/" + gameInfo.player2Heuristic + ").";
-		Query querySetup = new Query(setupString);
-		//System.out.println(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
-		Logger.info(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
-		querySetup.close();	
-		
-	}
+	/**
+	 * Initialise the Game by
+	 * 1. Consulting the prolog .pl file
+	 * 2. Call setup(H). where H are the heuristics
+	 * @param gameInfo
+	 */
 	private void initialise(GameInfo gameInfo){
 		String string = "consult('prolog/labyrinth.pl')";
 		Query query = new Query(string);
@@ -32,12 +42,23 @@ public class QueryProlog {
 		//System.out.println(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
 		Logger.info(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
 		querySetup.close();
+	}	
+	/**
+	 * Reset the game and create a new maze, treasure list etc.
+	 * @param gameInfo
+	 */
+	public void reset(GameInfo gameInfo){
+		String setupString = "setup(" + gameInfo.player1Heuristic + "/" + gameInfo.player2Heuristic + ").";
+		Query querySetup = new Query(setupString);
+		//System.out.println(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
+		Logger.info(setupString + " " + (querySetup.hasSolution() ? "suceeded" : "failed"));
+		querySetup.close();	
+		
 	}
-//	public boolean generateMaze(ArrayList<MazePiece> pieces){
-//		
-//		
-//		return false;
-//	}
+	/**
+	 * get the current board from prolog
+	 * @return ArrayList of strings containing the board pieces
+	 */
 	public ArrayList<String> getBoard(){
 		
 		String boardQueryString = "board(X).";
@@ -45,9 +66,7 @@ public class QueryProlog {
 		//System.out.println(boardQueryString + " " + (boardQuery.hasSolution() ? "suceeded" : "failed"));
 		Logger.info(boardQueryString + " " + (boardQuery.hasSolution() ? "suceeded" : "failed"));
 		Term term = boardQuery.oneSolution().get("X");
-		
-		
-		//The following iterates through a list of lists to get all elements into a ArrayList of string
+		//The following iterates through a list of lists to get all elements into a ArrayList of strings
 		ArrayList<String> elements = new ArrayList<String>(49);
 		
 		Term t1 =  term;
@@ -72,6 +91,11 @@ public class QueryProlog {
 		
 		return elements;
 	}
+	/**
+	 * Get the position of a particular player
+	 * @param player
+	 * @return a 2D Point containing the players location
+	 */
 	public Point getPlayerPosition(String player){
 		String positionString = "player(" + player +",_,I/J)";
 		Query positionQuery = new Query(positionString);
@@ -89,6 +113,10 @@ public class QueryProlog {
 		// Just to be confusing, x and y are swapped in my implementation of prolog :)
 		return new Point(J.intValue(),I.intValue());
 	}
+	/**
+	 * Get the treasure indices for the two players
+	 * @return a 2D point containing the Indices X = a, Y = b
+	 */
 	public Point getTreasurePositions(){
 		Point pos = new Point();
 		
@@ -115,18 +143,12 @@ public class QueryProlog {
 		 
 		return pos;
 	}
-//	public ArrayList<ArrayList<String>> generateMaze(){
-//		
-//		ArrayList<ArrayList<String>> mazeStrings = new ArrayList<ArrayList<String>>();
-//		
-//		//for(int i=0;i<)
-//		
-//		
-//		
-//		return mazeStrings;
-//	}
+	/**
+	 * Get the treasure lists for a particular player
+	 * @param player
+	 * @return An arraylist of strings containing the treasures
+	 */
 	public ArrayList<String> getTreasureList(String player){
-		//treasure_list(a,P1_List)
 		String treasureString = "get_treasure_list("+player+",List).";
 		Query treasureQuery = new Query(treasureString);
 		//System.out.println(treasureString + " " + (treasureQuery.hasSolution() ? "suceeded" : "failed"));
@@ -148,6 +170,11 @@ public class QueryProlog {
 		}
 		return treasures;
 	}
+	/**
+	 * Request to shift the maze left
+	 * @param row		The row
+	 * @return 			returns the new board and an arraylist of strings
+	 */
 	public ArrayList<String> requestShiftLeft(int row) {
 		
 		String shiftLeft = "try_to_shift_row_left("+ row +  ")";
@@ -158,6 +185,11 @@ public class QueryProlog {
 		
 		return getBoard();
 	}
+	/**
+	 * Request to shift the maze right
+	 * @param row		The row
+	 * @return 			returns the new board and an arraylist of strings
+	 */
 	public ArrayList<String> requestShiftRight(int row) {
 		String shiftRight = "try_to_shift_row_right("+ row +  ")";
 		Query shiftQuery = new Query(shiftRight);
@@ -167,6 +199,11 @@ public class QueryProlog {
 		
 		return getBoard();
 	}
+	/**
+	 * Request to shift the maze up
+	 * @param column	The column
+	 * @return 			returns the new board and an arraylist of strings
+	 */
 	public ArrayList<String> requestShiftUp(int column) {
 		String shiftUp = "try_to_shift_column_up("+ column +  ")";
 		Query shiftQuery = new Query(shiftUp);
@@ -176,6 +213,11 @@ public class QueryProlog {
 		
 		return getBoard();
 	}
+	/**
+	 * Request to shift the maze down
+	 * @param column	The column
+	 * @return 			returns the new board and an arraylist of strings
+	 */
 	public ArrayList<String> requestShiftDown(int column) {
 		String shiftDown = "try_to_shift_column_down("+ column +  ")";
 		Query shiftQuery = new Query(shiftDown);
@@ -185,6 +227,12 @@ public class QueryProlog {
 		
 		return getBoard();
 	}
+	/**
+	 * Checks to see if a player can move to a particular location, I think this is deprecated now.
+	 * @param i		the index I
+	 * @param j		the index J
+	 * @return boolean whether the move is possible or not
+	 */
 	public boolean canMove(int i, int j) {
 		
 		String moveString = "can_move(1/1,"+i+"/"+j+").";
@@ -193,7 +241,12 @@ public class QueryProlog {
 		moveQuery.close();
 		return canMove; 
 	}
-	
+	/**
+	 * for a given player and heuristic, this will try and make move to shift the maze
+	 * @param player 		The player
+	 * @param heuristic		The heuristic
+	 * @return	boolean showing whether a move was possible
+	 */
 	public boolean tryAndMakeMove(String player, String heuristic){
 		String moveString = "try_and_make_move(" + player + "," + heuristic +").";
 		Query moveQuery = new Query(moveString);
@@ -205,6 +258,11 @@ public class QueryProlog {
 		}
 		return true;
 	}
+	/**
+	 * makes the best local move after the maze has been shifted
+	 * @param player		the player
+	 * @param heuristic		the heuristic
+	 */
 	
 	public void makeBestLocalMove(String player, String heuristic){
 		String localMoveString = "make_best_local_move(" + player + "," + heuristic +").";
@@ -213,7 +271,12 @@ public class QueryProlog {
 		Logger.info(localMoveString + " " + (localMoveQuery.hasSolution() ? "suceeded" : "failed"));
 		localMoveQuery.close();
 	}
-	
+	/**
+	 * Checks the game state for a given player and state comination, e.g isGameState("a",1)
+	 * @param player
+	 * @param state
+	 * @return boolean value indicating whether that was the state
+	 */
 	public boolean isGameState(String player, int state){
 		String stateString = "game_state(" + player + "," + state +").";
 		Query stateQuery = new Query(stateString);
@@ -225,7 +288,13 @@ public class QueryProlog {
 		}
 		return true;
 	}
-
+	/**
+	 * Asks Prolog is there is a connected path in the maze between a given player and a i,k locations
+	 * @param player
+	 * @param i
+	 * @param j
+	 * @return boolean indicating whether the was a connected path
+	 */
 	public boolean canMove(String player, int i, int j) {
 		String positionString = "player(" + player +",_,I/J).";
 		Query positionQuery = new Query(positionString);
@@ -244,17 +313,23 @@ public class QueryProlog {
 		moveQuery.close();
 		return canMove; 
 	}
+	/**
+	 * Asks prolog to try and move a player to a given i and j location
+	 * @param player
+	 * @param i
+	 * @param j
+	 */
 	public void tryAndMove(String player, int i, int j) {
 		String moveString = "move_player(" + player + "," + i + "/" + j +").";
 		Query moveQuery = new Query(moveString);
 		//System.out.println(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
 		Logger.info(moveString + " " + (moveQuery.hasSolution() ? "suceeded" : "failed"));
 		moveQuery.close();
-		
-		
-		
-		//move_player(C,I/J)
 	}
+	/**
+	 * Gets the current player from prolog
+	 * @return string containing "a" or "b"
+	 */
 	public String getCurrentPlayer() {
 		String playerString = "get_current_player(Player).";
 		Query playerQuery = new Query(playerString);
@@ -266,9 +341,12 @@ public class QueryProlog {
 		}
 		Term playerTerm = playerQuery.oneSolution().get("Player");
 		return playerTerm.toString();
-		
-		
 	}
+	/**
+	 * Askes prolog whether a particular player has won the game
+	 * @param player
+	 * @return boolean indicting whether the player has won.
+	 */
 	public boolean haveIWon(String player) {
 		// TODO Auto-generated method stub
 		String wonString = "have_I_won(" + player + ").";
@@ -276,6 +354,5 @@ public class QueryProlog {
 		//System.out.println(wonString + " " + (wonQuery.hasSolution() ? "suceeded" : "failed"));
 		Logger.info(wonString + " " + (wonQuery.hasSolution() ? "suceeded" : "failed"));
 		return wonQuery.hasSolution();
-
 	}
 }
