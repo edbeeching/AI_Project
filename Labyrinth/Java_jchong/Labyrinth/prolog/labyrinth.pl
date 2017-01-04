@@ -711,6 +711,7 @@ h2_get_list_of_board_connections_second_move(CurrentBoard, TargetA, TargetB, Lis
 											
 											%write("Score B: "),write(ScoreB), nl, nl,
 											Score is ScoreA - ScoreB//2
+											% Score is 12 - ScoreB//2
 											%write("Score: "),write(Score), nl, nl
 											.
 
@@ -852,7 +853,9 @@ h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore)
 	Score > ScoreAcc,
 	h3_get_highest_score_I_J_acc(ListOfScores, Score/I/J, MaxScore).
 
-
+% These predicates help finding in a list of Move/Score/I/J the one that
+% maximizes the Score. If two or more scores are equal, break ties by the 
+% h3_man_distance
 % Find the max score
 h3_get_max([Move/Score/I/J|ListOfScores], MaxScoreInt):-
 	h3_get_max_acc([Move/Score/I/J|ListOfScores], -12, MaxScoreInt).
@@ -878,12 +881,12 @@ h3_get_highest_score_move_I_J(Target, ListOfScores, MaxMoveScoreIJ):-
 
 h3_get_highest_score_move_I_J_acc(Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
-	man_distance(Target, I/J, NewDistance),
+	h3_man_distance(Target, I/J, NewDistance),
 	NewDistance >= DistanceAcc, !,
 	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
 h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
-	man_distance(Target, I/J, NewDistance),
+	h3_man_distance(Target, I/J, NewDistance),
 	NewDistance < DistanceAcc, h3_check_valid_move(Move),
 	!,h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
 	
