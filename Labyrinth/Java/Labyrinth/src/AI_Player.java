@@ -57,6 +57,7 @@ public class AI_Player extends Player {
 		if(queryProlog.haveIWon(this.name)){
 			//System.out.println("Player " + this.name + " has won!");
 			Logger.info("Player " + this.name + " has won!");
+			gameBoard.swapCurrentPlayer();
 			return true;
 		}
 		return false;

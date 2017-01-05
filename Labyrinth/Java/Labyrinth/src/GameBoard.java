@@ -105,7 +105,7 @@ public class GameBoard extends JLayeredPane {
 					//System.out.println("updating");
 					if(currentPlayer.update(gameBoard, queryProlog, timeLabel)){
 						numGames++;
-						if((player1.heuristic == "h0" && currentPlayer == player1)||(currentPlayer == player2&&player2.heuristic!= "h0")){
+						if(currentPlayer == player1){
 							player1.winCount++;
 							// This has to be queued as we are not on the main thread
 							EventQueue.invokeLater(new Runnable() {
