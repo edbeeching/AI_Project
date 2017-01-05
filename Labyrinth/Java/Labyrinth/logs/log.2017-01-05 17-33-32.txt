@@ -1,0 +1,2 @@
+2017-01-05 17:33:32 GameBoard.<init>()	Hello World!
+2017-01-05 17:33:32 QueryProlog.initialise()	consult('prolog/labyrinth.pl') suceeded

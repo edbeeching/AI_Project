@@ -55,6 +55,10 @@
 % of a player move: 1st shift column or row, 2nd move the player to a valid
 % position.
 
+:- discontiguous(make_best_move(_,_)).
+:- discontiguous(make_best_local_move(_,_)).
+
+
 %---------------------------------------------------------------
 %				Section 1. Predicates for Game playing.
 %---------------------------------------------------------------
@@ -117,7 +121,8 @@ extract_treasures([],[]):-!.
 extract_treasures([Treasure/_/_|Tail],[Treasure|Rest]):- extract_treasures(Tail,Rest).
 
 % sets up the 5 treasures for each player, this uses randomnes to mix the lists a bit
-setup_treasure_lists(Player1List,Player2List):- treasures(Treasures),
+setup_treasure_lists(Player1List, Player2List):- treasures(Treasures),
+												%random_permutation(Treasures,T5),
 												mix_treasures(Treasures,T1),
 												mix_treasures(T1,T2),
 												mix_treasures(T2,T3),
@@ -149,7 +154,7 @@ check_reached_target(Player):- get_target(Player,Target),
 								NewIndex is Index + 1, 
 								retractall(treasure_index(Player,Index)),
 								assert(treasure_index(Player,NewIndex)).
-check_reached_target(Player).
+check_reached_target(_Player).
 
 % If the index is 7 Player has won. There are 6 targets for each player:
 % 5 treasures, after that, the player has to come back to home (target 6),
@@ -362,9 +367,9 @@ update_history():- history(H),
 					get_target(a,A4),
 					get_target(b,B4),
 					append(H,[Board/a/A2/A3/A4/b/B2/B3/B4],H2), 
-					assert(history(H2)),
-					nl,
-					write(H2),nl.
+					assert(history(H2)).%,
+					%nl,
+					%write(H2),nl.
 %% -------------------------------------------------------------------------------------------%%
 
 
@@ -404,7 +409,7 @@ replace_nth_h([First|RestMatrix], Index, Counter, Element, [First|NewMatrix]):-
 																				NewCounter is Counter + 1,
 																				replace_nth_h(RestMatrix, Index, NewCounter, Element, NewMatrix).
 
-replace_nth_h([First|RestMatrix], Index, Counter, Element, [Element|NewMatrix]):-
+replace_nth_h([_First|RestMatrix], Index, Counter, Element, [Element|NewMatrix]):-
 																				Index =:= Counter,
 																				NewCounter is Counter + 1,
 																				replace_nth_h(RestMatrix, Index, NewCounter, Element, NewMatrix).
@@ -468,7 +473,7 @@ get_entry(Row,Index,[_Head|Tail],List):-
 get_connections(Board, Row,Column,ConnectionList) :- 
 		get_connections(Board, Row,Column, [] ,ConnectionList,1),!.
 		
-get_connections(Board, Row, Column, ConnectionList ,ConnectionList,5):- !.
+get_connections(_Board, _Row, _Column, ConnectionList ,ConnectionList,5):- !.
 get_connections(Board, Row, Column, List ,ConnectionList,1):-
 	get_piece(Board, Row, Column, P1),R1 is Row - 1, get_piece(Board, R1, Column, P2),
 	pieces_connected_up(P1, P2),!,get_connections(Board, Row, Column, [R1/Column|List], ConnectionList,2).
@@ -500,7 +505,7 @@ get_connections(Board, Row, Column, List, ConnectionList,4):-
 add_connections(ConnectionList, Visited, Frontier, FinalFrontier) :- 
 	check_connections(ConnectionList, Visited, Frontier ,[], Newfrontier),append(Frontier,Newfrontier,FinalFrontier), ! .
 
-check_connections([], Visited, _Frontier, FinalFrontier, FinalFrontier):- !.
+check_connections([], _Visited, _Frontier, FinalFrontier, FinalFrontier):- !.
 
 check_connections([Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 	\+ member(Head,Visited), \+ member(Head,Frontier),!,
@@ -514,7 +519,7 @@ check_connections([_Head|ConnectionList], Visited, Frontier,Acc, Newfrontier):-
 graph_search_BFS(Board, StartI, StartJ, ListOfVisitedNodes):-
 	graph_search_BFS_acc(Board, [StartI/StartJ], [], ListOfVisitedNodes).
 
-graph_search_BFS_acc(Board, [], Visited, Visited):-!.
+graph_search_BFS_acc(_Board, [], Visited, Visited):-!.
 graph_search_BFS_acc(Board, [I/J|Frontier], Acc, Visited):-
 	get_connections(Board, I, J, ConnectionList),
 	add_connections(ConnectionList, Acc, Frontier, Newfrontier),
@@ -575,7 +580,7 @@ create_shifted_player(I,J,_/_,I,J).
 check_shifted_players(C_R,Dir):- check_player_shift(a,C_R,Dir),check_player_shift(b,C_R,Dir).
 
 check_player_shift(Player,C_R,Dir):- player(Player,H1,I/J),create_shifted_player(I,J,C_R/Dir,NewI,NewJ),!,retractall(player(Player,H1,I/J)),assert(player(Player,H1,NewI/NewJ)).
-check_player_shift(Player,C_R,Dir).
+check_player_shift(_Player,_C_R,_Dir).
 
 
 move_player(a,I/J):-game_state(a,2),player(a,H,_/_),retractall(player(a,_,_/_)),assert(player(a,H,I/J)),retractall(game_state(a,_)),assert(game_state(b,1)),check_reached_target(a).
@@ -643,10 +648,10 @@ make_best_local_move(Player,h1):- game_state(Player,2),
 get_best_local_best(I/J,Target,Locations,Move):- get_best_local_best_acc(Target,Locations,0,I/J,Move).
 
 get_best_local_best_acc(_Target,[],_BestScore,Move,Move):-!.
-get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
+get_best_local_best_acc(Target,[Head|Tail],BestScore,_Acc,Move):-
 					man_distance(Target,Head,ManDist),Score2 is 12 - ManDist, Score2 > BestScore,!,
 					get_best_local_best_acc(Target,Tail,Score2,Head,Move).
-get_best_local_best_acc(Target,[Head|Tail],BestScore,Acc,Move):-
+get_best_local_best_acc(Target,[_Head|Tail],BestScore,Acc,Move):-
 					get_best_local_best_acc(Target,Tail,BestScore,Acc,Move).
 
 				
@@ -683,7 +688,7 @@ h1_get_best_score(Target,[Position|Rest],Acc,Score):-
 % Get the index in the list Scores of the maximum score
 get_index_of_highest(Scores,Index):- get_index_of_highest_acc(Scores,Index,1,0,1).
 get_index_of_highest_acc([],Index,Index,_ScoreAcc,_Counter):-!.
-get_index_of_highest_acc([Head|Scores],Index,IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, 
+get_index_of_highest_acc([Head|Scores],Index,_IndexAcc,ScoreAcc,Counter):- Head > ScoreAcc, 
 						maze_moves(Moves), get_element_number(Counter, Moves, Move), h3_check_valid_move(Move), !,  C2 is Counter +1,
 			get_index_of_highest_acc(Scores,Index,Counter,Head,C2).
 get_index_of_highest_acc([_Head|Scores],Index,IndexAcc,ScoreAcc,Counter):-   C2 is Counter +1,
@@ -796,7 +801,7 @@ make_best_move(h2, PlayerA):- get_target(PlayerA, TargetA),
 						h2_get_list_of_board_connections(CurrentBoard, PlayerA, PlayerB, ListOfScores), 
 						%write_list_of_scores(ListOfScores),
 						%write(ListOfScores),
-						h3_get_highest_score_move_I_J(TargetA, ListOfScores, Move/Score/I/J), 
+						h3_get_highest_score_move_I_J(TargetA, ListOfScores, Move/_Score/I/J), 
 						%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
 						assert(h2_best_position(PlayerA,I/J)),
 						make_move(Move).
@@ -880,7 +885,7 @@ h3_get_list_of_board_connections_second_move(CurrentBoard, Target, ListOfVisited
 
 % If the Target is in ListOfVisitedNodes1, then add 1
 score_add(Target,ListOfVisitedNodes1,1):- member(Target,ListOfVisitedNodes1),!.
-score_add(Target,ListOfVisitedNodes1,0).
+score_add(_Target,_ListOfVisitedNodes1,0).
 
 % This is a "circular" man_distance
 h3_man_distance(X1/Y1,X2/Y2,ManDist):-
@@ -941,10 +946,10 @@ h3_get_highest_score_acc([Score|ListOfScores], ScoreAcc, MaxScore):-
 h3_get_highest_score_I_J([Score/I/J|ListOfScores], MaxScore):- 
 	h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], Score/I/J, MaxScore).
 h3_get_highest_score_I_J_acc([], ScoreAcc/I/J, ScoreAcc/I/J):- !.
-h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
+h3_get_highest_score_I_J_acc([Score/_I/_J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
 	Score =< ScoreAcc, !,
 	h3_get_highest_score_I_J_acc(ListOfScores, ScoreAcc/IK/JK, MaxScore).
-h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/IK/JK, MaxScore):-
+h3_get_highest_score_I_J_acc([Score/I/J|ListOfScores], ScoreAcc/_IK/_JK, MaxScore):-
 	Score > ScoreAcc,
 	h3_get_highest_score_I_J_acc(ListOfScores, Score/I/J, MaxScore).
 
@@ -956,7 +961,7 @@ h3_get_max([Move/Score/I/J|ListOfScores], MaxScoreInt):-
 	h3_get_max_acc([Move/Score/I/J|ListOfScores], -12, MaxScoreInt).
 	
 h3_get_max_acc([], MaxAcc, MaxAcc):- !.
-h3_get_max_acc([Move/Score/I/J|ListOfScores], MaxAcc, MaxScoreInt):-
+h3_get_max_acc([_Move/Score/_I/_J|ListOfScores], MaxAcc, MaxScoreInt):-
 	MaxAcc2 is max(Score, MaxAcc),
 	h3_get_max_acc(ListOfScores, MaxAcc2, MaxScoreInt).
 	
@@ -976,18 +981,18 @@ h3_get_highest_score_move_I_J(Target, ListOfScores, MaxMoveScoreIJ):-
 	h3_get_all_max(ListOfScores, [Move/Score/I/J|NewListOfScores]),
 	h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], 12, Move/Score/I/J, MaxMoveScoreIJ).
 
-h3_get_highest_score_move_I_J_acc(Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
-h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+h3_get_highest_score_move_I_J_acc(_Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
+h3_get_highest_score_move_I_J_acc(Target, [_Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	h3_man_distance(Target, I/J, NewDistance),
 	NewDistance >= DistanceAcc, !,
 	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
-h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, _MoveK/Score/_IK/_JK, MaxMoveScoreIJ):-
 	h3_man_distance(Target, I/J, NewDistance),
 	NewDistance < DistanceAcc, h3_check_valid_move(Move),
 	!,h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
 	
-h3_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+h3_get_highest_score_move_I_J_acc(Target, [Move/Score/_I/_J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	write('INVALID MOVE '),write(Move),nl,
 	h3_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
@@ -1029,7 +1034,7 @@ make_best_move(h3, Player):- get_target(Player,Target),
 							h3_get_list_of_board_connections(CurrentBoard, Player, ListOfScores), 
 							%write_list_of_scores(ListOfScores),
 							%write(ListOfScores),
-							h3_get_highest_score_move_I_J(Target, ListOfScores, Move/Score/I/J), 
+							h3_get_highest_score_move_I_J(Target, ListOfScores, Move/_Score/I/J), 
 							%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
 							assert(h3_best_position(Player,I/J)),
 							make_move(Move).
@@ -1146,18 +1151,18 @@ h4_get_highest_score_move_I_J(Target, ListOfScores, MaxMoveScoreIJ):-
 	h3_get_all_max(ListOfScores, [Move/Score/I/J|NewListOfScores]),
 	h4_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], 12, Move/Score/I/J, MaxMoveScoreIJ).
 
-h4_get_highest_score_move_I_J_acc(Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
-h4_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+h4_get_highest_score_move_I_J_acc(_Target, [], _, MaxMoveScoreIJ, MaxMoveScoreIJ):- !.
+h4_get_highest_score_move_I_J_acc(Target, [_Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	man_distance(Target, I/J, NewDistance),
 	NewDistance >= DistanceAcc, !,
 	h4_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 
-h4_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+h4_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, _MoveK/Score/_IK/_JK, MaxMoveScoreIJ):-
 	man_distance(Target, I/J, NewDistance),
 	NewDistance < DistanceAcc, h3_check_valid_move(Move),
 	!,h4_get_highest_score_move_I_J_acc(Target, NewListOfScores, NewDistance, Move/Score/I/J, MaxMoveScoreIJ).
 	
-h4_get_highest_score_move_I_J_acc(Target, [Move/Score/I/J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
+h4_get_highest_score_move_I_J_acc(Target, [Move/Score/_I/_J|NewListOfScores], DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ):-
 	write('INVALID MOVE '),write(Move),nl,
 	h4_get_highest_score_move_I_J_acc(Target, NewListOfScores, DistanceAcc, MoveK/Score/IK/JK, MaxMoveScoreIJ).
 % Try to make the move using h2_get_list_of_board_connections, 
@@ -1169,7 +1174,7 @@ make_best_move(h4, PlayerA):- get_target(PlayerA, TargetA),
 						h4_get_list_of_board_connections(CurrentBoard, PlayerA, PlayerB, ListOfScores), 
 						%write_list_of_scores(ListOfScores),
 						write(ListOfScores),
-						h4_get_highest_score_move_I_J(TargetA, ListOfScores, Move/Score/I/J), 
+						h4_get_highest_score_move_I_J(TargetA, ListOfScores, Move/_Score/I/J), 
 						%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
 						assert(h4_best_position(PlayerA,I/J)),
 						make_move(Move).
