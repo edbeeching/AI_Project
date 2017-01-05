@@ -659,7 +659,7 @@ make_best_move(h1, Player):- !,
 							get_target(Player,Target), % Get Target given Player
 							get_list_of_board_connections(Player, LocationsList),	% For Player, get a list of lists LocationsList, each element of LocationsList is a list representing all tiles reachable from the moves executed. See get_list_of_board_connections for more details
 							h1_evaluate_moves(Target, LocationsList, Move), 		% Given Target, LocationsList get the highest scored Move
-							write(Move),
+							% write(Move),
 							make_move(Move).
 						
 h1_evaluate_moves(Target,LocationsList,Move):-  h1_score_moves(Target,LocationsList,Scores),
@@ -1167,8 +1167,8 @@ make_best_move(h4, PlayerA):- get_target(PlayerA, TargetA),
 						get_other_player(PlayerA, PlayerB),
 						board(CurrentBoard),
 						h4_get_list_of_board_connections(CurrentBoard, PlayerA, PlayerB, ListOfScores), 
-						%write_list_of_scores(ListOfScores),
-						write(ListOfScores),
+						% write_list_of_scores(ListOfScores),
+						% write(ListOfScores),
 						h4_get_highest_score_move_I_J(TargetA, ListOfScores, Move/Score/I/J), 
 						%nl, write(Player),write(' '), write(Move/Score/I/J),nl,
 						assert(h4_best_position(PlayerA,I/J)),
@@ -1238,10 +1238,11 @@ h5_get_list_of_board_connections(CurrentBoard, Player_A, Player_B, ListOfScores)
 													graph_search_BFS(NewBoard,NewIA,NewJA,ListOfVisitedNodes1),score_add(TargetA,ListOfVisitedNodes1,Val),
 													h5_get_list_of_board_connections_second_move(NewBoard, TargetA, Next_TargetA, TargetB, ListOfVisitedNodes1, NewIB, NewJB, Score1/IK/JK),
 													Score2 is Score1 + Val,
-													write(Score2)
+													% write(Score2)
 													), ListOfScores)
 
-								,write(TargetA/ListOfScores),nl,nl,nl.
+								%,write(TargetA/ListOfScores),nl,nl,nl
+								.
 
 h5_get_score(ListOfVisitedNodes, Target, ListOfScores):-
 	findall(Score, ( member(Position, ListOfVisitedNodes),
