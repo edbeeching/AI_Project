@@ -6,7 +6,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Users/Edward/Documents/GitHub/AI_Project/Labyrinth/Java/Labyrinth/lib/jpl.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Edward/Documents/GitHub/AI_Project/Labyrinth/Java/Labyrinth/lib/tinylog.jar" sourcepath="lib/tinylog-src.zip"/>
-	<classpathentry kind="lib" path="/Users/Sejal/Desktop/AI_Project/Labyrinth/Java/Labyrinth/lib/jpl.jar"/>
-	<classpathentry kind="lib" path="/Users/Sejal/Desktop/AI_Project/Labyrinth/Java/Labyrinth/lib/tinylog.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
