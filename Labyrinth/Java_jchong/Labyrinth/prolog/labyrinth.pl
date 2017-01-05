@@ -1237,7 +1237,7 @@ h5_get_list_of_board_connections(CurrentBoard, Player_A, Player_B, ListOfScores)
 													create_shifted_board(CurrentBoard,Move,NewBoard),
 													graph_search_BFS(NewBoard,NewIA,NewJA,ListOfVisitedNodes1),score_add(TargetA,ListOfVisitedNodes1,Val),
 													h5_get_list_of_board_connections_second_move(NewBoard, TargetA, Next_TargetA, TargetB, ListOfVisitedNodes1, NewIB, NewJB, Score1/IK/JK),
-													Score2 is Score1 + Val,
+													Score2 is Score1 + Val
 													% write(Score2)
 													), ListOfScores)
 
