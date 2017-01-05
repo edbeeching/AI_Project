@@ -13,30 +13,37 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 // some code taken taken from http://zetcode.com/tutorials/javaswingtutorial/swingdialogs/
+/**
+ * Custom Dialog for getting user setup parameters
+ * @author Edward Beeching
+ *
+ */
 public class GameInfoDialog extends JDialog implements ItemListener{
 
-	private GameInfo gameInfo;
-	private String[] heuristicOptions;
-	private String[] timeOptions;
-	private String[] gameOptions;
-	private JComboBox<String> player1OptionsBox;
-	private JComboBox<String> player2OptionsBox;
-	private JComboBox<String> timeBox;
-	private JComboBox<String> gameBox;
+	private GameInfo gameInfo;						// Class containing the parameters
+	private String[] heuristicOptions;				// String of heuristic options
+	private String[] timeOptions;					// String of time options
+	private String[] gameOptions;					// String of game options
+	private JComboBox<String> player1OptionsBox;	//Player 1 combo box of heuristics
+	private JComboBox<String> player2OptionsBox;	//Player 2 combo box of heuristics
+	private JComboBox<String> timeBox;				// Time options combo box
+	private JComboBox<String> gameBox;				// Game options combo box
 	public GameInfoDialog(Frame parent, GameInfo gameInfo){
 		super(parent);
 		
 		init(gameInfo);
 	}
+	/**
+	 * Takes an instantiated GameInfo class as a parameter sets the game options
+	 * includes combo boxes for heuristics, number of games and time of games.
+	 * @param gameInfo
+	 */
 	private void init(GameInfo gameInfo){
-		
 		
 		this.gameInfo = gameInfo;
 		
-		
 		JLabel name = new JLabel("Game setup");
 		this.setBounds(100, 100, 400, 400);
-		
 		
 		JPanel player1Panel = new JPanel();
 		player1Panel.setBorder(BorderFactory.createTitledBorder("Player 1"));
@@ -51,7 +58,6 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 		player2OptionsBox = new JComboBox<>(heuristicOptions);
 		player2OptionsBox.addItemListener(this);
 		
-		
 		player1Panel.add(player1OptionsBox);
 		player2Panel.add(player2OptionsBox);
 		JButton button = new JButton("Create game!");
@@ -62,10 +68,7 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 				dispose();
 			}
 		});
-		
-		
-		
-		
+
 		gameOptions = new String[]{"1","5","10","50","100"};
 		gameBox = new JComboBox<>(gameOptions);
 		gameBox.addItemListener(this);
@@ -73,7 +76,6 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 		timeOptions = new String[]{"100 ms","200 ms","500 ms","1000 ms","1 ms" };
 		timeBox = new JComboBox<>(timeOptions);
 		timeBox.addItemListener(this);
-		
 		
 		optionsPanel.add(button);
 		optionsPanel.add(gameBox);
@@ -89,6 +91,9 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(getParent());
 	}
+	/**
+	 * Adjust gameInfo class with changes to options
+	 */
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getSource()==player1OptionsBox){
@@ -110,7 +115,7 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 					gameInfo.player1Heuristic = "h4";
 					break;		
 				case 5:
-					gameInfo.player2Heuristic = "h5";
+					gameInfo.player1Heuristic = "h5";
 					break;	
 			}
 			System.out.println("combox box 1 toggled" + i);
@@ -181,7 +186,5 @@ public class GameInfoDialog extends JDialog implements ItemListener{
 			}
 			System.out.println("num games"+ i);
 		}
-			
-		
 	}
 }

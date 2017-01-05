@@ -5,25 +5,20 @@ import javax.swing.JLabel;
 
 import org.pmw.tinylog.Logger;
 
+/**
+ * The AI Player 
+ * @author Edward
+ *
+ */
 public class AI_Player extends Player {
 
 	public AI_Player(String name, String heuristic) {
 		super(name, false, heuristic);
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public void yourMove() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getTarget() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * The update function, this either asks prolog to shift the board, based on a certain heuristic or asks prolog to move the player based on a certain heuristic
+	 */
 	@Override
 	public boolean update(GameBoard gameBoard, QueryProlog queryProlog, JLabel timeLabel) {
 		
@@ -40,15 +35,8 @@ public class AI_Player extends Player {
 			    @Override
 			    public void run() {
 			    	timeLabel.setText("Search took: "+ (System.currentTimeMillis() - start_time ) +"ms");
-			    	//timeLabel.revalidate();
-					//timeLabel.repaint();
 			    }
 			  });
-			
-			
-			//timeLabel.setText("Search took: "+ (start_time -System.currentTimeMillis()) +"ms");
-			//timeLabel.revalidate();
-			//timeLabel.repaint();
 			ArrayList<String> newBoard = queryProlog.getBoard();
 			Logger.info("----------------------------------------------------------------------");
 			for(int i=0;i<7;i++){

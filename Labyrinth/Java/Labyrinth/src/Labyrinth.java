@@ -14,7 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-
+/**
+ * Class defining the Labyrinth Game Frame 
+ * @author Edward Beeching
+ *
+ */
 
 public class Labyrinth extends JPanel implements ActionListener, MouseMotionListener{
 
@@ -23,11 +27,19 @@ public class Labyrinth extends JPanel implements ActionListener, MouseMotionList
 	private JFrame frame;
 	private JLayeredPane gamePanel;
 	private GameBoard gameBoard;
+	/**
+	 * Constructor for Class
+	 * Calls initialize to initialize the game
+	 * 
+	 */
 	public Labyrinth() {
-		
 		initialize();
 	}
-	
+	/**
+	 * Sets up the Java swing frame
+	 * Gets user setup parameters with a Dialog pop-up
+	 * sets up the Game board and control, info & debug panels
+	 */
     private void initialize() {
     	System.out.println("Initialising");
     	frame = new JFrame();
@@ -54,25 +66,10 @@ public class Labyrinth extends JPanel implements ActionListener, MouseMotionList
 		controlPanel.setPreferredSize(new Dimension(200,600));
 		controlPanel.setBorder(BorderFactory.createTitledBorder("Control Panel"));
 		
-		//BoxLayout boxLayout =  new BoxLayout(controlPanel,BoxLayout.Y_AXIS);
-		//controlPanel.setLayout(new BoxLayout(controlPanel,BoxLayout.Y_AXIS));
+
 		controlPanel.setLayout(new GridLayout(4, 1));
 		frame.getContentPane().add(controlPanel, BorderLayout.EAST);	
-		
-//		JButton button = new JButton();
-//		button.setBounds(10,10,40,40);
-//		button.setText("Generate Maze!");
-//		button.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				generateMaze();
-//				
-//			}
-//		});
-//		controlPanel.add(button);
-		
-		
+
 		JPanel infoPanel = new JPanel();
 		infoPanel.setBorder(BorderFactory.createTitledBorder("Info"));
 		
@@ -97,75 +94,18 @@ public class Labyrinth extends JPanel implements ActionListener, MouseMotionList
 		controlPanel.add(infoPanel);
 		controlPanel.add(treasurePanel);
 		controlPanel.add(debugPanel);
-
-		
     }
-    @Override
-    public void paint(Graphics g){
-    	super.paint(g);
-    	gameBoard.paint(g);
-    	
-    	
-    	
-    }
-    private void generateMaze(){
-    	System.out.print("[");
-    	for(int j =0;j<7;j++){
-    		System.out.print("[");
-    		for(int i=0;i<7;i++){
-    			if(i!=6){
-    				System.out.print(""+getString(gameBoard.pieces.get(j*7 + i))+",");
-    			}else{
-    				System.out.print(""+getString(gameBoard.pieces.get(j*7 + i)));
-    			}
-    		}
-    		if(j!=6){
-    			System.out.println("],");
-    		}else{
-    			System.out.println("]");
-    		}
-    		
-    		
-    	}
-    	System.out.println("]");    	
-    }
-    private String getString(MazePiece mazePiece) {
-    	
-    	if((Integer)mazePiece.getClientProperty("type")==0){
-    		//The piece is a straight piece
-    		int rotation = (Integer)mazePiece.getClientProperty("rot");
-    		String s = new String();
-    		if(rotation == 90 || rotation == 270)  s = "1010";
-    		if(rotation ==  0 || rotation == 180)  s = "0101";
-    		return s;
-    	}else if((Integer)mazePiece.getClientProperty("type")==1){
-    		//The piece is a corner
-    		int rotation = (Integer)mazePiece.getClientProperty("rot");
-    		String s = new String();
-    		if(rotation ==   0) s = "1001";
-    		if(rotation ==  90) s = "1100";
-    		if(rotation == 180) s = "0110";
-    		if(rotation == 270) s = "0011";
-    		
-    		return s;
-    	}else{
-    		//its a junction
-    		int rotation = (Integer)mazePiece.getClientProperty("rot");
-    		String s = new String();
-    		if(rotation ==   0) s = "1101";
-    		if(rotation ==  90) s = "1011";
-    		if(rotation == 180) s = "0111";
-    		if(rotation == 270) s = "1110";
-    		return s;
-    	}
-	}
+    /**
+     *  invokes the jframe 
+     * @param args no args required
+     */
 	public static void main(String[] args) {
     	//EventQueue.invokeLater(new Runnable() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Labyrinth demo = new Labyrinth();
-					demo.frame.setVisible(true);
+					Labyrinth labyrinth = new Labyrinth();
+					labyrinth.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -176,12 +116,10 @@ public class Labyrinth extends JPanel implements ActionListener, MouseMotionList
 	public void mouseDragged(MouseEvent arg0) {
 		
 	}
-
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		

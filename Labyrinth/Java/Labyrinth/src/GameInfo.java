@@ -1,4 +1,8 @@
-
+/**
+ * A helper class to hold the game information
+ * @author Edward Beeching
+ *
+ */
 public class GameInfo{
 	
 		public String player1Heuristic;

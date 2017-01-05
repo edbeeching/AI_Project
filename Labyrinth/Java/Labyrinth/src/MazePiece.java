@@ -7,7 +7,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
+/**
+ * The maze pieces class
+ * @author Edward Beeching
+ *
+ */
 public class MazePiece extends JButton {
 	
 	int rotation;

@@ -2,6 +2,12 @@ import java.awt.Point;
 
 import javax.swing.JLabel;
 
+/**
+ * This is essentially an interface that the Classes HumanPlayer and AIPlayer inherit to provide the game with similar functionality.
+ * 
+ * @author Edward Beeching
+ *
+ */
 public abstract class Player {
 
 	private boolean isHuman;
@@ -18,8 +24,6 @@ public abstract class Player {
 	public void setPosition(Point position){
 		this.position = position;
 	}
-	public abstract void yourMove();
-	public abstract void getTarget();
 	public boolean update(GameBoard board, QueryProlog queryProlog, JLabel timeLabel) {
 		// TODO Auto-generated method stub
 		return false;
