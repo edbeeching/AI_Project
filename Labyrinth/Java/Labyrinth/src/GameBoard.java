@@ -641,7 +641,11 @@ public class GameBoard extends JLayeredPane {
 						
 						queryProlog.tryAndMove(player,(int)point.getX()+1, (int)point.getY() +1);
 						updatePlayerPositons();
-						swapCurrentPlayer();
+						if(queryProlog.haveIWon(currentPlayer.name)){
+							
+						}else{
+							swapCurrentPlayer();
+						}
 					}
 				}
 			}
