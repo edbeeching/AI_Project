@@ -90,7 +90,7 @@ public class Labyrinth extends JPanel implements ActionListener, MouseMotionList
 		JPanel debugPanel = new JPanel();
 		debugPanel.setLayout(new BoxLayout(debugPanel, BoxLayout.X_AXIS));
 		debugPanel.setBorder(BorderFactory.createTitledBorder("Debug"));
-		
+		debugPanel.setVisible(false);
 		controlPanel.add(infoPanel);
 		controlPanel.add(treasurePanel);
 		controlPanel.add(debugPanel);
