@@ -17,3 +17,5 @@ For more details of the project, including a UML diagram, look at the [Project R
 
 For Prolog code, look in directory [here](Labyrinth/Java/Labyrinth/prolog)
 
+Here's what the finall UI looked like, note the main focus of the course was the AI code.
+![Alt text](UserInterface.png?raw=true "The Game UI")
