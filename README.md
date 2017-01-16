@@ -1,6 +1,6 @@
 # Semester 1 Artificial Intelligence Project.
-# Université Jean-Monnet, Saint-Étienne, France.
-# Amazing Labyrinth AI written in the Prolog language
+## Université Jean-Monnet, Saint-Étienne, France.
+## Amazing Labyrinth AI written in the Prolog language
 
 Authors:
 * Edward Beeching
